@@ -26,7 +26,7 @@ const DetailInfo = () => {
             <h3 className="text-[20px] leading-[130%] font-bold text-[#121212] tracking-[-0.02em]">
               활동 내용
             </h3>
-            <p className="leading-[130%] tracking-[-0.02em] text-[#767676] font-medium">
+            <p className="leading-[130%] tracking-[-0.02em] text-[#767676]">
               날짜별 활동 내용을 간단히 적어주세요
             </p>
           </div>

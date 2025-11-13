@@ -2,7 +2,7 @@ import { Button } from "@/components";
 import { SESSION_FIELDS } from "../constants/SESSION_FIELDS";
 
 const TIME_BUTTON_BASE_STYLE =
-  "py-[14.5px] text-[18px] leading-[130%] tracking-[-0.02em] text-[#121212] font-medium text-center";
+  "py-[14.5px] text-[18px] leading-[130%] tracking-[-0.02em] text-[#121212] text-center";
 
 interface SessionFieldButtonProps {
   field: (typeof SESSION_FIELDS)[number];
@@ -15,7 +15,7 @@ const SessionFieldButton = ({ field }: SessionFieldButtonProps) => {
         variant="outline"
         color="black"
         size="small"
-        className="text-[#8F8F8F] bg-white w-full h-[52px] font-medium rounded-lg"
+        className="text-[#8F8F8F] bg-white w-full h-[52px]rounded-lg"
         ariaLabel={field.ariaLabel}
       >
         {field.placeholder}
@@ -51,4 +51,3 @@ const SessionFieldButton = ({ field }: SessionFieldButtonProps) => {
 };
 
 export default SessionFieldButton;
-
