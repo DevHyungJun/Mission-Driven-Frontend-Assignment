@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Header, Icon, Textarea } from "@/components";
-import { cn } from "./utils/cn";
+import { cn } from "./_utils/cn";
 import { useRef } from "react";
 
 export default function Home() {

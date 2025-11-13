@@ -1,4 +1,4 @@
-import { noScrollbar } from "@/app/utils/customPlugins";
+import { noScrollbar } from "@/app/_utils/customPlugins";
 import type { Config } from "tailwindcss";
 
 const config: Config = {

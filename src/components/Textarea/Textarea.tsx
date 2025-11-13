@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/app/utils/cn";
+import { cn } from "@/app/_utils/cn";
 import { TextareaHTMLAttributes, useRef } from "react";
 import adjustHeight from "./utils/adjustHeight";
 import handleKeyDown from "./utils/handleKeyDown";
