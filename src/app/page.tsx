@@ -4,6 +4,7 @@ import { Button, Header, Icon, Textarea } from "@/components";
 import { useRef } from "react";
 import { MainImageUpload, AdditonalImages } from "./_components";
 import CategorySelector from "./_components/CategorySelector/CategorySelector";
+import ContentTitle from "./_components/ContentTitle/ContentTitle";
 
 export default function Home() {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -30,16 +31,7 @@ export default function Home() {
 
         <CategorySelector />
 
-        {/* ContentTitle */}
-        <section className="pt-[40px] space-y-[12px]">
-          <h2 className="text-[22px] leading-[130%] font-bold text-[#121212]">
-            콘텐츠 제목
-          </h2>
-          <Textarea
-            placeholder="제목을 입력해주세요"
-            ariaLabel="콘텐츠 제목 입력 필드"
-          />
-        </section>
+        <ContentTitle />
 
         {/* ActivityTypeSelector */}
         <section className="pt-[40px] space-y-[12px]">
