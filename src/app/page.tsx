@@ -7,6 +7,7 @@ export default function Home() {
       <Textarea
         placeholder="텍스트를 입력해주세요"
         errorMessage="에러 메시지"
+        isError
       />
       <Button variant="outline" size="small" color="green">
         버튼

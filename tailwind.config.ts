@@ -1,3 +1,4 @@
+import { noScrollbar } from "@/app/utils/customPlugins";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -10,6 +11,7 @@ const config: Config = {
       fontFamily: { sans: ["var(--font-pretendard)", "Inter", "sans-serif"] },
     },
   },
+  // plugins: [noScrollbar],
 };
 
 export default config;
