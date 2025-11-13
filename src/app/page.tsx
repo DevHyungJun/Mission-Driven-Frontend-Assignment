@@ -1,4 +1,4 @@
-import { Textarea } from "@/components";
+import { Button, Textarea } from "@/components";
 
 export default function Home() {
   return (
@@ -8,6 +8,9 @@ export default function Home() {
         placeholder="텍스트를 입력해주세요"
         errorMessage="에러 메시지"
       />
+      <Button variant="outline" size="small" color="green">
+        버튼
+      </Button>
     </div>
   );
 }
