@@ -8,10 +8,9 @@ export interface IconProps {
 }
 
 const Icon = ({ name, className, size = 24 }: IconProps) => {
-  const IconComponent = Icons[name];
   return (
     <Image
-      src={IconComponent}
+      src={Icons[name]}
       alt={name}
       width={size}
       height={size}
