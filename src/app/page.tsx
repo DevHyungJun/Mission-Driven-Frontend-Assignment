@@ -2,7 +2,7 @@
 
 import { Button, Header, Icon, Textarea } from "@/components";
 import { useRef } from "react";
-import MainImageUpload from "./_components/MainImageUpload/MainImageUpload";
+import { MainImageUpload, AdditonalImages } from "./_components";
 
 export default function Home() {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -22,28 +22,12 @@ export default function Home() {
           handleImageUpload={handleImageUpload}
         />
 
-        <section className="pt-[40px] space-y-[12px]">
-          <div className="flex flex-col gap-2">
-            <h2 className="text-[22px] leading-[130%] font-bold text-[#121212]">
-              추가 이미지 (선택)
-            </h2>
-            <p className="text-[#767676]">최대 4장까지 등록할 수 있어요</p>
-          </div>
-          <label className="w-[120px] h-[120px] bg-[#F7F7F8] border border-[#E5E5E5] rounded-[8px] flex items-center justify-center cursor-pointer hover:bg-[#E5E5E5]">
-            <Icon name="Plus" size={32} />
-            <input
-              type="file"
-              name="additional-image"
-              id="additional-image"
-              className="hidden"
-              accept="image/*"
-              onChange={handleImageUpload}
-              ref={fileInputRef}
-              required
-            />
-          </label>
-        </section>
+        <AdditonalImages
+          fileInputRef={fileInputRef}
+          handleImageUpload={handleImageUpload}
+        />
 
+        {/* CategorySelector */}
         <section className="pt-[40px] space-y-[12px]">
           <h2 className="text-[22px] leading-[130%] font-bold text-[#121212]">
             카테고리
@@ -56,6 +40,7 @@ export default function Home() {
           </button>
         </section>
 
+        {/* ContentTitle */}
         <section className="pt-[40px] space-y-[12px]">
           <h2 className="text-[22px] leading-[130%] font-bold text-[#121212]">
             콘텐츠 제목
@@ -66,6 +51,7 @@ export default function Home() {
           />
         </section>
 
+        {/* ActivityTypeSelector */}
         <section className="pt-[40px] space-y-[12px]">
           <div className="flex flex-col gap-2">
             <h2 className="text-[22px] leading-[130%] font-bold text-[#121212]">
@@ -95,6 +81,7 @@ export default function Home() {
           </div>
         </section>
 
+        {/* DetailInfo */}
         <section className="pt-[40px] space-y-[12px]">
           <h2 className="text-[22px] leading-[130%] font-bold text-[#121212]">
             상세 정보
@@ -168,6 +155,7 @@ export default function Home() {
           </div>
         </section>
 
+        {/* AddSessionButton */}
         <Button
           variant="default"
           color="dark-gray"
@@ -177,6 +165,7 @@ export default function Home() {
           회차 추가하기
         </Button>
 
+        {/* NextButton */}
         <div className="fixed bottom-0 left-0 right-0 w-full px-[16px] py-[16px] bg-white">
           <Button
             variant="default"
