@@ -10,9 +10,12 @@ const DetailInfo = () => {
         <div className="space-y-[12px]">
           {SESSION_FIELDS.map((field) => (
             <div key={field.label} className="flex items-center gap-4">
-              <span className="text-nowrap leading-[130%] tracking-[-0.02em] text-[#565656] font-semibold">
+              <label
+                htmlFor={`session-field-${field.label}`}
+                className="text-nowrap leading-[130%] tracking-[-0.02em] text-[#565656] font-semibold"
+              >
                 {field.label}
-              </span>
+              </label>
               <SessionFieldButton field={field} />
             </div>
           ))}

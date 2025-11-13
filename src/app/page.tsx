@@ -21,7 +21,7 @@ export default function Home() {
   };
 
   return (
-    <main className="px-[16px] pb-[84px]">
+    <main className="px-[16px] pb-[160px]">
       <MainImageUpload
         fileInputRef={fileInputRef}
         handleImageUpload={handleImageUpload}
@@ -38,7 +38,7 @@ export default function Home() {
       <Button
         variant="default"
         color="dark-gray"
-        className="w-full mt-[24px]"
+        className="w-full mt-[24px] h-[48px] flex items-center justify-center"
         ariaLabel="회차 추가하기 버튼"
       >
         회차 추가하기
@@ -48,7 +48,7 @@ export default function Home() {
         <Button
           variant="default"
           color="light-green"
-          className="w-full"
+          className="w-full h-[48px] flex items-center justify-center"
           disabled
           ariaLabel="다음으로 버튼"
         >

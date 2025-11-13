@@ -28,22 +28,26 @@ const MainImageUpload = ({
               1:1 비율의 정사각형 이미지를 추천합니다
             </p>
           </div>
-          <Button
-            variant="default"
-            color="dark-gray"
-            ariaLabel="이미지 업로드 버튼"
-            onClick={() => fileInputRef.current?.click()}
-          >
+          <>
             <input
               type="file"
+              id="main-image-upload"
               className="hidden"
               accept="image/*"
               onChange={handleImageUpload}
               ref={fileInputRef}
+              aria-label="대표 이미지 업로드"
               required
             />
-            이미지 업로드
-          </Button>
+            <Button
+              variant="default"
+              color="dark-gray"
+              ariaLabel="이미지 업로드 버튼"
+              onClick={() => fileInputRef.current?.click()}
+            >
+              이미지 업로드
+            </Button>
+          </>
         </div>
       </div>
     </SectionProvider>

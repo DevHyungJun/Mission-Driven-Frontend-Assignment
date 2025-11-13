@@ -26,18 +26,26 @@ const SessionFieldButton = ({ field }: SessionFieldButtonProps) => {
   return (
     <div className="flex-1 w-full bg-white rounded-lg border border-[#E5E5E5] h-[52px] flex items-center">
       <button
-        aria-label={field.ariaLabel}
+        aria-label={`${field.label} 오전/오후 선택`}
         className="mx-[10px] my-[7px] p-[8px] font-semibold leading-[130%] tracking-[-0.02em] text-[#323232] bg-[#F7F7F8] rounded-[4px] border border-[#E5E5E5] cursor-pointer"
       >
         오후
       </button>
-      <time className={`flex-1 ${TIME_BUTTON_BASE_STYLE} cursor-pointer`}>
+      <button
+        aria-label={`${field.label} 시간 선택`}
+        className={`flex-1 ${TIME_BUTTON_BASE_STYLE} cursor-pointer`}
+      >
         11
-      </time>
-      <span className={TIME_BUTTON_BASE_STYLE}>:</span>
-      <time className={`flex-1 ${TIME_BUTTON_BASE_STYLE} cursor-pointer`}>
+      </button>
+      <span className={TIME_BUTTON_BASE_STYLE} aria-hidden="true">
+        :
+      </span>
+      <button
+        aria-label={`${field.label} 분 선택`}
+        className={`flex-1 ${TIME_BUTTON_BASE_STYLE} cursor-pointer`}
+      >
         00
-      </time>
+      </button>
     </div>
   );
 };

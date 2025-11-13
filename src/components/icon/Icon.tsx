@@ -5,16 +5,23 @@ export interface IconProps {
   name: keyof typeof Icons;
   className?: string;
   size?: number;
+  "aria-hidden"?: boolean;
 }
 
-const Icon = ({ name, className, size = 24 }: IconProps) => {
+const Icon = ({
+  name,
+  className,
+  size = 24,
+  "aria-hidden": ariaHidden,
+}: IconProps) => {
   return (
     <Image
       src={Icons[name]}
-      alt={name}
+      alt={ariaHidden ? "" : name}
       width={size}
       height={size}
       className={className}
+      aria-hidden={ariaHidden}
     />
   );
 };
