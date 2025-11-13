@@ -10,6 +10,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   color: Color;
   size?: Size;
   ariaLabel?: string;
+  className?: string;
 }
 
 const Button = ({
@@ -18,6 +19,7 @@ const Button = ({
   color,
   size = "medium",
   ariaLabel = "기본 버튼",
+  className,
   ...props
 }: ButtonProps) => {
   return (
@@ -27,7 +29,8 @@ const Button = ({
       className={cn(
         BASE_STYLES,
         SIZE_STYLES[size],
-        getVariantStyles(variant, color)
+        getVariantStyles(variant, color),
+        className
       )}
     >
       {children}

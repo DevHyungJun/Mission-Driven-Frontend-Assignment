@@ -10,6 +10,7 @@ interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   errorMessage?: string;
   currentMessageLength?: number;
   isError?: boolean;
+  ariaLabel?: string;
 }
 
 const Textarea = ({
@@ -17,6 +18,7 @@ const Textarea = ({
   isError = false,
   errorMessage,
   currentMessageLength = 0,
+  ariaLabel = "텍스트 입력 필드",
   ...props
 }: TextareaProps) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -25,12 +27,13 @@ const Textarea = ({
     <>
       <div
         className={cn(
-          "px-[16px] w-full rounded-lg border border-[#E5E5E5] focus-within:border-[#03C124]",
+          "px-[16px] w-full rounded-lg border border-[#E5E5E5] focus-within:border-[#03C124] bg-white",
           isError && "border-[#E82929] focus-within:border-[#E82929]"
         )}
       >
         <textarea
           {...props}
+          aria-label={ariaLabel}
           ref={textareaRef}
           onChange={(e) => adjustHeight(e.target)}
           onKeyDown={(e) => handleKeyDown(e, textareaRef)}
