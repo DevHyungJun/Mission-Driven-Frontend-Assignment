@@ -1,15 +1,15 @@
 "use client";
 
-import { Button, Header, Textarea } from "@/components";
+import { Button, Header } from "@/components";
 import { useRef } from "react";
 import {
   MainImageUpload,
   AdditonalImages,
   ActivityTypeSelector,
   DetailInfo,
+  CategorySelector,
+  ContentTitle,
 } from "./_components";
-import CategorySelector from "./_components/CategorySelector/CategorySelector";
-import ContentTitle from "./_components/ContentTitle/ContentTitle";
 
 export default function Home() {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -37,7 +37,6 @@ export default function Home() {
         <ActivityTypeSelector />
         <DetailInfo />
 
-        {/* AddSessionButton */}
         <Button
           variant="default"
           color="dark-gray"
@@ -47,7 +46,6 @@ export default function Home() {
           회차 추가하기
         </Button>
 
-        {/* NextButton */}
         <div className="fixed bottom-0 left-0 right-0 w-full px-[16px] py-[16px] bg-white">
           <Button
             variant="default"

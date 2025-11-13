@@ -1,55 +1,21 @@
-import { Button, Textarea } from "@/components";
+import { Textarea } from "@/components";
 import SectionProvider from "@/provider/SectionProvider/SectionProvider";
+import { SESSION_FIELDS } from "./constants/SESSION_FIELDS";
+import SessionFieldButton from "./internal/SessionFieldButton";
 
 const DetailInfo = () => {
   return (
     <SectionProvider title="상세 정보" mode="simple">
       <div className="w-full flex flex-col gap-[32px] bg-[#F7F7F8] border border-[#E5E5E5] rounded-[8px] px-[16px] py-[24px]">
-        <div className="space-y-[16px]">
-          <div className="space-y-[12px]">
-            <div className="flex items-center gap-4">
+        <div className="space-y-[12px]">
+          {SESSION_FIELDS.map((field) => (
+            <div key={field.label} className="flex items-center gap-4">
               <span className="text-nowrap leading-[130%] tracking-[-0.02em] text-[#565656] font-semibold">
-                날짜 선택
+                {field.label}
               </span>
-              <Button
-                variant="outline"
-                color="black"
-                size="small"
-                className="text-[#8F8F8F] bg-white w-full font-medium"
-                ariaLabel="날짜 선택 버튼"
-              >
-                날짜를 선택해주세요
-              </Button>
+              <SessionFieldButton field={field} />
             </div>
-            <div className="flex items-center gap-4">
-              <span className="text-nowrap leading-[130%] tracking-[-0.02em] text-[#565656] font-semibold">
-                시작 시간
-              </span>
-              <Button
-                variant="outline"
-                color="black"
-                size="small"
-                className="text-[#8F8F8F] bg-white w-full font-medium"
-                ariaLabel="날짜 선택 버튼"
-              >
-                날짜를 선택해주세요
-              </Button>
-            </div>
-            <div className="flex items-center gap-4">
-              <span className="text-nowrap leading-[130%] tracking-[-0.02em] text-[#565656] font-semibold">
-                종료 시간
-              </span>
-              <Button
-                variant="outline"
-                color="black"
-                size="small"
-                className="text-[#8F8F8F] bg-white w-full font-medium"
-                ariaLabel="날짜 선택 버튼"
-              >
-                날짜를 선택해주세요
-              </Button>
-            </div>
-          </div>
+          ))}
         </div>
 
         <div className="space-y-[12px]">
