@@ -1,8 +1,8 @@
 "use client";
 
 import { Button, Header, Icon, Textarea } from "@/components";
-import { cn } from "./_utils/cn";
 import { useRef } from "react";
+import MainImageUpload from "./_components/MainImageUpload/MainImageUpload";
 
 export default function Home() {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -17,44 +17,10 @@ export default function Home() {
     <>
       <Header />
       <main className="px-[16px] pb-[84px]">
-        <section className="pt-[40px] space-y-[12px]">
-          <h2 className="text-[22px] leading-[130%] font-bold text-[#121212]">
-            대표 이미지
-          </h2>
-          <div
-            className={cn(
-              "flex justify-center items-center h-[328px] bg-[#F7F7F8] border border-[#E5E5E5] rounded-[8px]",
-              "md:h-[510px] md:max-w-[510px]"
-            )}
-          >
-            <div className="flex flex-col items-center justify-center gap-[24px]">
-              <div className="flex flex-col items-center justify-center gap-2 leading-[130%] tracking-[-0.02em]">
-                <p className="text-[20px] font-bold text-[#121212]">
-                  콘텐츠 대표 이미지를 등록해주세요!
-                </p>
-                <p className="text-[#8F8F8F]">
-                  1:1 비율의 정사각형 이미지를 추천합니다
-                </p>
-              </div>
-              <Button
-                variant="default"
-                color="dark-gray"
-                ariaLabel="이미지 업로드 버튼"
-                onClick={() => fileInputRef.current?.click()}
-              >
-                <input
-                  type="file"
-                  className="hidden"
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                  ref={fileInputRef}
-                  required
-                />
-                이미지 업로드
-              </Button>
-            </div>
-          </div>
-        </section>
+        <MainImageUpload
+          fileInputRef={fileInputRef}
+          handleImageUpload={handleImageUpload}
+        />
 
         <section className="pt-[40px] space-y-[12px]">
           <div className="flex flex-col gap-2">
