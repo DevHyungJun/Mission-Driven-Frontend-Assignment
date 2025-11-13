@@ -9,7 +9,7 @@ export default function Home() {
         errorMessage="에러 메시지"
         isError
       />
-      <Button variant="outline" size="small" color="green">
+      <Button variant="outline" color="light-gray">
         버튼
       </Button>
     </div>
