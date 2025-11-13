@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Header } from "@/components";
+import { Button } from "@/components";
 import { useRef } from "react";
 import {
   MainImageUpload,
@@ -21,43 +21,40 @@ export default function Home() {
   };
 
   return (
-    <>
-      <Header />
-      <main className="px-[16px] pb-[84px]">
-        <MainImageUpload
-          fileInputRef={fileInputRef}
-          handleImageUpload={handleImageUpload}
-        />
-        <AdditonalImages
-          fileInputRef={fileInputRef}
-          handleImageUpload={handleImageUpload}
-        />
-        <CategorySelector />
-        <ContentTitle />
-        <ActivityTypeSelector />
-        <DetailInfo />
+    <main className="px-[16px] pb-[84px]">
+      <MainImageUpload
+        fileInputRef={fileInputRef}
+        handleImageUpload={handleImageUpload}
+      />
+      <AdditonalImages
+        fileInputRef={fileInputRef}
+        handleImageUpload={handleImageUpload}
+      />
+      <CategorySelector />
+      <ContentTitle />
+      <ActivityTypeSelector />
+      <DetailInfo />
 
+      <Button
+        variant="default"
+        color="dark-gray"
+        className="w-full mt-[24px]"
+        ariaLabel="회차 추가하기 버튼"
+      >
+        회차 추가하기
+      </Button>
+
+      <div className="fixed bottom-0 left-0 right-0 w-full px-[16px] py-[16px] bg-white">
         <Button
           variant="default"
-          color="dark-gray"
-          className="w-full mt-[24px]"
-          ariaLabel="회차 추가하기 버튼"
+          color="light-green"
+          className="w-full"
+          disabled
+          ariaLabel="다음으로 버튼"
         >
-          회차 추가하기
+          다음으로
         </Button>
-
-        <div className="fixed bottom-0 left-0 right-0 w-full px-[16px] py-[16px] bg-white">
-          <Button
-            variant="default"
-            color="light-green"
-            className="w-full"
-            disabled
-            ariaLabel="다음으로 버튼"
-          >
-            다음으로
-          </Button>
-        </div>
-      </main>
-    </>
+      </div>
+    </main>
   );
 }
