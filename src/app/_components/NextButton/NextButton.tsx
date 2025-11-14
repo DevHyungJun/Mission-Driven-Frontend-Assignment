@@ -1,7 +1,26 @@
+"use client";
+
 import { Button } from "@/components";
 import { cn } from "@/app/_utils/cn";
+import { usePathname, useRouter } from "next/navigation";
+import useCategoryContext from "@/provider/CategoryProvider/hooks/useCategoryContext";
 
 const NextButton = () => {
+  const pathname = usePathname();
+  const router = useRouter();
+  const { selectedCategories } = useCategoryContext();
+  const isCategorySelectPage = pathname === "/category-select";
+
+  const handleClick = () => {
+    if (isCategorySelectPage) {
+      router.push("/");
+    }
+  };
+
+  const isDisabled = isCategorySelectPage
+    ? selectedCategories.length === 0
+    : true;
+
   return (
     <div
       className={cn(
@@ -17,9 +36,10 @@ const NextButton = () => {
           "w-full h-[48px] flex items-center justify-center",
           "md:w-[120px] md:h-[38px]"
         )}
-        disabled
+        disabled={isDisabled}
         size="small"
         ariaLabel="다음으로 버튼"
+        onClick={handleClick}
       >
         다음으로
       </Button>

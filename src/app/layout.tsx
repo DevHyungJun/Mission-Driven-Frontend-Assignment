@@ -1,8 +1,6 @@
 import { ReactNode } from "react";
 import "./globals.css";
 import localFont from "next/font/local";
-import { Header } from "@/components";
-import ImageProvider from "@/provider/ImageProvider/ImageProvider";
 
 const pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
@@ -16,12 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={`${pretendard.variable} font-medium`}>
-      <body>
-        <ImageProvider>
-          <Header />
-          {children}
-        </ImageProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
