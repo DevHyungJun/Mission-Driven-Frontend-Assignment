@@ -6,8 +6,8 @@ import {
   DetailInfo,
   CategorySelector,
   ContentTitle,
-} from "../_components";
-import { cn } from "../_utils/cn";
+} from "./_components";
+import { cn } from "./_utils/cn";
 
 export default function Home() {
   return (
@@ -41,3 +41,4 @@ export default function Home() {
     </main>
   );
 }
+

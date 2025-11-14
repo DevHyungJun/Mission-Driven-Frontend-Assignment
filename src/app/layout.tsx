@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import "./globals.css";
 import localFont from "next/font/local";
+import TotalProvider from "@/provider/TotalProvider/TotalProvider";
 
 const pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
@@ -14,7 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={`${pretendard.variable} font-medium`}>
-      <body>{children}</body>
+      <body>
+        <TotalProvider>{children}</TotalProvider>
+      </body>
     </html>
   );
 }
