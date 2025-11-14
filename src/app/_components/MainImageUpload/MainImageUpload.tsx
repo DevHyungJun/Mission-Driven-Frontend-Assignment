@@ -77,7 +77,7 @@ const MainImageUpload = () => {
             alt="대표 이미지"
             width={510}
             height={510}
-            className="object-cover rounded-[8px] aspect-square"
+            className="object-cover rounded-[8px] aspect-square w-full h-full"
           />
         </div>
       )}
