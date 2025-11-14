@@ -3,7 +3,7 @@ import { NextButton } from "@/app/_components";
 
 const Header = () => {
   return (
-    <div className="w-full border-b border-[#E5E5E5]">
+    <div className="w-full border-b border-[#E5E5E5] sticky top-0 bg-white z-10">
       <header
         className={cn(
           "w-full h-[48px] flex items-center justify-center text-[#121212] font-bold text-[18px]",
