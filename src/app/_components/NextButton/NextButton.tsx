@@ -18,6 +18,7 @@ const NextButton = () => {
           "md:w-[120px] md:h-[38px]"
         )}
         disabled
+        size="small"
         ariaLabel="다음으로 버튼"
       >
         다음으로
