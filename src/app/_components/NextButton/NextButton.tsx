@@ -4,12 +4,14 @@ import { Button } from "@/components";
 import { cn } from "@/app/_utils/cn";
 import { usePathname, useRouter } from "next/navigation";
 import { useCategoryStore } from "@/utils/store/store";
+import useCompletedAll from "./hooks/useCompletedAll";
 
 const NextButton = () => {
   const pathname = usePathname();
   const router = useRouter();
   const { selectedCategories } = useCategoryStore();
   const isCategorySelectPage = pathname === "/category-select";
+  const isCompletedAll = useCompletedAll();
 
   const handleClick = () => {
     if (!isCategorySelectPage) return;
@@ -18,7 +20,7 @@ const NextButton = () => {
 
   const isDisabled = isCategorySelectPage
     ? selectedCategories.length === 0
-    : true;
+    : !isCompletedAll;
 
   return (
     <div
