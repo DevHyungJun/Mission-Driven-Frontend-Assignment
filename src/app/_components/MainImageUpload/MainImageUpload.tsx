@@ -15,8 +15,8 @@ const MainImageUpload = ({
     <SectionProvider title="대표 이미지" mode="simple">
       <div
         className={cn(
-          "flex justify-center items-center h-[328px] bg-[#F7F7F8] border border-[#E5E5E5] rounded-[8px]",
-          "md:h-[510px] md:max-w-[510px]"
+          "flex justify-center items-center w-full aspect-square bg-[#F7F7F8] border border-[#E5E5E5] rounded-[8px]",
+          "md:max-w-[510px]"
         )}
       >
         <div className="flex flex-col items-center justify-center gap-[24px]">
