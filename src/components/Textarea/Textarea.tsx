@@ -1,9 +1,10 @@
 "use client";
 
 import { cn } from "@/app/_utils/cn";
-import { TextareaHTMLAttributes, useId, forwardRef } from "react";
-import adjustHeight from "./utils/adjustHeight";
-import handleKeyDown from "./utils/handleKeyDown";
+import { TextareaHTMLAttributes, forwardRef } from "react";
+import useTextareaIds from "./hooks/useTextareaIds";
+import useTextareaHandlers from "./hooks/useTextareaHandlers";
+import getAriaDescribedBy from "./utils/getAriaDescribedBy";
 
 interface TextareaProps
   extends Omit<
@@ -33,27 +34,12 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     },
     ref
   ) => {
-    const descriptionId = useId();
-    const errorId = useId();
+    const { descriptionId, errorId } = useTextareaIds();
+    const { handleChange, handleKeyDownEvent } = useTextareaHandlers({
+      onChange,
+    });
     const currentMessageLength = value.length;
-
-    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      const newValue = e.target.value;
-      const hasConsecutiveSpaces = /\s{2,}/.test(newValue);
-
-      if (hasConsecutiveSpaces) {
-        return;
-      }
-
-      adjustHeight(e.target);
-      onChange?.(e);
-    };
-
-    const handleKeyDownEvent = (
-      e: React.KeyboardEvent<HTMLTextAreaElement>
-    ) => {
-      handleKeyDown(e);
-    };
+    const ariaDescribedBy = getAriaDescribedBy(descriptionId, errorId, isError);
 
     return (
       <>
@@ -69,9 +55,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             onChange={handleChange}
             onBlur={onBlur}
             aria-label={ariaLabel}
-            aria-describedby={`${descriptionId} ${
-              isError ? errorId : ""
-            }`.trim()}
+            aria-describedby={ariaDescribedBy}
             ref={ref}
             onKeyDown={handleKeyDownEvent}
             rows={1}
