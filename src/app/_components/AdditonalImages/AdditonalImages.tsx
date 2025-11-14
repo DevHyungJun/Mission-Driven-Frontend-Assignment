@@ -44,7 +44,7 @@ const AdditonalImages = () => {
               name="additional-image"
               id="additional-image"
               className="hidden"
-              accept="image/*"
+              accept="image/jpeg,image/png,.jpg,.jpeg,.png"
               multiple
               onChange={(e) => handleMultiImageUpload(e, setAdditionalImages)}
               ref={fileInputRef}
