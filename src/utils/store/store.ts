@@ -55,7 +55,13 @@ interface SessionStore {
 
 export const useSessionStore = create<SessionStore>((set) => ({
   sessions: [
-    { id: generateSessionId(), date: null, startTime: null, endTime: null },
+    {
+      id: generateSessionId(),
+      date: null,
+      startTime: null,
+      endTime: null,
+      detailText: "",
+    },
   ],
   setSessionDate: (sessionId, date) =>
     set((state) => {

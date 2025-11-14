@@ -3,9 +3,9 @@
 import { Textarea } from "@/components";
 import SectionProvider from "@/provider/SectionProvider/SectionProvider";
 import { useForm, Controller } from "react-hook-form";
-import { CONTENT_TITLE_VALIDATION } from "./constant/CONTENT_TITLE_VALIDATION";
 import { useContentTitleStore } from "@/utils/store/store";
 import { useEffect } from "react";
+import { TEXTAREA_VALIDATION } from "@/constant/TEXTAREA_VALIDATION";
 
 interface ContentTitleFormValues {
   contentTitle: string;
@@ -36,7 +36,7 @@ const ContentTitle = () => {
         <Controller
           name="contentTitle"
           control={control}
-          rules={CONTENT_TITLE_VALIDATION}
+          rules={TEXTAREA_VALIDATION}
           render={({ field, fieldState }) => (
             <Textarea
               {...field}
