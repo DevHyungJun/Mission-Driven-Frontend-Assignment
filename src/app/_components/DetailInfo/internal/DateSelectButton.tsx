@@ -58,7 +58,7 @@ const DateSelectButton = ({ sessionId, ariaLabel }: DateSelectButtonProps) => {
       </Button>
       {isDateCalendarOpen && (
         <Calendar
-          selectedDate={selectedDate}
+          selectedDate={selectedDate ?? null}
           onSelectDate={(date) => {
             setSessionDate(sessionId, date);
             setIsDateCalendarOpen(false);
@@ -73,4 +73,3 @@ const DateSelectButton = ({ sessionId, ariaLabel }: DateSelectButtonProps) => {
 };
 
 export default DateSelectButton;
-
