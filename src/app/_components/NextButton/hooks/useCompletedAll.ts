@@ -8,14 +8,11 @@ import {
 import { useMemo } from "react";
 
 const useCompletedAll = () => {
-  const { mainImage, additionalImages } = useImageContext();
+  const { mainImage } = useImageContext();
   const { selectedCategories } = useCategoryStore();
   const { contentTitle } = useContentTitleStore();
   const { activityType } = useActivityTypeStore();
   const { sessions } = useSessionStore();
-
-  // console확인
-  console.log(contentTitle.length >= 8);
 
   const isCompletedAll = useMemo(() => {
     return (
