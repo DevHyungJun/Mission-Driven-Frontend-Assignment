@@ -25,7 +25,7 @@ export default function Home() {
     <main
       className={cn(
         "px-[16px] pb-[160px]",
-        "md:max-w-[1060px] md:flex md:gap-[40px] md:mx-auto"
+        "md:max-w-[1100px] md:flex md:gap-[40px] md:mx-auto"
       )}
     >
       <div className="md:w-1/2">
