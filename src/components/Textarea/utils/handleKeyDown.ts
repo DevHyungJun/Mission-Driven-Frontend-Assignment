@@ -1,18 +1,15 @@
-import { KeyboardEvent, RefObject } from "react";
+import { KeyboardEvent } from "react";
 
-const clearHeight = (textareaRef: HTMLTextAreaElement | null) => {
-  if (!textareaRef) return;
-  textareaRef.style.height = "auto";
+const clearHeight = (textarea: HTMLTextAreaElement | null) => {
+  if (!textarea) return;
+  textarea.style.height = "auto";
 };
 
-const handleKeyDown = (
-  e: KeyboardEvent<HTMLTextAreaElement>,
-  textareaRef: RefObject<HTMLTextAreaElement | null>
-) => {
+const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
     e.currentTarget.form?.requestSubmit();
-    clearHeight(textareaRef.current ?? null);
+    clearHeight(e.currentTarget);
   }
 };
 
