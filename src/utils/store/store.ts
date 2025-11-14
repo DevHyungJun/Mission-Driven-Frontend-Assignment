@@ -34,63 +34,64 @@ export const useActivityTypeStore = create<ActivityTypeStore>((set) => ({
 }));
 
 export interface SessionDate {
+  id: string;
   date: Date | null;
   startTime: Date | null;
   endTime: Date | null;
 }
 
+const generateSessionId = (): string => {
+  return `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+};
+
 interface SessionStore {
   sessions: SessionDate[];
-  setSessionDate: (sessionIndex: number, date: Date | null) => void;
-  setSessionStartTime: (sessionIndex: number, time: Date | null) => void;
-  setSessionEndTime: (sessionIndex: number, time: Date | null) => void;
+  setSessionDate: (sessionId: string, date: Date | null) => void;
+  setSessionStartTime: (sessionId: string, time: Date | null) => void;
+  setSessionEndTime: (sessionId: string, time: Date | null) => void;
   addSession: () => void;
-  removeSession: (sessionIndex: number) => void;
+  removeSession: (sessionId: string) => void;
 }
 
 export const useSessionStore = create<SessionStore>((set) => ({
-  sessions: [{ date: null, startTime: null, endTime: null }],
-  setSessionDate: (sessionIndex, date) =>
+  sessions: [
+    { id: generateSessionId(), date: null, startTime: null, endTime: null },
+  ],
+  setSessionDate: (sessionId, date) =>
     set((state) => {
-      const newSessions = [...state.sessions];
-      newSessions[sessionIndex] = {
-        ...newSessions[sessionIndex],
-        date,
-      };
+      const newSessions = state.sessions.map((session) =>
+        session.id === sessionId ? { ...session, date } : session
+      );
       return { sessions: newSessions };
     }),
-  setSessionStartTime: (sessionIndex, time) =>
+  setSessionStartTime: (sessionId, time) =>
     set((state) => {
-      const newSessions = [...state.sessions];
-      newSessions[sessionIndex] = {
-        ...newSessions[sessionIndex],
-        startTime: time,
-      };
+      const newSessions = state.sessions.map((session) =>
+        session.id === sessionId ? { ...session, startTime: time } : session
+      );
       return { sessions: newSessions };
     }),
-  setSessionEndTime: (sessionIndex, time) =>
+  setSessionEndTime: (sessionId, time) =>
     set((state) => {
-      const newSessions = [...state.sessions];
-      newSessions[sessionIndex] = {
-        ...newSessions[sessionIndex],
-        endTime: time,
-      };
+      const newSessions = state.sessions.map((session) =>
+        session.id === sessionId ? { ...session, endTime: time } : session
+      );
       return { sessions: newSessions };
     }),
   addSession: () =>
     set((state) => ({
       sessions: [
         ...state.sessions,
-        { date: null, startTime: null, endTime: null },
+        { id: generateSessionId(), date: null, startTime: null, endTime: null },
       ],
     })),
-  removeSession: (sessionIndex) =>
+  removeSession: (sessionId) =>
     set((state) => {
       if (state.sessions.length <= 1) {
         return state;
       }
       const newSessions = state.sessions.filter(
-        (_, index) => index !== sessionIndex
+        (session) => session.id !== sessionId
       );
       return { sessions: newSessions };
     }),

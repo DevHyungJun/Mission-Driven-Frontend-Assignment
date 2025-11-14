@@ -4,15 +4,18 @@ import { SessionDate } from "@/utils/store/store";
 /**
  * 특정 회차의 선택 가능한 날짜 범위를 계산하는 함수
  * @param sessions 모든 회차 정보
- * @param currentSessionIndex 현재 회차 인덱스
+ * @param currentSessionId 현재 회차 ID
  * @returns 선택 가능한 날짜 범위 (minDate, maxDate)
  */
 export const getDateRange = (
   sessions: SessionDate[],
-  currentSessionIndex: number
+  currentSessionId: string
 ): { minDate: Date | null; maxDate: Date | null } => {
-  const currentSession = sessions[currentSessionIndex];
-  if (!currentSession) {
+  const currentSessionIndex = sessions.findIndex(
+    (session) => session.id === currentSessionId
+  );
+  
+  if (currentSessionIndex === -1) {
     return { minDate: null, maxDate: null };
   }
 

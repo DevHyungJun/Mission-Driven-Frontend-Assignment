@@ -6,17 +6,17 @@ import TimePickerButton from "./TimePickerButton";
 
 interface SessionFieldButtonProps {
   field: (typeof SESSION_FIELDS)[number];
-  sessionIndex: number;
+  sessionId: string;
 }
 
 const SessionFieldButton = ({
   field,
-  sessionIndex,
+  sessionId,
 }: SessionFieldButtonProps) => {
   if (field.type === "simple") {
     return (
       <DateSelectButton
-        sessionIndex={sessionIndex}
+        sessionId={sessionId}
         ariaLabel={field.ariaLabel}
       />
     );

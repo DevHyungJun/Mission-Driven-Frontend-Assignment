@@ -10,17 +10,16 @@ import DetailTextarea from "./internal/DetailTextarea";
 
 const DetailInfo = () => {
   const { sessions, addSession, removeSession } = useSessionStore();
-
   return (
     <SectionProvider title="상세 정보" mode="simple">
       {sessions.map((sessionDate, sessionIndex) => (
         <div
-          key={sessionIndex}
+          key={sessionDate.id}
           className="w-full flex flex-col gap-[32px] bg-[#F7F7F8] border border-[#E5E5E5] rounded-[8px] px-[16px] py-[24px] mb-4 relative"
         >
           {sessions.length > 1 && (
             <button
-              onClick={() => removeSession(sessionIndex)}
+              onClick={() => removeSession(sessionDate.id)}
               className="absolute p-2.5 top-1 cursor-pointer right-1 flex items-center justify-center text-[#8F8F8F] hover:text-[#121212] transition-colors"
               aria-label={`${sessionIndex + 1}회차 삭제`}
             >
@@ -34,12 +33,12 @@ const DetailInfo = () => {
             {SESSION_FIELDS.map((field) => (
               <div key={field.label} className="flex items-center gap-4">
                 <label
-                  htmlFor={`session-field-${sessionIndex}-${field.label}`}
+                  htmlFor={`session-field-${sessionDate.id}-${field.label}`}
                   className="text-nowrap leading-[130%] tracking-[-0.02em] text-[#565656] font-semibold"
                 >
                   {field.label}
                 </label>
-                <SessionFieldButton field={field} sessionIndex={sessionIndex} />
+                <SessionFieldButton field={field} sessionId={sessionDate.id} />
               </div>
             ))}
           </div>

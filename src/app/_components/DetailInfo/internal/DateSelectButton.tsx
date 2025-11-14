@@ -9,13 +9,13 @@ import { ko } from "date-fns/locale";
 import { cn } from "@/app/_utils/cn";
 
 interface DateSelectButtonProps {
-  sessionIndex: number;
+  sessionId: string;
   ariaLabel: string;
 }
 
-const DateSelectButton = ({ sessionIndex, ariaLabel }: DateSelectButtonProps) => {
+const DateSelectButton = ({ sessionId, ariaLabel }: DateSelectButtonProps) => {
   const { sessions, setSessionDate } = useSessionStore();
-  const currentSession = sessions[sessionIndex];
+  const currentSession = sessions.find((session) => session.id === sessionId);
   const selectedDate = currentSession?.date;
   const [isDateCalendarOpen, setIsDateCalendarOpen] = useState(false);
   const dateContainerRef = useRef<HTMLDivElement>(null);
@@ -60,11 +60,11 @@ const DateSelectButton = ({ sessionIndex, ariaLabel }: DateSelectButtonProps) =>
         <Calendar
           selectedDate={selectedDate}
           onSelectDate={(date) => {
-            setSessionDate(sessionIndex, date);
+            setSessionDate(sessionId, date);
             setIsDateCalendarOpen(false);
           }}
           sessions={sessions}
-          currentSessionIndex={sessionIndex}
+          currentSessionId={sessionId}
           onClose={() => setIsDateCalendarOpen(false)}
         />
       )}

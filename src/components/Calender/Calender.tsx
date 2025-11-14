@@ -24,7 +24,7 @@ interface CalendarProps {
   selectedDate: Date | null;
   onSelectDate: (date: Date | null) => void;
   sessions: SessionDate[];
-  currentSessionIndex: number;
+  currentSessionId: string;
   onClose: () => void;
 }
 
@@ -34,10 +34,10 @@ const Calendar = ({
   selectedDate,
   onSelectDate,
   sessions,
-  currentSessionIndex,
+  currentSessionId,
   onClose,
 }: CalendarProps) => {
-  const { minDate, maxDate } = getDateRange(sessions, currentSessionIndex);
+  const { minDate, maxDate } = getDateRange(sessions, currentSessionId);
 
   const getInitialDate = (): Date => {
     if (selectedDate) {
