@@ -1,3 +1,4 @@
+import { toast } from "@/provider/ToastProvider/ToastProvider";
 import { CategoryId } from "../_constant/CATEGORY_LIST";
 
 const handleCategoryClick = (
@@ -10,7 +11,10 @@ const handleCategoryClick = (
     return;
   }
 
-  if (selectedCategories.length >= 2) return;
+  if (selectedCategories.length >= 2) {
+    toast.show("최대 2개까지 선택 가능합니다.");
+    return;
+  }
 
   setSelectedCategories([...selectedCategories, categoryId]);
 };
