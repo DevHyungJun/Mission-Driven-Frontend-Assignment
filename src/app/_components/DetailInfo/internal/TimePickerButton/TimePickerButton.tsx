@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, KeyboardEvent, FocusEvent } from "react";
+import { useState, useEffect, useRef, KeyboardEvent } from "react";
 import { useSessionStore } from "@/utils/store/store";
 import {
   convertTo24Hour,
@@ -8,7 +8,7 @@ import {
   isEndTimeAfterStart,
   calculateEndTime,
 } from "./utils/timeUtils";
-import Toast from "@/components/Toast/Toast";
+import { Toast } from "@/components";
 import { cn } from "@/app/_utils/cn";
 
 const TIME_BUTTON_BASE_STYLE =
