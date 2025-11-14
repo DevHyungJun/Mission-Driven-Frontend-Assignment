@@ -1,20 +1,17 @@
+"use client";
+
 import { cn } from "@/app/_utils/cn";
 import { Icon } from "@/components";
 import SectionProvider from "@/provider/SectionProvider/SectionProvider";
 import Image from "next/image";
-import { ChangeEvent, RefObject } from "react";
+import { useRef } from "react";
+import useAdditionalImages from "./hooks/useAdditionalImages";
+import handleMultiImageUpload from "./utils/handleMultiImageUpload";
 
-interface AdditonalImagesProps {
-  fileInputRef: RefObject<HTMLInputElement | null>;
-  handleImageUpload: (e: ChangeEvent<HTMLInputElement>) => void;
-  additionalImages: string[];
-}
+const AdditonalImages = () => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const { additionalImages, setAdditionalImages } = useAdditionalImages();
 
-const AdditonalImages = ({
-  fileInputRef,
-  handleImageUpload,
-  additionalImages,
-}: AdditonalImagesProps) => {
   return (
     <SectionProvider
       title="추가 이미지 (선택)"
@@ -49,7 +46,7 @@ const AdditonalImages = ({
               className="hidden"
               accept="image/*"
               multiple
-              onChange={handleImageUpload}
+              onChange={(e) => handleMultiImageUpload(e, setAdditionalImages)}
               ref={fileInputRef}
               required
             />

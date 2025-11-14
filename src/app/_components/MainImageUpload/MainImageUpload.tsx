@@ -1,19 +1,17 @@
+"use client";
+
 import { cn } from "@/app/_utils/cn";
 import { Button } from "@/components";
 import SectionProvider from "@/provider/SectionProvider/SectionProvider";
 import Image from "next/image";
+import { useRef } from "react";
+import useMainImage from "./hooks/useMainImage";
+import handleImageUpload from "./utils/handleImageUpload";
 
-interface MainImageUploadProps {
-  fileInputRef: React.RefObject<HTMLInputElement | null>;
-  handleImageUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  mainImage: string | null;
-}
+const MainImageUpload = () => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const { mainImage, setMainImage } = useMainImage();
 
-const MainImageUpload = ({
-  fileInputRef,
-  handleImageUpload,
-  mainImage,
-}: MainImageUploadProps) => {
   return (
     <SectionProvider title="대표 이미지" mode="simple">
       <input
@@ -21,7 +19,7 @@ const MainImageUpload = ({
         id="main-image-upload"
         className="hidden"
         accept="image/jpeg,image/png,.jpg,.jpeg,.png"
-        onChange={handleImageUpload}
+        onChange={(e) => handleImageUpload(e, setMainImage)}
         ref={fileInputRef}
         aria-label="대표 이미지 업로드"
         required

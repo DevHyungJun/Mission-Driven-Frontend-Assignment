@@ -1,7 +1,4 @@
-"use client";
-
 import { Button } from "@/components";
-import { useRef } from "react";
 import {
   MainImageUpload,
   AdditonalImages,
@@ -11,16 +8,8 @@ import {
   ContentTitle,
 } from "./_components";
 import { cn } from "./_utils/cn";
-import handleImageUpload from "./_components/MainImageUpload/utils/handleImageUpload";
-import useMainImage from "./_components/MainImageUpload/hooks/useMainImage";
-import useAdditionalImages from "./_components/AdditonalImages/hooks/useAdditionalImages";
-import handleMultiImageUpload from "./_components/AdditonalImages/utils/handleMultiImageUpload";
 
 export default function Home() {
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const { mainImage, setMainImage } = useMainImage();
-  const { additionalImages, setAdditionalImages } = useAdditionalImages();
-
   return (
     <main
       className={cn(
@@ -29,18 +18,8 @@ export default function Home() {
       )}
     >
       <div className="md:w-1/2">
-        <MainImageUpload
-          fileInputRef={fileInputRef}
-          handleImageUpload={(e) => handleImageUpload(e, setMainImage)}
-          mainImage={mainImage}
-        />
-        <AdditonalImages
-          fileInputRef={fileInputRef}
-          handleImageUpload={(e) =>
-            handleMultiImageUpload(e, setAdditionalImages)
-          }
-          additionalImages={additionalImages}
-        />
+        <MainImageUpload />
+        <AdditonalImages />
       </div>
       <div className="md:w-1/2 md:flex md:flex-col md:gap-[24px]">
         <CategorySelector />
