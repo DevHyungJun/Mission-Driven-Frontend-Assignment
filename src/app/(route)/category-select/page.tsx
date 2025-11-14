@@ -4,19 +4,35 @@ import { Button } from "@/components";
 import { CATEGORY_LIST } from "./_constant/CATEGORY_LIST";
 import useCategoryContext from "@/provider/CategoryProvider/hooks/useCategoryContext";
 import handleCategoryClick from "./_utils/handleCategoryClick";
+import { cn } from "@/app/_utils/cn";
 
 const CategorySelectPage = () => {
   const { selectedCategories, setSelectedCategories } = useCategoryContext();
 
   return (
-    <main className="px-[16px] pb-[160px]">
+    <main
+      className={cn(
+        "max-w-[1100px] mx-auto px-[16px] pb-[160px]",
+        "md:px-[20px]"
+      )}
+    >
       <section className="pt-[40px] flex flex-col gap-2">
-        <h2 className="text-[22px] font-bold text-[#121212] leading-[130%] tracking-[-0.02em]">
+        <h2
+          className={cn(
+            "text-[22px] font-bold text-[#121212] leading-[130%] tracking-[-0.02em]",
+            "md:text-[28px] md:leading-[38px] md:tracking-[-0.02.5em]"
+          )}
+        >
           어떤 카테고리의
           <br />
           콘텐츠를 만드시나요?
         </h2>
-        <p className="text-[18px] text-[#767676] leading-[130%] tracking-[-0.02em]">
+        <p
+          className={cn(
+            "text-[18px] text-[#767676] leading-[130%] tracking-[-0.02em]",
+            "md:text-[20px] md:leading-[28px] md:tracking-[-0.025em]"
+          )}
+        >
           최대 2개까지 선택 가능합니다.
         </p>
       </section>
