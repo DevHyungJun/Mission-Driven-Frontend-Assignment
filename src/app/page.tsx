@@ -13,10 +13,13 @@ import {
 import { cn } from "./_utils/cn";
 import handleImageUpload from "./_components/MainImageUpload/utils/handleImageUpload";
 import useMainImage from "./_components/MainImageUpload/hooks/useMainImage";
+import useAdditionalImages from "./_components/AdditonalImages/hooks/useAdditionalImages";
+import handleMultiImageUpload from "./_components/AdditonalImages/utils/handleMultiImageUpload";
 
 export default function Home() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { mainImage, setMainImage } = useMainImage();
+  const { additionalImages, setAdditionalImages } = useAdditionalImages();
 
   return (
     <main
@@ -33,7 +36,10 @@ export default function Home() {
         />
         <AdditonalImages
           fileInputRef={fileInputRef}
-          handleImageUpload={(e) => handleImageUpload(e, setMainImage)}
+          handleImageUpload={(e) =>
+            handleMultiImageUpload(e, setAdditionalImages)
+          }
+          additionalImages={additionalImages}
         />
       </div>
       <div className="md:w-1/2 md:flex md:flex-col md:gap-[24px]">
