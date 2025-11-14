@@ -38,6 +38,7 @@ export interface SessionDate {
   date: Date | null;
   startTime: Date | null;
   endTime: Date | null;
+  detailText: string;
 }
 
 const generateSessionId = (): string => {
@@ -49,6 +50,7 @@ interface SessionStore {
   setSessionDate: (sessionId: string, date: Date | null) => void;
   setSessionStartTime: (sessionId: string, time: Date | null) => void;
   setSessionEndTime: (sessionId: string, time: Date | null) => void;
+  setSessionDetailText: (sessionId: string, detailText: string) => void;
   addSession: () => void;
   removeSession: (sessionId: string) => void;
 }
@@ -84,11 +86,24 @@ export const useSessionStore = create<SessionStore>((set) => ({
       );
       return { sessions: newSessions };
     }),
+  setSessionDetailText: (sessionId, detailText) =>
+    set((state) => {
+      const newSessions = state.sessions.map((session) =>
+        session.id === sessionId ? { ...session, detailText } : session
+      );
+      return { sessions: newSessions };
+    }),
   addSession: () =>
     set((state) => ({
       sessions: [
         ...state.sessions,
-        { id: generateSessionId(), date: null, startTime: null, endTime: null },
+        {
+          id: generateSessionId(),
+          date: null,
+          startTime: null,
+          endTime: null,
+          detailText: "",
+        },
       ],
     })),
   removeSession: (sessionId) =>

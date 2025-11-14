@@ -1,21 +1,35 @@
 "use client";
 
+import { useEffect } from "react";
 import { Textarea } from "@/components";
 import { useSessionStore } from "@/utils/store/store";
 import { Controller, useForm } from "react-hook-form";
 import { TEXTAREA_VALIDATION } from "@/constant/TEXTAREA_VALIDATION";
+
 interface DetailTextareaFormValues {
   detailTextarea: string;
 }
-const DetailTextarea = () => {
-  const { sessions, setSessionStartTime } = useSessionStore();
+
+interface DetailTextareaProps {
+  sessionId: string;
+}
+
+const DetailTextarea = ({ sessionId }: DetailTextareaProps) => {
+  const { sessions, setSessionDetailText } = useSessionStore();
+  const currentSession = sessions.find((session) => session.id === sessionId);
   const { control, handleSubmit, watch } = useForm<DetailTextareaFormValues>({
     mode: "onChange",
     reValidateMode: "onChange",
     defaultValues: {
-      detailTextarea: "",
+      detailTextarea: currentSession?.detailText || "",
     },
   });
+
+  const detailTextareaValue = watch("detailTextarea");
+
+  useEffect(() => {
+    setSessionDetailText(sessionId, detailTextareaValue);
+  }, [detailTextareaValue, sessionId, setSessionDetailText]);
 
   const onSubmit = (data: DetailTextareaFormValues) => {
     console.log(data);

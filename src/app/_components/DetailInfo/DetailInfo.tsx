@@ -52,7 +52,7 @@ const DetailInfo = () => {
                 날짜별 활동 내용을 간단히 적어주세요
               </p>
             </div>
-            <DetailTextarea />
+            <DetailTextarea sessionId={sessionDate.id} />
           </div>
         </div>
       ))}
