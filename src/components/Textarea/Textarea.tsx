@@ -18,6 +18,7 @@ interface TextareaProps
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
+  maxLength?: number;
 }
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
@@ -30,6 +31,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       value = "",
       onChange,
       onBlur,
+      maxLength = 80,
       ...props
     },
     ref
@@ -59,7 +61,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             ref={ref}
             onKeyDown={handleKeyDownEvent}
             rows={1}
-            maxLength={80}
+            maxLength={maxLength}
             className="resize-none w-full min-h-[80px] max-h-[320px] leading-[130%] placeholder:text-[#8F8F8F] focus:outline-none py-[12px] text-[#121212] overflow-y-hidden"
             placeholder={placeholder}
           />
@@ -67,7 +69,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             id={descriptionId}
             className="flex justify-end items-center min-h-[38px] text-[#8F8F8F] text-sm"
           >
-            {currentMessageLength}/80자 (최소 8자)
+            {currentMessageLength}/{maxLength}자 (최소 8자)
           </div>
         </div>
         {isError && errorMessage && (
