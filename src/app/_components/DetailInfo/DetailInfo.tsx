@@ -88,7 +88,7 @@ const DetailInfo = () => {
         onConfirm={handleRemoveSession}
         title={
           <>
-            작성된 내용을 <br />
+            작성된 내용을 <br className="hidden md:block" />
             삭제하시겠어요?
           </>
         }

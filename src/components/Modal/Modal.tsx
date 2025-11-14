@@ -4,6 +4,8 @@ import { useEffect, ReactNode } from "react";
 import { createPortal } from "react-dom";
 import Button from "../Button/Button";
 import Icon from "../Icon/Icon";
+import { cn } from "@/app/_utils/cn";
+import { MODAL_BUTTON_CONFIG } from "./constants/MODAL_BUTTON_CONFIG";
 
 interface ModalProps {
   open: boolean;
@@ -56,7 +58,7 @@ const Modal = ({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-[430px] rounded-2xl bg-white"
+        className={cn("w-[328px] rounded-2xl bg-white", "md:w-[430px]")}
       >
         <div className="h-[56px] flex justify-end items-center pr-[16px]">
           <button
@@ -64,38 +66,53 @@ const Modal = ({
             onClick={onClose}
             className="cursor-pointer"
           >
-            <Icon name="X" size={32} />
+            <Icon name="X" size={28} className="md:size-8" />
           </button>
         </div>
-        <div className="flex flex-col items-center px-[24px] pb-[24px] gap-8">
+        <div
+          className={cn(
+            "flex flex-col items-center px-[20px] pb-[20px] gap-8",
+            "md:px-[24px] md:pb-[24px]"
+          )}
+        >
           <div className="space-y-2">
-            <h2 className="text-center text-[24px] font-bold text-[#121212] leading-[130%] tracking-[-0.02em]">
+            <h2
+              className={cn(
+                "text-center text-[20px] font-bold text-[#121212] leading-[130%] tracking-[-0.02em]",
+                "md:text-[24px]"
+              )}
+            >
               {title}
             </h2>
             {subtitle && (
-              <p className="text-[18px] leading-[130%] tracking-[-0.02em] text-[#565656]">
+              <p
+                className={cn(
+                  "text-center text-[16px] leading-[130%] tracking-[-0.02em] text-[#565656]",
+                  "md:text-[18px]"
+                )}
+              >
                 {subtitle}
               </p>
             )}
           </div>
 
           <div className="w-full flex gap-2">
-            <Button
-              variant="outline"
-              color="black"
-              onClick={onClose}
-              className="w-full"
-            >
-              {cancelText}
-            </Button>
-            <Button
-              variant="default"
-              color="dark-gray"
-              onClick={onConfirm}
-              className="w-full"
-            >
-              {confirmText}
-            </Button>
+            {MODAL_BUTTON_CONFIG.map((buttonConfig, index) => {
+              return (
+                <Button
+                  key={index}
+                  variant={buttonConfig.variant}
+                  color={buttonConfig.color}
+                  onClick={buttonConfig.id === "cancel" ? onClose : onConfirm}
+                  className={cn(
+                    "w-full h-[48px] flex justify-center items-center",
+                    "md:h-[58px]"
+                  )}
+                >
+                  {buttonConfig.id === "cancel" ? cancelText : confirmText}
+                </Button>
+              );
+            })}
           </div>
         </div>
       </div>
