@@ -2,12 +2,12 @@
 
 import { Button } from "@/components";
 import { CATEGORY_LIST } from "./_constant/CATEGORY_LIST";
-import useCategoryContext from "@/provider/CategoryProvider/hooks/useCategoryContext";
+import { useCategoryStore } from "@/utils/store/store";
 import handleCategoryClick from "./_utils/handleCategoryClick";
 import { cn } from "@/app/_utils/cn";
 
 const CategorySelectPage = () => {
-  const { selectedCategories, setSelectedCategories } = useCategoryContext();
+  const { setSelectedCategories, selectedCategories } = useCategoryStore();
 
   return (
     <main

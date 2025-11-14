@@ -3,18 +3,17 @@
 import { Button } from "@/components";
 import { cn } from "@/app/_utils/cn";
 import { usePathname, useRouter } from "next/navigation";
-import useCategoryContext from "@/provider/CategoryProvider/hooks/useCategoryContext";
+import { useCategoryStore } from "@/utils/store/store";
 
 const NextButton = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const { selectedCategories } = useCategoryContext();
+  const { selectedCategories } = useCategoryStore();
   const isCategorySelectPage = pathname === "/category-select";
 
   const handleClick = () => {
-    if (isCategorySelectPage) {
-      router.push("/");
-    }
+    if (!isCategorySelectPage) return;
+    router.push("/");
   };
 
   const isDisabled = isCategorySelectPage

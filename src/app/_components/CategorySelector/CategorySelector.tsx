@@ -3,11 +3,11 @@
 import { Icon } from "@/components";
 import SectionProvider from "@/provider/SectionProvider/SectionProvider";
 import Link from "next/link";
-import useCategoryContext from "@/provider/CategoryProvider/hooks/useCategoryContext";
+import { useCategoryStore } from "@/utils/store/store";
 import getCategoryDisplayText from "@/app/(route)/category-select/_utils/getCategoryDisplayText";
 
 const CategorySelector = () => {
-  const { selectedCategories } = useCategoryContext();
+  const { selectedCategories } = useCategoryStore();
   const displayText = getCategoryDisplayText(selectedCategories);
 
   return (
