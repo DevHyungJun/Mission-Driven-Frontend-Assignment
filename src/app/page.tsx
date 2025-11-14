@@ -26,19 +26,7 @@ export default function Home() {
         <ContentTitle />
         <ActivityTypeSelector />
         <DetailInfo />
-        <Button
-          variant="default"
-          color="dark-gray"
-          className={cn(
-            "w-full mt-[24px] h-[48px] flex items-center justify-center",
-            "md:h-[58px] md:mt-0"
-          )}
-          ariaLabel="회차 추가하기 버튼"
-        >
-          회차 추가하기
-        </Button>
       </div>
     </main>
   );
 }
-
