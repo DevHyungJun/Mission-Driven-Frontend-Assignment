@@ -37,11 +37,26 @@ const Calendar = ({
   currentSessionIndex,
   onClose,
 }: CalendarProps) => {
-  const [currentMonth, setCurrentMonth] = useState(selectedDate || new Date());
-  const [tempSelectedDate, setTempSelectedDate] = useState<Date | null>(
-    selectedDate
-  );
   const { minDate, maxDate } = getDateRange(sessions, currentSessionIndex);
+
+  const getInitialDate = (): Date => {
+    if (selectedDate) {
+      return selectedDate;
+    }
+
+    const today = new Date();
+    if (isDateSelectable(today, minDate, maxDate)) {
+      return today;
+    }
+
+    return minDate || today;
+  };
+
+  const initialDate = getInitialDate();
+  const [currentMonth, setCurrentMonth] = useState(initialDate);
+  const [tempSelectedDate, setTempSelectedDate] = useState<Date | null>(
+    initialDate
+  );
 
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(currentMonth);
