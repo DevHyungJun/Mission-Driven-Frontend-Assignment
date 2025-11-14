@@ -10,6 +10,7 @@ import {
   CategorySelector,
   ContentTitle,
 } from "./_components";
+import { cn } from "./_utils/cn";
 
 export default function Home() {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -21,38 +22,37 @@ export default function Home() {
   };
 
   return (
-    <main className="px-[16px] pb-[160px]">
-      <MainImageUpload
-        fileInputRef={fileInputRef}
-        handleImageUpload={handleImageUpload}
-      />
-      <AdditonalImages
-        fileInputRef={fileInputRef}
-        handleImageUpload={handleImageUpload}
-      />
-      <CategorySelector />
-      <ContentTitle />
-      <ActivityTypeSelector />
-      <DetailInfo />
-
-      <Button
-        variant="default"
-        color="dark-gray"
-        className="w-full mt-[24px] h-[48px] flex items-center justify-center"
-        ariaLabel="회차 추가하기 버튼"
-      >
-        회차 추가하기
-      </Button>
-
-      <div className="fixed bottom-0 left-0 right-0 w-full px-[16px] py-[16px] bg-white">
+    <main
+      className={cn(
+        "px-[16px] pb-[160px]",
+        "md:max-w-[1060px] md:flex md:gap-[40px] md:mx-auto"
+      )}
+    >
+      <div className="md:w-1/2">
+        <MainImageUpload
+          fileInputRef={fileInputRef}
+          handleImageUpload={handleImageUpload}
+        />
+        <AdditonalImages
+          fileInputRef={fileInputRef}
+          handleImageUpload={handleImageUpload}
+        />
+      </div>
+      <div className="md:w-1/2 md:flex md:flex-col md:gap-[24px]">
+        <CategorySelector />
+        <ContentTitle />
+        <ActivityTypeSelector />
+        <DetailInfo />
         <Button
           variant="default"
-          color="light-green"
-          className="w-full h-[48px] flex items-center justify-center"
-          disabled
-          ariaLabel="다음으로 버튼"
+          color="dark-gray"
+          className={cn(
+            "w-full mt-[24px] h-[48px] flex items-center justify-center",
+            "md:h-[58px] md:mt-0"
+          )}
+          ariaLabel="회차 추가하기 버튼"
         >
-          다음으로
+          회차 추가하기
         </Button>
       </div>
     </main>

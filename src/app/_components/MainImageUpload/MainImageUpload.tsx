@@ -20,11 +20,21 @@ const MainImageUpload = ({
         )}
       >
         <div className="flex flex-col items-center justify-center gap-[24px]">
-          <div className="flex flex-col items-center justify-center gap-2 leading-[130%] tracking-[-0.02em]">
-            <p className="text-[20px] font-bold text-[#121212]">
+          <div
+            className={cn(
+              "flex flex-col items-center justify-center gap-2 leading-[130%] tracking-[-0.02em]",
+              "md:gap-4"
+            )}
+          >
+            <p
+              className={cn(
+                "text-[20px] font-bold text-[#121212]",
+                "md:text-[28px]"
+              )}
+            >
               콘텐츠 대표 이미지를 등록해주세요!
             </p>
-            <p className="text-[#8F8F8F]">
+            <p className={cn("text-[#8F8F8F]", "md:text-[22px]")}>
               1:1 비율의 정사각형 이미지를 추천합니다
             </p>
           </div>
