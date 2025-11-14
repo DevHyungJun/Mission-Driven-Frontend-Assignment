@@ -45,6 +45,18 @@ const generateSessionId = (): string => {
   return `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 };
 
+const getDefaultStartTime = (): Date => {
+  const date = new Date();
+  date.setHours(10, 0, 0, 0);
+  return date;
+};
+
+const getDefaultEndTime = (): Date => {
+  const date = new Date();
+  date.setHours(11, 0, 0, 0);
+  return date;
+};
+
 interface SessionStore {
   sessions: SessionDate[];
   setSessionDate: (sessionId: string, date: Date | null) => void;
@@ -60,8 +72,8 @@ export const useSessionStore = create<SessionStore>((set) => ({
     {
       id: generateSessionId(),
       date: null,
-      startTime: null,
-      endTime: null,
+      startTime: getDefaultStartTime(),
+      endTime: getDefaultEndTime(),
       detailText: "",
     },
   ],
@@ -100,8 +112,8 @@ export const useSessionStore = create<SessionStore>((set) => ({
         {
           id: generateSessionId(),
           date: null,
-          startTime: null,
-          endTime: null,
+          startTime: getDefaultStartTime(),
+          endTime: getDefaultEndTime(),
           detailText: "",
         },
       ],
