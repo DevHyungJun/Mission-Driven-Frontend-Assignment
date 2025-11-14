@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useState, useEffect, useRef, ReactNode } from "react";
 
 interface ImageContextType {
   mainImage: string | null;
@@ -21,18 +21,28 @@ const ImageProvider = ({ children }: ImageProviderProps) => {
   const [mainImage, setMainImage] = useState<string | null>(null);
   const [additionalImages, setAdditionalImages] = useState<string[]>([]);
 
+  // ref로 이미지 최신 값 저장
+  const mainImageRef = useRef(mainImage);
+  const additionalImagesRef = useRef(additionalImages);
+
+  useEffect(() => {
+    mainImageRef.current = mainImage;
+    additionalImagesRef.current = additionalImages;
+  });
+
+  // 컴포넌트 언마운트 시에만 Blob URL 정리
   useEffect(() => {
     return () => {
-      if (mainImage && mainImage.startsWith("blob:")) {
-        URL.revokeObjectURL(mainImage);
+      if (mainImageRef.current && mainImageRef.current.startsWith("blob:")) {
+        URL.revokeObjectURL(mainImageRef.current);
       }
-      additionalImages.forEach((url) => {
+      additionalImagesRef.current.forEach((url) => {
         if (url.startsWith("blob:")) {
           URL.revokeObjectURL(url);
         }
       });
     };
-  }, [mainImage, additionalImages]);
+  }, []);
 
   return (
     <ImageContext.Provider
