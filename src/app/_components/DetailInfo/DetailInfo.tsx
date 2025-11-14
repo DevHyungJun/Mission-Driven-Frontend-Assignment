@@ -1,11 +1,12 @@
 "use client";
 
-import { Button, Icon, Textarea } from "@/components";
+import { Button, Icon } from "@/components";
 import SectionProvider from "@/provider/SectionProvider/SectionProvider";
 import { SESSION_FIELDS } from "./constants/SESSION_FIELDS";
 import SessionFieldButton from "./internal/SessionFieldButton";
 import { cn } from "@/app/_utils/cn";
 import { useSessionStore } from "@/utils/store/store";
+import DetailTextarea from "./internal/DetailTextarea";
 
 const DetailInfo = () => {
   const { sessions, addSession, removeSession } = useSessionStore();
@@ -17,7 +18,7 @@ const DetailInfo = () => {
           key={sessionIndex}
           className="w-full flex flex-col gap-[32px] bg-[#F7F7F8] border border-[#E5E5E5] rounded-[8px] px-[16px] py-[24px] mb-4 relative"
         >
-          {sessionIndex > 0 && (
+          {sessions.length > 1 && (
             <button
               onClick={() => removeSession(sessionIndex)}
               className="absolute top-[24px] right-[16px] w-[24px] h-[24px] flex items-center justify-center text-[#8F8F8F] hover:text-[#121212] transition-colors"
@@ -52,11 +53,7 @@ const DetailInfo = () => {
                 날짜별 활동 내용을 간단히 적어주세요
               </p>
             </div>
-            <Textarea
-              placeholder="활동 내용을 간단히 입력해주세요"
-              ariaLabel="활동 내용 입력 필드"
-              maxLength={80}
-            />
+            <DetailTextarea />
           </div>
         </div>
       ))}

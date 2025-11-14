@@ -65,7 +65,12 @@ const Calendar = ({
   };
 
   return (
-    <div className="absolute top-full left-0 mt-2 bg-white border border-[#E5E5E5] rounded-lg shadow-lg p-4 z-50 min-w-[320px]">
+    <div
+      className={cn(
+        "absolute min-w-[250px] top-full left-0 right-0 mt-2 bg-white border border-[#E5E5E5] rounded-lg shadow-lg p-4 z-50",
+        "md:min-w-[330px]"
+      )}
+    >
       <div className="flex items-center justify-between mb-4">
         <button
           onClick={handlePrevMonth}

@@ -7,6 +7,7 @@ import { SESSION_FIELDS } from "../constants/SESSION_FIELDS";
 import { useSessionStore } from "@/utils/store/store";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
+import { cn } from "@/app/_utils/cn";
 
 const TIME_BUTTON_BASE_STYLE =
   "py-[14.5px] text-[18px] leading-[130%] tracking-[-0.02em] text-[#121212] text-center";
@@ -16,7 +17,10 @@ interface SessionFieldButtonProps {
   sessionIndex: number;
 }
 
-const SessionFieldButton = ({ field, sessionIndex }: SessionFieldButtonProps) => {
+const SessionFieldButton = ({
+  field,
+  sessionIndex,
+}: SessionFieldButtonProps) => {
   const { sessions, setSessionDate } = useSessionStore();
   const currentSession = sessions[sessionIndex];
 
@@ -50,7 +54,10 @@ const SessionFieldButton = ({ field, sessionIndex }: SessionFieldButtonProps) =>
           variant="outline"
           color="black"
           size="small"
-          className="text-[#8F8F8F] bg-white w-full h-[52px] rounded-lg"
+          className={cn(
+            "text-[#8F8F8F] bg-white w-full h-[52px] rounded-lg text-[16px] font-medium",
+            "md:text-[20px]"
+          )}
           ariaLabel={field.ariaLabel}
           onClick={() => setIsDateCalendarOpen(!isDateCalendarOpen)}
         >
