@@ -1,15 +1,26 @@
 "use client";
 
-import { Button, Icon } from "@/components";
+import { Button, Icon, Modal } from "@/components";
 import SectionProvider from "@/provider/SectionProvider/SectionProvider";
 import { SESSION_FIELDS } from "./constants/SESSION_FIELDS";
 import SessionFieldButton from "./internal/SessionFieldButton";
 import { cn } from "@/app/_utils/cn";
 import { useSessionStore } from "@/utils/store/store";
 import DetailTextarea from "./internal/DetailTextarea";
+import { useState } from "react";
 
 const DetailInfo = () => {
   const { sessions, addSession, removeSession } = useSessionStore();
+  const [openModal, setOpenModal] = useState(false);
+  const [sessionIdToDelete, setSessionIdToDelete] = useState<string>("");
+
+  const handleRemoveSession = () => {
+    if (!sessionIdToDelete) return;
+    setOpenModal(false);
+    removeSession(sessionIdToDelete);
+    setSessionIdToDelete("");
+  };
+
   return (
     <SectionProvider title="상세 정보" mode="simple">
       {sessions.map((sessionDate, sessionIndex) => (
@@ -19,8 +30,11 @@ const DetailInfo = () => {
         >
           {sessions.length > 1 && (
             <button
-              onClick={() => removeSession(sessionDate.id)}
-              className="absolute p-2.5 top-1 cursor-pointer right-1 flex items-center justify-center text-[#8F8F8F] hover:text-[#121212] transition-colors"
+              onClick={() => {
+                setOpenModal(true);
+                setSessionIdToDelete(sessionDate.id);
+              }}
+              className="absolute p-2.5 top-1 cursor-pointer right-1 flex items-center justify-center text-[#8F8F8F] hover:text-[#121212] transition-colors focus:outline-none"
               aria-label={`${sessionIndex + 1}회차 삭제`}
             >
               <Icon name="X" size={28} />
@@ -68,6 +82,20 @@ const DetailInfo = () => {
       >
         회차 추가하기
       </Button>
+      <Modal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        onConfirm={handleRemoveSession}
+        title={
+          <>
+            작성된 내용을 <br />
+            삭제하시겠어요?
+          </>
+        }
+        subtitle="삭제한 내용은 복구할 수 없습니다."
+        cancelText="취소"
+        confirmText="삭제하기"
+      />
     </SectionProvider>
   );
 };
