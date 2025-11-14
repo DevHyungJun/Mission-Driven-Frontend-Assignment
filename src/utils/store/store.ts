@@ -5,12 +5,14 @@ import { ActivityType } from "@/app/_components/ActivityTypeSelector/constant/AC
 interface CategoryStore {
   selectedCategories: CategoryId[];
   setSelectedCategories: (categories: CategoryId[]) => void;
+  clearSelectedCategories: () => void;
 }
 
 export const useCategoryStore = create<CategoryStore>((set) => ({
   selectedCategories: [],
   setSelectedCategories: (categories) =>
     set({ selectedCategories: categories }),
+  clearSelectedCategories: () => set({ selectedCategories: [] }),
 }));
 
 interface ContentTitleStore {

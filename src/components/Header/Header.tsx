@@ -3,13 +3,21 @@
 import { cn } from "@/app/_utils/cn";
 import { NextButton } from "@/app/_components";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
 import Icon from "../Icon/Icon";
 import Button from "../Button/Button";
+import { useRouter } from "next/navigation";
+import { useCategoryStore } from "@/utils/store/store";
 
 const Header = () => {
   const pathname = usePathname();
+  const router = useRouter();
+  const { clearSelectedCategories } = useCategoryStore();
   const isCategorySelectPage = pathname === "/category-select";
+
+  const handleOut = () => {
+    clearSelectedCategories();
+    router.back();
+  };
 
   return (
     <header className="w-full border-b border-[#E5E5E5] sticky top-0 bg-white z-10">
@@ -22,29 +30,23 @@ const Header = () => {
       >
         {isCategorySelectPage && (
           <>
-            <Link
-              href="/"
-              replace
-              className="md:hidden cursor-pointer hover:opacity-80 active:opacity-60"
+            <button
+              onClick={handleOut}
+              className="cursor:pointer md:hidden cursor-pointer hover:opacity-80 active:opacity-60"
               aria-label="닫기 버튼"
             >
               <Icon name="X" size={28} aria-hidden={true} />
-            </Link>
-            <Link
-              href="/"
-              replace
-              className="hidden md:flex items-center cursor-pointer hover:opacity-80 active:opacity-60"
-              aria-label="나가기 버튼"
+            </button>
+            <Button
+              variant="outline"
+              color="black"
+              className="w-[120px] h-[38px] ml-[40px] md:flex items-center justify-center cursor-pointer hover:opacity-80 active:opacity-60 hidden"
+              size="small"
+              ariaLabel="나가기 버튼"
+              onClick={handleOut}
             >
-              <Button
-                variant="outline"
-                color="black"
-                className="w-[120px] h-[38px] ml-[40px] flex items-center justify-center"
-                size="small"
-              >
-                나가기
-              </Button>
-            </Link>
+              나가기
+            </Button>
           </>
         )}
         <div className="hidden md:block flex-1" />
