@@ -21,10 +21,10 @@ const DetailInfo = () => {
           {sessions.length > 1 && (
             <button
               onClick={() => removeSession(sessionIndex)}
-              className="absolute top-[24px] right-[16px] w-[24px] h-[24px] flex items-center justify-center text-[#8F8F8F] hover:text-[#121212] transition-colors"
+              className="absolute p-2.5 top-1 cursor-pointer right-1 flex items-center justify-center text-[#8F8F8F] hover:text-[#121212] transition-colors"
               aria-label={`${sessionIndex + 1}회차 삭제`}
             >
-              <Icon name="X" />
+              <Icon name="X" size={28} />
             </button>
           )}
           <div className="space-y-[12px]">
