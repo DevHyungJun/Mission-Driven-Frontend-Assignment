@@ -46,7 +46,7 @@ const DetailTextarea = ({ sessionId }: DetailTextareaProps) => {
             {...field}
             placeholder="활동 내용을 간단히 입력해주세요"
             ariaLabel="활동 내용 입력 필드"
-            maxLength={80}
+            maxLength={800}
             isError={!!fieldState.error}
             errorMessage={fieldState.error?.message}
           />
