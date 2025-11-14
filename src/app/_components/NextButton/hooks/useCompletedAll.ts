@@ -15,18 +15,13 @@ const useCompletedAll = () => {
   const { sessions } = useSessionStore();
 
   // console확인
-  console.log(mainImage);
-  console.log(additionalImages);
-  console.log(selectedCategories);
-  console.log(contentTitle);
-  console.log(activityType);
-  console.log(sessions);
+  console.log(contentTitle.length >= 8);
 
   const isCompletedAll = useMemo(() => {
     return (
       mainImage &&
       selectedCategories.length > 0 &&
-      contentTitle &&
+      contentTitle.length >= 8 &&
       activityType &&
       sessions.length > 0 &&
       sessions.every(
@@ -34,7 +29,7 @@ const useCompletedAll = () => {
           session.date &&
           session.startTime &&
           session.endTime &&
-          session.detailText
+          session.detailText.length >= 8
       )
     );
   }, [mainImage, selectedCategories, contentTitle, activityType, sessions]);
