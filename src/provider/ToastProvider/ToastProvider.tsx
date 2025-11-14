@@ -7,7 +7,7 @@ import {
   useEffect,
   ReactNode,
 } from "react";
-import Toast from "@/components/Toast/Toast";
+import Toast from "@/provider/ToastProvider/internal/Toast";
 
 export interface ToastItem {
   id: string;
