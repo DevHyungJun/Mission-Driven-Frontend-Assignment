@@ -5,12 +5,12 @@ import { Button } from "@/components";
 import SectionProvider from "@/provider/SectionProvider/SectionProvider";
 import Image from "next/image";
 import { useRef } from "react";
-import useMainImage from "./hooks/useMainImage";
+import useImageContext from "@/provider/ImageProvider/hooks/useImageContext";
 import handleImageUpload from "./utils/handleImageUpload";
 
 const MainImageUpload = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { mainImage, setMainImage } = useMainImage();
+  const { mainImage, setMainImage } = useImageContext();
 
   return (
     <SectionProvider title="대표 이미지" mode="simple">
@@ -19,7 +19,7 @@ const MainImageUpload = () => {
         id="main-image-upload"
         className="hidden"
         accept="image/jpeg,image/png,.jpg,.jpeg,.png"
-        onChange={(e) => handleImageUpload(e, setMainImage)}
+        onChange={(e) => handleImageUpload(e, setMainImage, mainImage)}
         ref={fileInputRef}
         aria-label="대표 이미지 업로드"
         required

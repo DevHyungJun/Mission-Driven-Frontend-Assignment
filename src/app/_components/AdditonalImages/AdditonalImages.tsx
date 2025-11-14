@@ -5,12 +5,12 @@ import { Icon } from "@/components";
 import SectionProvider from "@/provider/SectionProvider/SectionProvider";
 import Image from "next/image";
 import { useRef } from "react";
-import useAdditionalImages from "./hooks/useAdditionalImages";
+import useImageContext from "@/provider/ImageProvider/hooks/useImageContext";
 import handleMultiImageUpload from "./utils/handleMultiImageUpload";
 
 const AdditonalImages = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { additionalImages, setAdditionalImages } = useAdditionalImages();
+  const { additionalImages, setAdditionalImages } = useImageContext();
 
   return (
     <SectionProvider
