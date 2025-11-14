@@ -11,15 +11,12 @@ import {
   ContentTitle,
 } from "./_components";
 import { cn } from "./_utils/cn";
+import handleImageUpload from "./_components/MainImageUpload/utils/handleImageUpload";
+import useMainImage from "./_components/MainImageUpload/hooks/useMainImage";
 
 export default function Home() {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      console.log(file);
-    }
-  };
+  const { mainImage, setMainImage } = useMainImage();
 
   return (
     <main
@@ -31,11 +28,12 @@ export default function Home() {
       <div className="md:w-1/2">
         <MainImageUpload
           fileInputRef={fileInputRef}
-          handleImageUpload={handleImageUpload}
+          handleImageUpload={(e) => handleImageUpload(e, setMainImage)}
+          mainImage={mainImage}
         />
         <AdditonalImages
           fileInputRef={fileInputRef}
-          handleImageUpload={handleImageUpload}
+          handleImageUpload={(e) => handleImageUpload(e, setMainImage)}
         />
       </div>
       <div className="md:w-1/2 md:flex md:flex-col md:gap-[24px]">
