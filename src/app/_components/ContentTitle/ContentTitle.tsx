@@ -4,19 +4,27 @@ import { Textarea } from "@/components";
 import SectionProvider from "@/provider/SectionProvider/SectionProvider";
 import { useForm, Controller } from "react-hook-form";
 import { CONTENT_TITLE_VALIDATION } from "./constant/CONTENT_TITLE_VALIDATION";
+import { useContentTitleStore } from "@/utils/store/store";
+import { useEffect } from "react";
 
 interface ContentTitleFormValues {
   contentTitle: string;
 }
 
 const ContentTitle = () => {
-  const { control, handleSubmit } = useForm<ContentTitleFormValues>({
+  const { contentTitle, setContentTitle } = useContentTitleStore();
+  const { control, handleSubmit, watch } = useForm<ContentTitleFormValues>({
     mode: "onChange",
     reValidateMode: "onChange",
     defaultValues: {
-      contentTitle: "",
+      contentTitle: contentTitle || "",
     },
   });
+  const watchContentTitle = watch("contentTitle");
+
+  useEffect(() => {
+    setContentTitle(watchContentTitle);
+  }, [watchContentTitle]);
 
   const onSubmit = (data: ContentTitleFormValues) => {
     console.log(data);

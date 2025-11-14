@@ -11,3 +11,13 @@ export const useCategoryStore = create<CategoryStore>((set) => ({
   setSelectedCategories: (categories) =>
     set({ selectedCategories: categories }),
 }));
+
+interface ContentTitleStore {
+  contentTitle: string;
+  setContentTitle: (contentTitle: string) => void;
+}
+
+export const useContentTitleStore = create<ContentTitleStore>((set) => ({
+  contentTitle: "",
+  setContentTitle: (contentTitle) => set({ contentTitle }),
+}));
