@@ -20,7 +20,6 @@ const handleImageUpload = (
     return;
   }
 
-  // 이전 Blob URL 정리
   if (currentMainImage && currentMainImage.startsWith("blob:")) {
     URL.revokeObjectURL(currentMainImage);
   }
