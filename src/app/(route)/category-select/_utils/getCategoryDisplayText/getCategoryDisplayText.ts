@@ -1,4 +1,8 @@
-import { CategoryId, CategoryName, getCategoryById } from "../_constant/CATEGORY_LIST";
+import {
+  CategoryId,
+  CategoryName,
+  getCategoryById,
+} from "../../_constant/CATEGORY_LIST";
 
 const getCategoryDisplayText = (
   selectedCategories: CategoryId[],
@@ -14,4 +18,3 @@ const getCategoryDisplayText = (
 };
 
 export default getCategoryDisplayText;
-
