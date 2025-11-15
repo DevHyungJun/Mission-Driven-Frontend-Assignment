@@ -6,6 +6,7 @@ import { Toast } from "@/components";
 import { useTimeDisplay } from "./hooks/useTimeDisplay";
 import { useTimeUpdate } from "./hooks/useTimeUpdate";
 import { useTimeInput } from "./hooks/useTimeInput";
+import { getTimeDisplay, formatTimeDisplay } from "./utils/timeDisplayUtils";
 import { AMPMToggleButton } from "./internal/AMPMToggleButton";
 import { TimeInput } from "./internal/TimeInput";
 import { TimeSeparator } from "./internal/TimeSeparator";
@@ -40,10 +41,15 @@ const TimePickerButton = ({ label, sessionId }: TimePickerButtonProps) => {
   const { updateTime, handleAMPMToggle: updateAMPM } = useTimeUpdate({
     sessionId,
     isStartTime,
-    startTime: startTime ?? null,
-    endTime: endTime ?? null,
     onValidationError: setToastMessage,
   });
+
+  const restoreTimeDisplay = () => {
+    const display = getTimeDisplay(currentTime ?? null);
+    const formatted = formatTimeDisplay(display);
+    setLocalHour(formatted.hour);
+    setLocalMinute(formatted.minute);
+  };
 
   const {
     handleHourChange,
@@ -58,8 +64,8 @@ const TimePickerButton = ({ label, sessionId }: TimePickerButtonProps) => {
     localIsAM,
     setLocalHour,
     setLocalMinute,
-    time: currentTime ?? null,
     onTimeUpdate: updateTime,
+    onRestore: restoreTimeDisplay,
   });
 
   const handleAMPMToggle = () => {

@@ -9,19 +9,19 @@ import { getTimeDisplay } from "../utils/timeDisplayUtils";
 interface UseTimeUpdateParams {
   sessionId: string;
   isStartTime: boolean;
-  startTime: Date | null;
-  endTime: Date | null;
   onValidationError: (message: string) => void;
 }
 
 export const useTimeUpdate = ({
   sessionId,
   isStartTime,
-  startTime,
-  endTime,
   onValidationError,
 }: UseTimeUpdateParams) => {
-  const { setSessionStartTime, setSessionEndTime } = useSessionStore();
+  const { sessions, setSessionStartTime, setSessionEndTime } = useSessionStore();
+
+  const getCurrentSession = () => {
+    return sessions.find((session) => session.id === sessionId);
+  };
 
   const updateTime = (hour: number, minute: number, isAM: boolean): void => {
     const hour24 = convertTo24Hour(hour, isAM);
@@ -40,7 +40,9 @@ export const useTimeUpdate = ({
     startHour24: number,
     startMinute: number
   ): void => {
-    const endDisplay = getTimeDisplay(endTime ?? null);
+    const currentSession = getCurrentSession();
+    const endTime = currentSession?.endTime ?? null;
+    const endDisplay = getTimeDisplay(endTime);
     const endTime24 = convertTo24Hour(endDisplay.hour, endDisplay.isAM);
     const endMinute = endDisplay.minute;
 
@@ -59,7 +61,9 @@ export const useTimeUpdate = ({
   };
 
   const updateEndTime = (endHour24: number, endMinute: number): void => {
-    const startDisplay = getTimeDisplay(startTime ?? null);
+    const currentSession = getCurrentSession();
+    const startTime = currentSession?.startTime ?? null;
+    const startDisplay = getTimeDisplay(startTime);
     const startTime24 = convertTo24Hour(startDisplay.hour, startDisplay.isAM);
     const startMinute = startDisplay.minute;
 
@@ -83,12 +87,16 @@ export const useTimeUpdate = ({
   ): void => {
     updateTime(hour, minute, newIsAM);
 
-    if (isStartTime && endTime) {
-      const endDisplay = getTimeDisplay(endTime);
-      const newEndHour24 = convertTo24Hour(endDisplay.hour, newIsAM);
-      const newEndTime = new Date();
-      newEndTime.setHours(newEndHour24, endDisplay.minute, 0, 0);
-      setSessionEndTime(sessionId, newEndTime);
+    if (isStartTime) {
+      const currentSession = getCurrentSession();
+      const endTime = currentSession?.endTime;
+      if (endTime) {
+        const endDisplay = getTimeDisplay(endTime);
+        const newEndHour24 = convertTo24Hour(endDisplay.hour, newIsAM);
+        const newEndTime = new Date();
+        newEndTime.setHours(newEndHour24, endDisplay.minute, 0, 0);
+        setSessionEndTime(sessionId, newEndTime);
+      }
     }
   };
 

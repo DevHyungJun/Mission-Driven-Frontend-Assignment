@@ -13,7 +13,6 @@ import {
   getNextMinute,
   getPrevMinute,
 } from "../utils/keyboardUtils";
-import { getTimeDisplay, formatTimeDisplay } from "../utils/timeDisplayUtils";
 
 interface UseTimeInputParams {
   localHour: string;
@@ -21,8 +20,8 @@ interface UseTimeInputParams {
   localIsAM: boolean;
   setLocalHour: (value: string) => void;
   setLocalMinute: (value: string) => void;
-  time: Date | null;
   onTimeUpdate: (hour: number, minute: number, isAM: boolean) => void;
+  onRestore: () => void;
 }
 
 export const useTimeInput = ({
@@ -31,15 +30,9 @@ export const useTimeInput = ({
   localIsAM,
   setLocalHour,
   setLocalMinute,
-  time,
   onTimeUpdate,
+  onRestore,
 }: UseTimeInputParams) => {
-  const restoreTimeDisplay = () => {
-    const display = getTimeDisplay(time ?? null);
-    const formatted = formatTimeDisplay(display);
-    setLocalHour(formatted.hour);
-    setLocalMinute(formatted.minute);
-  };
 
   const handleHourChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = sanitizeNumericInput(e.target.value);
@@ -61,7 +54,7 @@ export const useTimeInput = ({
       setLocalHour(paddedValue);
       onTimeUpdate(numValue, parseInt(localMinute, 10), localIsAM);
     } else {
-      restoreTimeDisplay();
+      onRestore();
     }
   };
 
@@ -85,7 +78,7 @@ export const useTimeInput = ({
       setLocalMinute(paddedValue);
       onTimeUpdate(parseInt(localHour, 10), numValue, localIsAM);
     } else {
-      restoreTimeDisplay();
+      onRestore();
     }
   };
 
@@ -144,7 +137,7 @@ export const useTimeInput = ({
     const numValue = parseInt(value, 10);
 
     if (!value || !isValidHour(numValue)) {
-      restoreTimeDisplay();
+      onRestore();
       return;
     }
 
@@ -164,7 +157,7 @@ export const useTimeInput = ({
     const numValue = parseInt(value, 10);
 
     if (!value || !isValidMinute(numValue)) {
-      restoreTimeDisplay();
+      onRestore();
       return;
     }
 
