@@ -7,6 +7,23 @@ import Icon from "../Icon/Icon";
 import { cn } from "@/app/_utils/cn";
 import { MODAL_BUTTON_CONFIG } from "./constants/MODAL_BUTTON_CONFIG";
 
+/**
+ * 모달 컴포넌트(취소, 확인 버튼)
+ * @param open - 모달 열기 여부(필수)
+ * @param onClose - 모달 닫기 시 콜백(필수)
+ * @param onConfirm - 모달 확인 시 콜백(필수)
+ * @param title - 모달 제목(필수)
+ * @param subtitle - 모달 서브타이틀(선택)
+ * @param cancelText - 취소 버튼 텍스트(선택)
+ * @param confirmText - 확인 버튼 텍스트(필수)
+ *
+ * @example
+ * <Modal open={true} onClose={() => {}} onConfirm={() => {}} title="모달 제목" subtitle="모달 서브타이틀" cancelText="취소" confirmText="확인" />
+ *
+ * @description
+ * 모달이 열리고 ESC 키를 누르면 모달이 닫힙니다.
+ */
+
 interface ModalProps {
   open: boolean;
   onClose: () => void;
