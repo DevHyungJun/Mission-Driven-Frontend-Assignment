@@ -4,7 +4,7 @@ import { Button } from "@/components";
 import { cn } from "@/app/_utils/cn";
 import { usePathname, useRouter } from "next/navigation";
 import { useCategoryStore } from "@/stores";
-import useCompletedAll from "./hooks/useCompletedAll";
+import useCompletedAll from "./hooks/useCompletedAll/useCompletedAll";
 
 const NextButton = () => {
   const pathname = usePathname();
