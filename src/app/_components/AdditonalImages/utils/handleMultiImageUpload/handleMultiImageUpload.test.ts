@@ -1,4 +1,3 @@
-// toast 모킹
 jest.mock("@/provider/ToastProvider/ToastProvider", () => ({
   toast: {
     show: jest.fn(),
@@ -361,8 +360,6 @@ describe("handleMultiImageUpload", () => {
 
   describe("기존 이미지 정리", () => {
     it("기존 blob URL이 있으면 revokeObjectURL을 호출해야 한다 (필요 시)", () => {
-      // handleMultiImageUpload는 기존 이미지를 직접 revoke하지 않지만,
-      // ImageProvider에서 cleanup을 담당하므로 이 테스트는 참고용으로 작성
       const existingImages = ["blob:existing1"];
       const newImage = new File(["test"], "test.jpg", { type: "image/jpeg" });
       const mockEvent = {
@@ -382,8 +379,6 @@ describe("handleMultiImageUpload", () => {
 
       handleMultiImageUpload(mockEvent, setAdditionalImages);
 
-      // 함수는 기존 이미지를 직접 revoke하지 않음 (ImageProvider에서 처리)
-      // 하지만 새 이미지는 정상적으로 추가되어야 함
       expect(mockCreateObjectURL).toHaveBeenCalledWith(newImage);
       expect(currentImages).toHaveLength(2);
     });
