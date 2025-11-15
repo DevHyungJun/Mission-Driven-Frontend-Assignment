@@ -6,6 +6,34 @@ import useTextareaIds from "./hooks/useTextareaIds";
 import useTextareaHandlers from "./hooks/useTextareaHandlers";
 import getAriaDescribedBy from "./utils/getAriaDescribedBy";
 
+/**
+ * 텍스트 입력 필드 컴포넌트
+ * @param placeholder - 텍스트 입력 필드 플레이스홀더(필수)
+ * @param errorMessage - 에러 메시지(선택)
+ * @param isError - 에러 여부(선택)
+ * @param ariaLabel - 접근성 라벨(선택)
+ * @param value - 텍스트 입력 필드 값(선택)
+ * @param onChange - 텍스트 입력 필드 값 변경 시 콜백(선택)
+ * @param onBlur - 텍스트 입력 필드 포커스 이탈 시 콜백(선택)
+ * @param maxLength - 최대 자리수(선택)
+ *
+ * @example
+ * <form onSubmit={(e) => e.preventDefault()}>
+ *   <Controller
+ *     name="contentTitle"
+ *     control={control}
+ *     rules={TEXTAREA_VALIDATION}
+ *     render={({ field, fieldState }) => (
+ *       <Textarea {...field} placeholder="제목을 입력해주세요" ariaLabel="콘텐츠 제목 입력 필드" isError={!!fieldState.error} errorMessage={fieldState.error?.message} />
+ *     )}
+ *   />
+ * </form>
+ *
+ * @description
+ * Textarea는 React Hook Form을 기반으로 관리됩니다.
+ * Controller 컴포넌트 내부에서 사용되어야 하며, name, control, render 속성은 필수입니다.
+ */
+
 interface TextareaProps
   extends Omit<
     TextareaHTMLAttributes<HTMLTextAreaElement>,
