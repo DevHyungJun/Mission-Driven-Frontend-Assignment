@@ -6,7 +6,7 @@ import SectionProvider from "@/provider/SectionProvider/SectionProvider";
 import Image from "next/image";
 import { useRef } from "react";
 import useImageContext from "@/provider/ImageProvider/hooks/useImageContext";
-import handleImageUpload from "./utils/handleImageUpload";
+import handleImageUpload from "./utils/handleImageUpload/handleImageUpload";
 
 const MainImageUpload = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
