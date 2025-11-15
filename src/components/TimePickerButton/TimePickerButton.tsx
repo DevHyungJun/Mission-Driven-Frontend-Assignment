@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { useSessionStore } from "@/stores";
-import { Toast } from "@/components";
 import { useTimeDisplay } from "./hooks/useTimeDisplay";
 import { useTimeUpdate } from "./hooks/useTimeUpdate";
 import { useTimeInput } from "./hooks/useTimeInput";
@@ -43,7 +42,6 @@ const TimePickerButton = ({ label, sessionId }: TimePickerButtonProps) => {
   const endTime = currentSession?.endTime;
   const currentTime = isStartTime ? startTime : endTime;
 
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
   const hourInputRef = useRef<HTMLInputElement | null>(null);
   const minuteInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -59,7 +57,6 @@ const TimePickerButton = ({ label, sessionId }: TimePickerButtonProps) => {
   const { updateTime, handleAMPMToggle: updateAMPM } = useTimeUpdate({
     sessionId,
     isStartTime,
-    onValidationError: setToastMessage,
   });
 
   const restoreTimeDisplay = () => {
@@ -122,9 +119,6 @@ const TimePickerButton = ({ label, sessionId }: TimePickerButtonProps) => {
           onBlur={handleMinuteBlur}
         />
       </div>
-      {toastMessage && (
-        <Toast message={toastMessage} onClose={() => setToastMessage(null)} />
-      )}
     </>
   );
 };

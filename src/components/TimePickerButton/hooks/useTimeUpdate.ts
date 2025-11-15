@@ -1,4 +1,5 @@
 import { useSessionStore } from "@/stores";
+import { toast } from "@/provider/ToastProvider/ToastProvider";
 import {
   convertTo24Hour,
   isEndTimeAfterStart,
@@ -9,13 +10,11 @@ import { getTimeDisplay } from "../utils/timeDisplayUtils";
 interface UseTimeUpdateParams {
   sessionId: string;
   isStartTime: boolean;
-  onValidationError: (message: string) => void;
 }
 
 export const useTimeUpdate = ({
   sessionId,
   isStartTime,
-  onValidationError,
 }: UseTimeUpdateParams) => {
   const { sessions, setSessionStartTime, setSessionEndTime } = useSessionStore();
 
@@ -51,7 +50,7 @@ export const useTimeUpdate = ({
       const newEndTime = new Date();
       newEndTime.setHours(calculatedEnd.hour, calculatedEnd.minute, 0, 0);
       setSessionEndTime(sessionId, newEndTime);
-      onValidationError("시작 시간보다 종료시간은 빠를 수 없습니다.");
+      toast.show("시작 시간보다 종료시간은 빠를 수 없습니다.");
     } else {
       const calculatedEnd = calculateEndTime(startHour24, startMinute);
       const newEndTime = new Date();
@@ -68,7 +67,7 @@ export const useTimeUpdate = ({
     const startMinute = startDisplay.minute;
 
     if (!isEndTimeAfterStart(startTime24, startMinute, endHour24, endMinute)) {
-      onValidationError("시작 시간보다 종료시간은 빠를 수 없습니다.");
+      toast.show("시작 시간보다 종료시간은 빠를 수 없습니다.");
       const calculatedEnd = calculateEndTime(startTime24, startMinute);
       const newEndTime = new Date();
       newEndTime.setHours(calculatedEnd.hour, calculatedEnd.minute, 0, 0);
