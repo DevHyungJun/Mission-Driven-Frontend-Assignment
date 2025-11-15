@@ -2,7 +2,7 @@
 
 import { SESSION_FIELDS } from "../constants/SESSION_FIELDS";
 import DateSelectButton from "./DateSelectButton";
-import TimePickerButton from "./TimePickerButton";
+import { TimePickerButton } from "@/components";
 
 interface SessionFieldButtonProps {
   field: (typeof SESSION_FIELDS)[number];
