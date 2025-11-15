@@ -7,13 +7,6 @@ interface UseCalendarStateParams {
   maxDate: Date | null;
 }
 
-/**
- * 캘린더의 상태를 관리하는 커스텀 훅
- * @param selectedDate 이미 선택된 날짜
- * @param minDate 선택 가능한 최소 날짜
- * @param maxDate 선택 가능한 최대 날짜
- * @returns 캘린더 상태와 상태 업데이트 함수
- */
 export const useCalendarState = ({
   selectedDate,
   minDate,
@@ -32,4 +25,3 @@ export const useCalendarState = ({
     setTempSelectedDate,
   };
 };
-

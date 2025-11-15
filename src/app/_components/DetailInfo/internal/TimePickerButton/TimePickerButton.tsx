@@ -122,7 +122,6 @@ const TimePickerButton = ({ label, sessionId }: TimePickerButtonProps) => {
 
     if (isStartTime) {
       updateTime(hour, minute, newIsAM, true);
-      // 시작 시간의 오전/오후 변경 시 종료 시간도 동일하게 변경
       if (endTime) {
         const endDisplay = getTimeDisplay(endTime);
         const newEndHour24 = convertTo24Hour(endDisplay.hour, newIsAM);
@@ -154,7 +153,6 @@ const TimePickerButton = ({ label, sessionId }: TimePickerButtonProps) => {
   };
 
   const handleHourKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    // 숫자가 아닌 문자만 차단 (화살표, Tab, Enter, Backspace, Delete는 허용)
     if (
       !/[0-9]/.test(e.key) &&
       ![
@@ -186,7 +184,6 @@ const TimePickerButton = ({ label, sessionId }: TimePickerButtonProps) => {
   };
 
   const handleMinuteKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    // 숫자가 아닌 문자만 차단 (화살표, Tab, Enter, Backspace, Delete는 허용)
     if (
       !/[0-9]/.test(e.key) &&
       ![
@@ -240,7 +237,6 @@ const TimePickerButton = ({ label, sessionId }: TimePickerButtonProps) => {
       return;
     }
 
-    // 두 자리가 됐을 때 검증
     const numValue = parseInt(value, 10);
     if (!isNaN(numValue) && numValue >= 1 && numValue <= 12) {
       const paddedValue = value.padStart(2, "0");
@@ -259,34 +255,28 @@ const TimePickerButton = ({ label, sessionId }: TimePickerButtonProps) => {
   const handleMinuteChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
 
-    // 숫자가 아닌 문자 제거
     value = value.replace(/[^0-9]/g, "");
 
-    // 최대 2자리까지만 허용
     if (value.length > 2) {
       value = value.slice(0, 2);
     }
 
-    // 빈 값이면 허용 (사용자가 삭제 중일 수 있음)
     if (value === "") {
       setLocalMinute("");
       return;
     }
 
-    // 한 자리 입력 중일 때는 그냥 표시만
     if (value.length === 1) {
       setLocalMinute(value);
       return;
     }
 
-    // 두 자리가 됐을 때 검증
     const numValue = parseInt(value, 10);
     if (!isNaN(numValue) && numValue >= 0 && numValue <= 59) {
       const paddedValue = value.padStart(2, "0");
       setLocalMinute(paddedValue);
       updateTime(parseInt(localHour, 10), numValue, localIsAM, isStartTime);
     } else {
-      // 유효하지 않은 값이면 이전 값으로 복원
       const display = isStartTime
         ? getTimeDisplay(startTime ?? null)
         : getTimeDisplay(endTime ?? null);
@@ -299,7 +289,6 @@ const TimePickerButton = ({ label, sessionId }: TimePickerButtonProps) => {
     const value = e.target.value;
     const numValue = parseInt(value, 10);
 
-    // 빈 값이거나 유효하지 않은 값이면 이전 값으로 복원
     if (!value || isNaN(numValue) || numValue < 1 || numValue > 12) {
       const display = isStartTime
         ? getTimeDisplay(startTime ?? null)
@@ -309,7 +298,6 @@ const TimePickerButton = ({ label, sessionId }: TimePickerButtonProps) => {
       return;
     }
 
-    // 한 자리 수면 자동으로 0을 앞에 붙여서 두 자리로 변환
     if (value.length === 1) {
       const paddedValue = value.padStart(2, "0");
       setLocalHour(paddedValue);
@@ -326,7 +314,6 @@ const TimePickerButton = ({ label, sessionId }: TimePickerButtonProps) => {
     const value = e.target.value;
     const numValue = parseInt(value, 10);
 
-    // 빈 값이거나 유효하지 않은 값이면 이전 값으로 복원
     if (!value || isNaN(numValue) || numValue < 0 || numValue > 59) {
       const display = isStartTime
         ? getTimeDisplay(startTime ?? null)
@@ -336,7 +323,6 @@ const TimePickerButton = ({ label, sessionId }: TimePickerButtonProps) => {
       return;
     }
 
-    // 한 자리 수면 자동으로 0을 앞에 붙여서 두 자리로 변환
     if (value.length === 1) {
       const paddedValue = value.padStart(2, "0");
       setLocalMinute(paddedValue);

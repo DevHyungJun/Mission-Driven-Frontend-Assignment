@@ -20,17 +20,18 @@ interface UseCalendarHandlersParams {
   onClose: () => void;
 }
 
-/**
- * 캘린더의 이벤트 핸들러를 관리하는 커스텀 훅
- */
 export const useCalendarHandlers = ({
   calendarState,
   dateRange,
   onSelectDate,
   onClose,
 }: UseCalendarHandlersParams) => {
-  const { currentMonth, setCurrentMonth, tempSelectedDate, setTempSelectedDate } =
-    calendarState;
+  const {
+    currentMonth,
+    setCurrentMonth,
+    tempSelectedDate,
+    setTempSelectedDate,
+  } = calendarState;
   const { minDate, maxDate } = dateRange;
   const handleDateClick = (day: Date) => {
     if (!isDateSelectable(day, minDate, maxDate)) {
@@ -61,4 +62,3 @@ export const useCalendarHandlers = ({
     handleNextMonth,
   };
 };
-
