@@ -13,6 +13,30 @@ import Icon from "../Icon/Icon";
 import Button from "../Button/Button";
 import { DAYS_OF_WEEK } from "./constants/DAYS_OF_WEEK";
 
+/**
+ * 달력 컴포넌트
+ *
+ * @param selectedDate - 선택된 날짜
+ * @param onSelectDate - 날짜 선택 시 콜백
+ * @param sessions - 세션 데이터
+ * @param currentSessionId - 현재 세션 ID
+ * @param onClose - 닫기 시 콜백
+ *
+ * @example
+ * <Calendar selectedDate={selectedDate(Date객체)}
+ * onSelectDate={onSelectDate(Date객체)}
+ * sessions={sessions(SessionDate[])}
+ * currentSessionId={currentSessionId(string)}
+ * onClose={onClose(함수)} />
+ *
+ * @description
+ * - selectedDate가 null인 경우, 오늘 날짜를 기본값으로 사용합니다. 단, 오늘 날짜가 선택 불가능한 범위에 있으면 minDate를 사용하며, minDate도 null이면 오늘 날짜를 사용합니다.
+ * - currentSessionId가 sessions에 존재하지 않으면 minDate와 maxDate가 모두 null이 되어 모든 날짜가 선택 가능해집니다.
+ * - 날짜 선택 범위는 다른 세션과 겹치지 않도록 제한됩니다. 이전 세션의 가장 늦은 날짜(date, startTime, endTime 중 최대값)의 다음 날부터, 다음 세션의 가장 이른 날짜의 전날까지만 선택 가능합니다.
+ * - minDate보다 이전이거나 maxDate보다 이후인 날짜는 선택 불가능하며, 클릭해도 동작하지 않습니다.
+ * - "선택 완료" 버튼 클릭 시 tempSelectedDate가 null이면 onSelectDate는 호출되지 않지만 onClose는 항상 호출됩니다.
+ */
+
 interface CalendarProps {
   selectedDate: Date | null;
   onSelectDate: (date: Date | null) => void;
