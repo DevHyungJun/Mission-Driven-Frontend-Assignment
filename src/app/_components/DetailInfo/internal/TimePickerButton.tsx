@@ -7,7 +7,7 @@ import {
   convertTo12Hour,
   isEndTimeAfterStart,
   calculateEndTime,
-} from "./utils/timeUtils";
+} from "../utils/timeUtils";
 import { Toast } from "@/components";
 import { cn } from "@/app/_utils/cn";
 
