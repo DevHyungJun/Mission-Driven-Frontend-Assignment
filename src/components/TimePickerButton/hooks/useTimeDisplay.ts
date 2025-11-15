@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  getTimeDisplay,
-  formatTimeDisplay,
-  TimeDisplay,
-} from "../utils/timeDisplayUtils";
+import { getTimeDisplay, formatTimeDisplay } from "../utils/timeDisplayUtils";
 
 interface UseTimeDisplayParams {
   time: Date | null;
