@@ -98,18 +98,20 @@ const Modal = ({
 
           <div className="w-full flex gap-2">
             {MODAL_BUTTON_CONFIG.map((buttonConfig, index) => {
+              const isCancel = buttonConfig.id === "cancel";
               return (
                 <Button
                   key={index}
                   variant={buttonConfig.variant}
                   color={buttonConfig.color}
-                  onClick={buttonConfig.id === "cancel" ? onClose : onConfirm}
+                  onClick={isCancel ? onClose : onConfirm}
                   className={cn(
                     "w-full h-[48px] flex justify-center items-center",
                     "md:h-[58px]"
                   )}
+                  ariaLabel={isCancel ? cancelText : confirmText}
                 >
-                  {buttonConfig.id === "cancel" ? cancelText : confirmText}
+                  {isCancel ? cancelText : confirmText}
                 </Button>
               );
             })}

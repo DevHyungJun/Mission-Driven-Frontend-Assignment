@@ -50,6 +50,7 @@ const CategorySelectPage = () => {
                 setSelectedCategories
               )
             }
+            ariaLabel={`${category.name} 카테고리 선택`}
           >
             {category.name}
           </Button>
