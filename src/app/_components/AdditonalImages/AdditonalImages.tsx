@@ -36,7 +36,7 @@ const AdditonalImages = () => {
             <Icon
               name="Plus"
               size={32}
-              aria-hidden={true}
+              ariaHidden={true}
               className="md:size-[60px]"
             />
             <input
