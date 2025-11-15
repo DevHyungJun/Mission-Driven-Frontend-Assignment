@@ -46,10 +46,7 @@ const DetailInfo = () => {
             </h3>
             {SESSION_FIELDS.map((field) => (
               <div key={field.label} className="flex items-center gap-4">
-                <label
-                  htmlFor={`session-field-${sessionDate.id}-${field.label}`}
-                  className="text-nowrap leading-[130%] tracking-[-0.02em] text-[#565656] font-semibold"
-                >
+                <label className="text-nowrap leading-[130%] tracking-[-0.02em] text-[#565656] font-semibold">
                   {field.label}
                 </label>
                 <SessionFieldButton field={field} sessionId={sessionDate.id} />
