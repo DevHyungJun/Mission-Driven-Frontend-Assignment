@@ -1,24 +1,17 @@
 "use client";
 
-import { useState } from "react";
-import {
-  startOfMonth,
-  endOfMonth,
-  startOfWeek,
-  endOfWeek,
-  eachDayOfInterval,
-  isSameMonth,
-  isSameDay,
-  format,
-  addMonths,
-  subMonths,
-} from "date-fns";
+import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import { cn } from "@/app/_utils/cn";
-import { getDateRange, isDateSelectable } from "./utils/getDateRange";
+import { getDateRange } from "./utils/getDateRange";
+import { getCalendarDays } from "./utils/getCalendarDays";
+import { getDateState } from "./utils/getDateState";
+import { useCalendarState } from "./hooks/useCalendarState";
+import { useCalendarHandlers } from "./hooks/useCalendarHandlers";
 import { SessionDate } from "@/utils/store/store";
 import Icon from "../Icon/Icon";
 import Button from "../Button/Button";
+import { DAYS_OF_WEEK } from "./constants/DAYS_OF_WEEK";
 
 interface CalendarProps {
   selectedDate: Date | null;
@@ -27,8 +20,6 @@ interface CalendarProps {
   currentSessionId: string;
   onClose: () => void;
 }
-
-const DAYS_OF_WEEK = ["일", "월", "화", "수", "목", "금", "토"];
 
 const Calendar = ({
   selectedDate,
@@ -39,53 +30,22 @@ const Calendar = ({
 }: CalendarProps) => {
   const { minDate, maxDate } = getDateRange(sessions, currentSessionId);
 
-  const getInitialDate = (): Date => {
-    if (selectedDate) {
-      return selectedDate;
-    }
+  const calendarState = useCalendarState({
+    selectedDate,
+    minDate,
+    maxDate,
+  });
 
-    const today = new Date();
-    if (isDateSelectable(today, minDate, maxDate)) {
-      return today;
-    }
+  const { currentMonth, tempSelectedDate } = calendarState;
+  const days = getCalendarDays(currentMonth);
 
-    return minDate || today;
-  };
-
-  const initialDate = getInitialDate();
-  const [currentMonth, setCurrentMonth] = useState(initialDate);
-  const [tempSelectedDate, setTempSelectedDate] = useState<Date | null>(
-    initialDate
-  );
-
-  const monthStart = startOfMonth(currentMonth);
-  const monthEnd = endOfMonth(currentMonth);
-  const calendarStart = startOfWeek(monthStart, { weekStartsOn: 0 });
-  const calendarEnd = endOfWeek(monthEnd, { weekStartsOn: 0 });
-
-  const days = eachDayOfInterval({ start: calendarStart, end: calendarEnd });
-
-  const handleDateClick = (day: Date) => {
-    if (!isDateSelectable(day, minDate, maxDate)) {
-      return;
-    }
-    setTempSelectedDate(day);
-  };
-
-  const handleConfirm = () => {
-    if (tempSelectedDate) {
-      onSelectDate(tempSelectedDate);
-    }
-    onClose();
-  };
-
-  const handlePrevMonth = () => {
-    setCurrentMonth(subMonths(currentMonth, 1));
-  };
-
-  const handleNextMonth = () => {
-    setCurrentMonth(addMonths(currentMonth, 1));
-  };
+  const { handleDateClick, handleConfirm, handlePrevMonth, handleNextMonth } =
+    useCalendarHandlers({
+      calendarState,
+      dateRange: { minDate, maxDate },
+      onSelectDate,
+      onClose,
+    });
 
   return (
     <div
@@ -140,11 +100,8 @@ const Calendar = ({
 
       <div className="grid grid-cols-7 gap-1">
         {days.map((day, index) => {
-          const isCurrentMonth = isSameMonth(day, currentMonth);
-          const isSelected =
-            tempSelectedDate && isSameDay(day, tempSelectedDate);
-          const isSelectable = isDateSelectable(day, minDate, maxDate);
-          const isToday = isSameDay(day, new Date());
+          const { isCurrentMonth, isSelected, isSelectable, isToday } =
+            getDateState(day, currentMonth, tempSelectedDate, minDate, maxDate);
 
           return (
             <button
