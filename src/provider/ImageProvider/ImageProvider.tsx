@@ -21,7 +21,6 @@ const ImageProvider = ({ children }: ImageProviderProps) => {
   const [mainImage, setMainImage] = useState<string | null>(null);
   const [additionalImages, setAdditionalImages] = useState<string[]>([]);
 
-  // ref로 이미지 최신 값 저장
   const mainImageRef = useRef(mainImage);
   const additionalImagesRef = useRef(additionalImages);
 
@@ -30,7 +29,6 @@ const ImageProvider = ({ children }: ImageProviderProps) => {
     additionalImagesRef.current = additionalImages;
   });
 
-  // 컴포넌트 언마운트 시에만 Blob URL 정리
   useEffect(() => {
     return () => {
       if (mainImageRef.current && mainImageRef.current.startsWith("blob:")) {
