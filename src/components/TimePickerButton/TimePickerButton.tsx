@@ -11,6 +11,24 @@ import { AMPMToggleButton } from "./internal/AMPMToggleButton";
 import { TimeInput } from "./internal/TimeInput";
 import { TimeSeparator } from "./internal/TimeSeparator";
 
+/**
+ * 시간 선택 버튼 컴포넌트
+ * 모든 props는 필수입니다.
+ * @param label - 라벨
+ * @param sessionId - 세션 ID
+ *
+ * @example
+ * <TimePickerButton label="시작 시간" sessionId="1" />
+ *
+ * @description
+ * 회차 정보를 입력할 때 시작 시간 또는 종료 시간을 선택할 수 있습니다.
+ * 사용자는 키보드 입력(숫자, 방향키)을 통해 시간을 입력할 수 있습니다.
+ * 오전/오후 토글 버튼을 통해 시간을 선택할 수 있습니다.
+ * 시작 시간이 12시 30분이라면 종료 시간은 자동적으로 1시 30분으로 설정됩니다.
+ * 시작 시간의 오전/오후 토글을 변경하면 종료 시간의 오전/오후도 자동으로 변경됩니다.
+ * 종료 시간이 시작 시간보다 빠르다면 토스트 메시지가 표시되고, 종료 시간이 자동으로 시작 시간의 1시간 후로 설정됩니다.
+ */
+
 interface TimePickerButtonProps {
   label: string;
   sessionId: string;
