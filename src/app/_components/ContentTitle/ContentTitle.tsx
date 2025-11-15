@@ -28,7 +28,7 @@ const ContentTitle = () => {
 
   return (
     <SectionProvider title="콘텐츠 제목" mode="simple">
-      <form>
+      <form onSubmit={(e) => e.preventDefault()}>
         <Controller
           name="contentTitle"
           control={control}

@@ -17,7 +17,7 @@ interface DetailTextareaProps {
 const DetailTextarea = ({ sessionId }: DetailTextareaProps) => {
   const { sessions, setSessionDetailText } = useSessionStore();
   const currentSession = sessions.find((session) => session.id === sessionId);
-  const { control, handleSubmit, watch } = useForm<DetailTextareaFormValues>({
+  const { control, watch } = useForm<DetailTextareaFormValues>({
     mode: "onChange",
     reValidateMode: "onChange",
     defaultValues: {
@@ -31,12 +31,8 @@ const DetailTextarea = ({ sessionId }: DetailTextareaProps) => {
     setSessionDetailText(sessionId, detailTextareaValue);
   }, [detailTextareaValue, sessionId, setSessionDetailText]);
 
-  const onSubmit = (data: DetailTextareaFormValues) => {
-    console.log(data);
-  };
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={(e) => e.preventDefault()}>
       <Controller
         name="detailTextarea"
         control={control}
