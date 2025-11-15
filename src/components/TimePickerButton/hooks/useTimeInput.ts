@@ -24,6 +24,22 @@ interface UseTimeInputParams {
   onRestore: () => void;
 }
 
+type TimeUnit = "hour" | "minute";
+
+type TimeUnitConfig = {
+  current: string;
+  defaultValue: string;
+  isValid: (value: number) => boolean;
+  getNext: (current: number) => number;
+  getPrev: (current: number) => number;
+  setValue: (value: string) => void;
+};
+
+const ARROW_KEY_HANDLERS = {
+  ArrowUp: "increment",
+  ArrowDown: "decrement",
+} as const;
+
 export const useTimeInput = ({
   localHour,
   localMinute,
@@ -33,151 +49,119 @@ export const useTimeInput = ({
   onTimeUpdate,
   onRestore,
 }: UseTimeInputParams) => {
+  const getTimeUnitConfig = (unit: TimeUnit): TimeUnitConfig => {
+    const configs: Record<TimeUnit, TimeUnitConfig> = {
+      hour: {
+        current: localHour,
+        defaultValue: "1",
+        isValid: isValidHour,
+        getNext: getNextHour,
+        getPrev: getPrevHour,
+        setValue: setLocalHour,
+      },
+      minute: {
+        current: localMinute,
+        defaultValue: "0",
+        isValid: isValidMinute,
+        getNext: getNextMinute,
+        getPrev: getPrevMinute,
+        setValue: setLocalMinute,
+      },
+    };
+    return configs[unit];
+  };
 
-  const handleHourChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = sanitizeNumericInput(e.target.value);
-    value = limitInputLength(value, 2);
+  const createChangeHandler = (unit: TimeUnit) => {
+    return (e: React.ChangeEvent<HTMLInputElement>) => {
+      const config = getTimeUnitConfig(unit);
+      let value = sanitizeNumericInput(e.target.value);
+      value = limitInputLength(value, 2);
 
-    if (value === "") {
-      setLocalHour("");
-      return;
-    }
+      if (value === "") {
+        config.setValue("");
+        return;
+      }
 
-    if (value.length === 1) {
-      setLocalHour(value);
-      return;
-    }
+      if (value.length === 1) {
+        config.setValue(value);
+        return;
+      }
 
-    const numValue = parseInt(value, 10);
-    if (isValidHour(numValue)) {
+      const numValue = parseInt(value, 10);
+      if (!config.isValid(numValue)) {
+        onRestore();
+        return;
+      }
+
       const paddedValue = padTimeValue(value);
-      setLocalHour(paddedValue);
-      onTimeUpdate(numValue, parseInt(localMinute, 10), localIsAM);
-    } else {
-      onRestore();
-    }
+      config.setValue(paddedValue);
+
+      const hour = unit === "hour" ? numValue : parseInt(localHour, 10);
+      const minute = unit === "minute" ? numValue : parseInt(localMinute, 10);
+      onTimeUpdate(hour, minute, localIsAM);
+    };
   };
 
-  const handleMinuteChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = sanitizeNumericInput(e.target.value);
-    value = limitInputLength(value, 2);
+  const createKeyDownHandler = (unit: TimeUnit) => {
+    return (e: KeyboardEvent<HTMLInputElement>) => {
+      if (shouldPreventDefault(e)) {
+        e.preventDefault();
+        return;
+      }
 
-    if (value === "") {
-      setLocalMinute("");
-      return;
-    }
+      const action =
+        ARROW_KEY_HANDLERS[e.key as keyof typeof ARROW_KEY_HANDLERS];
+      if (!action) return;
 
-    if (value.length === 1) {
-      setLocalMinute(value);
-      return;
-    }
+      e.preventDefault();
+      const config = getTimeUnitConfig(unit);
+      const current = parseInt(config.current || config.defaultValue, 10);
+      const nextValue =
+        action === "increment"
+          ? config.getNext(current)
+          : config.getPrev(current);
+      const formattedValue = padTimeValue(nextValue.toString());
 
-    const numValue = parseInt(value, 10);
-    if (isValidMinute(numValue)) {
+      config.setValue(formattedValue);
+
+      const hour = unit === "hour" ? nextValue : parseInt(localHour, 10);
+      const minute = unit === "minute" ? nextValue : parseInt(localMinute, 10);
+      onTimeUpdate(hour, minute, localIsAM);
+    };
+  };
+
+  const createBlurHandler = (unit: TimeUnit) => {
+    return (e: React.FocusEvent<HTMLInputElement>) => {
+      const config = getTimeUnitConfig(unit);
+      const value = e.target.value;
+      const numValue = parseInt(value, 10);
+
+      if (!value || !config.isValid(numValue)) {
+        onRestore();
+        return;
+      }
+
+      if (value.length !== 1) return;
+
       const paddedValue = padTimeValue(value);
-      setLocalMinute(paddedValue);
-      onTimeUpdate(parseInt(localHour, 10), numValue, localIsAM);
-    } else {
-      onRestore();
-    }
-  };
+      config.setValue(paddedValue);
 
-  const handleHourKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (shouldPreventDefault(e)) {
-      e.preventDefault();
-      return;
-    }
-
-    if (e.key === "ArrowUp") {
-      e.preventDefault();
-      const current = parseInt(localHour || "1", 10);
-      const next = getNextHour(current);
-      const nextValue = padTimeValue(next.toString());
-      setLocalHour(nextValue);
-      onTimeUpdate(next, parseInt(localMinute, 10), localIsAM);
-    }
-
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      const current = parseInt(localHour || "1", 10);
-      const prev = getPrevHour(current);
-      const prevValue = padTimeValue(prev.toString());
-      setLocalHour(prevValue);
-      onTimeUpdate(prev, parseInt(localMinute, 10), localIsAM);
-    }
-  };
-
-  const handleMinuteKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (shouldPreventDefault(e)) {
-      e.preventDefault();
-      return;
-    }
-
-    if (e.key === "ArrowUp") {
-      e.preventDefault();
-      const current = parseInt(localMinute || "0", 10);
-      const next = getNextMinute(current);
-      const nextValue = padTimeValue(next.toString());
-      setLocalMinute(nextValue);
-      onTimeUpdate(parseInt(localHour, 10), next, localIsAM);
-    }
-
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      const current = parseInt(localMinute || "0", 10);
-      const prev = getPrevMinute(current);
-      const prevValue = padTimeValue(prev.toString());
-      setLocalMinute(prevValue);
-      onTimeUpdate(parseInt(localHour, 10), prev, localIsAM);
-    }
-  };
-
-  const handleHourBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const numValue = parseInt(value, 10);
-
-    if (!value || !isValidHour(numValue)) {
-      onRestore();
-      return;
-    }
-
-    if (value.length === 1) {
-      const paddedValue = padTimeValue(value);
-      setLocalHour(paddedValue);
-      onTimeUpdate(
-        parseInt(paddedValue, 10),
-        parseInt(localMinute, 10),
-        localIsAM
-      );
-    }
-  };
-
-  const handleMinuteBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const numValue = parseInt(value, 10);
-
-    if (!value || !isValidMinute(numValue)) {
-      onRestore();
-      return;
-    }
-
-    if (value.length === 1) {
-      const paddedValue = padTimeValue(value);
-      setLocalMinute(paddedValue);
-      onTimeUpdate(
-        parseInt(localHour, 10),
-        parseInt(paddedValue, 10),
-        localIsAM
-      );
-    }
+      const hour =
+        unit === "hour" ? parseInt(paddedValue, 10) : parseInt(localHour, 10);
+      const minute =
+        unit === "minute"
+          ? parseInt(paddedValue, 10)
+          : parseInt(localMinute, 10);
+      onTimeUpdate(hour, minute, localIsAM);
+    };
   };
 
   return {
-    handleHourChange,
-    handleMinuteChange,
-    handleHourKeyDown,
-    handleMinuteKeyDown,
-    handleHourBlur,
-    handleMinuteBlur,
+    handleHourChange: createChangeHandler("hour"),
+    handleMinuteChange: createChangeHandler("minute"),
+    handleHourKeyDown: createKeyDownHandler("hour"),
+    handleMinuteKeyDown: createKeyDownHandler("minute"),
+    handleHourBlur: createBlurHandler("hour"),
+    handleMinuteBlur: createBlurHandler("minute"),
   };
 };
