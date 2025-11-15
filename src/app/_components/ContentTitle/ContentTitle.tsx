@@ -13,7 +13,7 @@ interface ContentTitleFormValues {
 
 const ContentTitle = () => {
   const { contentTitle, setContentTitle } = useContentTitleStore();
-  const { control, handleSubmit, watch } = useForm<ContentTitleFormValues>({
+  const { control, watch } = useForm<ContentTitleFormValues>({
     mode: "onChange",
     reValidateMode: "onChange",
     defaultValues: {
@@ -26,13 +26,9 @@ const ContentTitle = () => {
     setContentTitle(watchContentTitle);
   }, [watchContentTitle]);
 
-  const onSubmit = (data: ContentTitleFormValues) => {
-    console.log(data);
-  };
-
   return (
     <SectionProvider title="콘텐츠 제목" mode="simple">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form>
         <Controller
           name="contentTitle"
           control={control}
