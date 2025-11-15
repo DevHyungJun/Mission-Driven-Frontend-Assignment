@@ -1,3 +1,5 @@
+import { toast } from "@/provider/ToastProvider/ToastProvider";
+
 const handleImageUpload = (
   e: React.ChangeEvent<HTMLInputElement>,
   setMainImage: (imageUrl: string | null) => void,
@@ -16,7 +18,7 @@ const handleImageUpload = (
     !allowedTypes.includes(file.type) &&
     !allowedExtensions.includes(fileExtension)
   ) {
-    alert("jpg, png 형식의 이미지만 업로드 가능합니다.");
+    toast.show("jpg, png 형식의 이미지만 업로드 가능합니다.");
     return;
   }
 
