@@ -1,5 +1,5 @@
 import { toast } from "@/provider/ToastProvider/ToastProvider";
-import { CategoryId } from "../_constant/CATEGORY_LIST";
+import { CategoryId } from "../../_constant/CATEGORY_LIST";
 
 const handleCategoryClick = (
   categoryId: CategoryId,
