@@ -5,7 +5,7 @@ import SectionProvider from "@/provider/SectionProvider/SectionProvider";
 import { SESSION_FIELDS } from "./constants/SESSION_FIELDS";
 import SessionFieldButton from "./internal/SessionFieldButton";
 import { cn } from "@/app/_utils/cn";
-import { useSessionStore } from "@/utils/store/store";
+import { useSessionStore } from "@/stores";
 import DetailTextarea from "./internal/DetailTextarea";
 import { useState } from "react";
 

@@ -3,7 +3,7 @@
 import { Icon } from "@/components";
 import SectionProvider from "@/provider/SectionProvider/SectionProvider";
 import Link from "next/link";
-import { useCategoryStore } from "@/utils/store/store";
+import { useCategoryStore } from "@/stores";
 import getCategoryDisplayText from "@/app/(route)/category-select/_utils/getCategoryDisplayText";
 
 const CategorySelector = () => {

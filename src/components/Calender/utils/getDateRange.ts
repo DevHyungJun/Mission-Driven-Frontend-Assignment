@@ -1,5 +1,5 @@
 import { addDays, isBefore, isAfter, startOfDay } from "date-fns";
-import { SessionDate } from "@/utils/store/store";
+import { SessionDate } from "@/stores/sessionStore";
 
 /**
  * 특정 회차의 선택 가능한 날짜 범위를 계산하는 함수

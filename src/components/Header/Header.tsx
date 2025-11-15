@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import Icon from "../Icon/Icon";
 import Button from "../Button/Button";
 import { useRouter } from "next/navigation";
-import { useCategoryStore } from "@/utils/store/store";
+import { useCategoryStore } from "@/stores";
 
 const Header = () => {
   const pathname = usePathname();

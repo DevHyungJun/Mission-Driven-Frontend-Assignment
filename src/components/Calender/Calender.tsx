@@ -8,7 +8,7 @@ import { getCalendarDays } from "./utils/getCalendarDays";
 import { getDateState } from "./utils/getDateState";
 import { useCalendarState } from "./hooks/useCalendarState";
 import { useCalendarHandlers } from "./hooks/useCalendarHandlers";
-import { SessionDate } from "@/utils/store/store";
+import { SessionDate } from "@/stores/sessionStore";
 import Icon from "../Icon/Icon";
 import Button from "../Button/Button";
 import { DAYS_OF_WEEK } from "./constants/DAYS_OF_WEEK";

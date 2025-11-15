@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { Textarea } from "@/components";
-import { useSessionStore } from "@/utils/store/store";
+import { useSessionStore } from "@/stores";
 import { Controller, useForm } from "react-hook-form";
 import { TEXTAREA_VALIDATION } from "@/constant/TEXTAREA_VALIDATION";
 

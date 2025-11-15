@@ -1,11 +1,11 @@
 import useImageContext from "@/provider/ImageProvider/hooks/useImageContext";
+import { useMemo } from "react";
 import {
-  useActivityTypeStore,
   useCategoryStore,
   useContentTitleStore,
+  useActivityTypeStore,
   useSessionStore,
-} from "@/utils/store/store";
-import { useMemo } from "react";
+} from "@/stores";
 
 const useCompletedAll = () => {
   const { mainImage } = useImageContext();

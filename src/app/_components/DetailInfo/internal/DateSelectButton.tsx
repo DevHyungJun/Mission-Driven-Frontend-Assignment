@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components";
 import Calendar from "@/components/Calender/Calender";
-import { useSessionStore } from "@/utils/store/store";
+import { useSessionStore } from "@/stores";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import { cn } from "@/app/_utils/cn";

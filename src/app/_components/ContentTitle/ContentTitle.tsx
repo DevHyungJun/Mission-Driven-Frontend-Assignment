@@ -3,7 +3,7 @@
 import { Textarea } from "@/components";
 import SectionProvider from "@/provider/SectionProvider/SectionProvider";
 import { useForm, Controller } from "react-hook-form";
-import { useContentTitleStore } from "@/utils/store/store";
+import { useContentTitleStore } from "@/stores";
 import { useEffect } from "react";
 import { TEXTAREA_VALIDATION } from "@/constant/TEXTAREA_VALIDATION";
 

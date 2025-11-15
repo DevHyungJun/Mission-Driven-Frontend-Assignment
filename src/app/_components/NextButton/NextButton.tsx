@@ -3,7 +3,7 @@
 import { Button } from "@/components";
 import { cn } from "@/app/_utils/cn";
 import { usePathname, useRouter } from "next/navigation";
-import { useCategoryStore } from "@/utils/store/store";
+import { useCategoryStore } from "@/stores";
 import useCompletedAll from "./hooks/useCompletedAll";
 
 const NextButton = () => {

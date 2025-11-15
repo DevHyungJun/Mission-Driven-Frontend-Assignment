@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, KeyboardEvent } from "react";
-import { useSessionStore } from "@/utils/store/store";
+import { useSessionStore } from "@/stores";
 import {
   convertTo24Hour,
   convertTo12Hour,

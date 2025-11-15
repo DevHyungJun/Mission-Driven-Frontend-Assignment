@@ -2,7 +2,7 @@
 
 import { Button } from "@/components";
 import { CATEGORY_LIST } from "./_constant/CATEGORY_LIST";
-import { useCategoryStore } from "@/utils/store/store";
+import { useCategoryStore } from "@/stores";
 import handleCategoryClick from "./_utils/handleCategoryClick";
 import { cn } from "@/app/_utils/cn";
 
