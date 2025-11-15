@@ -26,8 +26,7 @@ const NextButton = () => {
     <div
       className={cn(
         "fixed bottom-0 left-0 right-0 w-full px-[16px] py-[16px] bg-white",
-        "md:relative md:bottom-auto md:left-auto md:right-auto md:w-auto md:p-0 md:bg-transparent",
-        "md:flex md:flex-1 md:justify-end md:mr-[40px]"
+        "md:relative md:bottom-auto md:left-auto md:right-auto md:w-auto md:p-0 md:bg-transparent md:flex md:flex-1 md:justify-end md:mr-[40px]"
       )}
     >
       <Button
