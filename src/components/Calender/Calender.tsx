@@ -16,6 +16,7 @@ import { DAYS_OF_WEEK } from "./constants/DAYS_OF_WEEK";
 /**
  * 달력 컴포넌트
  *
+ * 모든 props는 필수입니다.
  * @param selectedDate - 선택된 날짜
  * @param onSelectDate - 날짜 선택 시 콜백
  * @param sessions - 세션 데이터

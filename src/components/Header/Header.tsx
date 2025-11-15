@@ -8,6 +8,24 @@ import Button from "../Button/Button";
 import { useRouter } from "next/navigation";
 import { useCategoryStore } from "@/stores";
 
+/**
+ * 헤더 컴포넌트
+ * @param children - 내용(필수)
+ * @param variant - 스타일 타입(필수)
+ * @param color - 색상(필수)
+ * @param size - 크기(선택)
+ * @param ariaLabel - 접근성 라벨(선택)
+ * @param className - 추가 스타일 클래스(선택)
+ *
+ * @example
+ * <Header />
+ *
+ * @description
+ * - 카테고리 선택 페이지인 경우, 왼쪽으로 이동하는 버튼이 표시됩니다.
+ * - 카테고리 선택 페이지가 아닌 경우, 중앙에 표시됩니다.
+ * - 나가기 버튼을 클릭하면 카테고리 선택 페이지로 이동합니다.
+ */
+
 const Header = () => {
   const pathname = usePathname();
   const router = useRouter();
