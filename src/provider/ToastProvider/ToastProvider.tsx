@@ -61,7 +61,7 @@ const ToastProvider = ({ children }: ToastProviderProps) => {
 
       setTimeout(() => {
         setToasts((current) => current.filter((toast) => toast.id !== id));
-      }, 1500);
+      }, 3000);
 
       return [newToast];
     });
