@@ -31,12 +31,6 @@ export const isEndTimeAfterStart = (
   return endTotalMinutes >= startTotalMinutes;
 };
 
-/**
- * 시작 시간에 1시간을 더한 종료 시간 계산
- * @param startHour 시작 시간 (24시간제)
- * @param startMinute 시작 분
- * @returns { hour: 종료 시간 (24시간제), minute: 종료 분 }
- */
 export const calculateEndTime = (
   startHour: number,
   startMinute: number

@@ -1,15 +1,5 @@
 import { KeyboardEvent } from "react";
-
-const ALLOWED_KEYS = [
-  "ArrowUp",
-  "ArrowDown",
-  "ArrowLeft",
-  "ArrowRight",
-  "Tab",
-  "Enter",
-  "Backspace",
-  "Delete",
-] as const;
+import { ALLOWED_KEYS } from "../constants/ALLOWED_KEYS";
 
 export const isAllowedKey = (key: string): boolean => {
   return (
