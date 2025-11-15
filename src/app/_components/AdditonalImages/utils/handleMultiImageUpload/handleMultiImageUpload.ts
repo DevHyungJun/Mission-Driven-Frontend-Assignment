@@ -5,7 +5,7 @@ const handleMultiImageUpload = (
   setAdditionalImages: (images: React.SetStateAction<string[]>) => void
 ) => {
   const files = e.target.files;
-  if (!files) return;
+  if (!files || files.length === 0) return;
 
   const allowedTypes = ["image/jpeg", "image/png"];
   const allowedExtensions = [".jpg", ".jpeg", ".png"];
@@ -26,10 +26,20 @@ const handleMultiImageUpload = (
     return;
   }
 
-  const additionalImages = Array.from(files).map((file) => {
-    return URL.createObjectURL(file);
+  const MAX_ADDITIONAL_IMAGES = 4;
+  setAdditionalImages((prev) => {
+    const remainingSlots = MAX_ADDITIONAL_IMAGES - prev.length;
+    if (remainingSlots <= 0) {
+      toast.show("최대 4장까지 등록할 수 있습니다.");
+      return prev;
+    }
+
+    const filesToAdd = Array.from(files).slice(0, remainingSlots);
+    const additionalImages = filesToAdd.map((file) => {
+      return URL.createObjectURL(file);
+    });
+    return [...prev, ...additionalImages];
   });
-  setAdditionalImages((prev) => [...prev, ...additionalImages]);
 };
 
 export default handleMultiImageUpload;
