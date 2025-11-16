@@ -38,6 +38,7 @@ const CategorySelectPage = () => {
         "md:px-[20px]"
       )}
     >
+      <h1 className="sr-only">카테고리 선택 페이지</h1>
       <section className="pt-[40px] flex flex-col gap-2">
         <h2
           className={cn(

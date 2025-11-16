@@ -68,14 +68,14 @@ const Header = () => {
           </>
         )}
         <div className="hidden md:block flex-1" />
-        <h1
+        <h2
           className={cn(
             isCategorySelectPage && "absolute left-1/2 -translate-x-1/2",
             !isCategorySelectPage && "md:static md:transform-none"
           )}
         >
           과제
-        </h1>
+        </h2>
         <NextButton />
       </div>
     </header>

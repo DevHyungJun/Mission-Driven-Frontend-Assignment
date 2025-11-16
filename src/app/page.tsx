@@ -16,6 +16,7 @@ export default function Home() {
         "md:max-w-[1100px] md:flex md:gap-[40px] md:mx-auto"
       )}
     >
+      <h1 className="sr-only">과제 작성 메인 페이지</h1>
       <div className="md:w-1/2">
         <MainImageUpload />
         <AdditonalImages />
