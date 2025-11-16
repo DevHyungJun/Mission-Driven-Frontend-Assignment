@@ -64,11 +64,15 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     },
     ref
   ) => {
+    // 텍스트 입력 필드 ID 생성
     const { descriptionId, errorId } = useTextareaIds();
+    // 텍스트 입력 필드 이벤트 핸들러 생성
     const { handleChange, handleKeyDownEvent } = useTextareaHandlers({
       onChange,
     });
+    // 현재 메시지 길이 계산
     const currentMessageLength = value.length;
+    // 텍스트 입력 필드 설명 접근성 처리
     const ariaDescribedBy = getAriaDescribedBy(descriptionId, errorId, isError);
 
     return (
