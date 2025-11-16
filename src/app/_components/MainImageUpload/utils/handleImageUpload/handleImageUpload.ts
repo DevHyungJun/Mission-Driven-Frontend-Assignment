@@ -23,7 +23,7 @@ const handleImageUpload = (
     return;
   }
 
-  revokeBlobURL(currentMainImage);
+  revokeBlobURL(currentMainImage ?? null);
 
   const imageUrl = URL.createObjectURL(file);
   setMainImage(imageUrl);
