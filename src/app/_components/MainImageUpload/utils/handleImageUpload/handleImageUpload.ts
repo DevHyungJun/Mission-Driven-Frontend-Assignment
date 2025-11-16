@@ -1,6 +1,11 @@
 import { toast } from "@/provider/ToastProvider/ToastProvider";
 import { revokeBlobURL } from "@/utils/revokeBlobURL";
 
+// 허용된 이미지 타입 설정
+const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png"];
+// 허용된 이미지 확장자 설정
+const ALLOWED_IMAGE_EXTENSIONS = [".jpg", ".jpeg", ".png"];
+
 // 이미지 업로드 핸들러
 const handleImageUpload = (
   e: React.ChangeEvent<HTMLInputElement>,
@@ -10,10 +15,6 @@ const handleImageUpload = (
   const file = e.target.files?.[0];
   if (!file) return;
 
-  // 허용된 이미지 타입 설정
-  const allowedTypes = ["image/jpeg", "image/png"];
-  // 허용된 이미지 확장자 설정
-  const allowedExtensions = [".jpg", ".jpeg", ".png"];
   // 파일 확장자 가져오기
   const fileExtension = file.name
     .toLowerCase()
@@ -21,8 +22,8 @@ const handleImageUpload = (
 
   // 허용된 이미지 타입이나 확장자가 아닌 경우 토스트 메시지 표시
   if (
-    !allowedTypes.includes(file.type) &&
-    !allowedExtensions.includes(fileExtension)
+    !ALLOWED_IMAGE_TYPES.includes(file.type) &&
+    !ALLOWED_IMAGE_EXTENSIONS.includes(fileExtension)
   ) {
     toast.show("jpg, png 형식의 이미지만 업로드 가능합니다.");
     return;
