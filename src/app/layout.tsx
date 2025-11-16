@@ -16,6 +16,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className={`${pretendard.variable} font-medium`}>
       <body>
+        {/* 전체 프로바이더 */}
         <TotalProvider>{children}</TotalProvider>
       </body>
     </html>

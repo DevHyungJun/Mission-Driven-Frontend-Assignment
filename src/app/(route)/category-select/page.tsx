@@ -8,17 +8,21 @@ import { cn } from "@/app/_utils/cn";
 import { useEffect } from "react";
 import { CategoryId } from "./_constant/CATEGORY_LIST";
 
+// 카테고리 선택 페이지
 const CategorySelectPage = () => {
+  // 임시 선택된 카테고리 스토어
   const {
     backupSelectedCategories,
     tempSelectedCategories,
     setTempSelectedCategories,
   } = useCategoryStore();
 
+  // 임시 선택된 카테고리 백업
   useEffect(() => {
     backupSelectedCategories();
   }, []);
 
+  // 임시 선택된 카테고리 클릭 핸들러
   const handleLocalCategoryClick = (categoryId: CategoryId) => {
     handleCategoryClick(
       categoryId,
