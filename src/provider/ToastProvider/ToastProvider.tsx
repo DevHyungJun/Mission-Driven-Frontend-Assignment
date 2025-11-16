@@ -36,18 +36,12 @@ export const toast = {
     if (globalToastFunction) {
       globalToastFunction(message);
     } else {
-      console.warn(
-        "Toast is not initialized. Make sure ToastProvider is mounted."
-      );
+      throw new Error("Toast는 ToastProvider 내에서 사용되어야 합니다.");
     }
   },
 };
 
-interface ToastProviderProps {
-  children: ReactNode;
-}
-
-const ToastProvider = ({ children }: ToastProviderProps) => {
+const ToastProvider = ({ children }: { children: ReactNode }) => {
   const [toasts, setToasts] = useState<ToastItem[]>([]);
 
   const showToast = useCallback((message: string) => {
