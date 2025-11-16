@@ -8,6 +8,7 @@ import getCategoryDisplayText from "@/app/(route)/category-select/_utils/getCate
 
 const CategorySelector = () => {
   const { selectedCategories } = useCategoryStore();
+  // 카테고리 표시 텍스트 가져오기
   const displayText = getCategoryDisplayText(selectedCategories);
 
   return (
