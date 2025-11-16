@@ -1,12 +1,13 @@
 "use client";
 
 import { cn } from "@/app/_utils/cn";
-import { Icon, ImageDeleteButton, revokeBlobURL } from "@/components";
+import { Icon, ImageDeleteButton } from "@/components";
 import SectionProvider from "@/provider/SectionProvider/SectionProvider";
 import Image from "next/image";
 import { useRef } from "react";
 import useImageContext from "@/provider/ImageProvider/hooks/useImageContext";
 import handleMultiImageUpload from "./utils/handleMultiImageUpload/handleMultiImageUpload";
+import { revokeBlobURL } from "@/utils/revokeBlobURL";
 
 const AdditonalImages = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);

@@ -5,4 +5,4 @@ export { default as Header } from "./Header/Header";
 export { default as Calender } from "./Calender/Calender";
 export { default as Modal } from "./Modal/Modal";
 export { default as TimePickerButton } from "./TimePickerButton/TimePickerButton";
-export { default as ImageDeleteButton, revokeBlobURL } from "./ImageDeleteButton";
+export { default as ImageDeleteButton } from "./ImageDeleteButton/ImageDeleteButton";

@@ -3,6 +3,20 @@
 import { Icon } from "@/components";
 import { cn } from "@/app/_utils/cn";
 
+/**
+ * 이미지 삭제 버튼 컴포넌트
+ * @param onDelete - 이미지 삭제 함수
+ * @param ariaLabel - 접근성 라벨
+ * @param className - 추가 스타일 클래스
+ * @param iconSize - 아이콘 크기
+ *
+ * @example
+ * <ImageDeleteButton onDelete={() => {}} ariaLabel="이미지 삭제" className="custom-class" iconSize={20} />
+ *
+ * @description
+ * - 이미지 삭제 버튼을 클릭하면 이미지 삭제 함수를 호출합니다.
+ */
+
 interface ImageDeleteButtonProps {
   onDelete: () => void;
   ariaLabel: string;
@@ -34,4 +48,3 @@ const ImageDeleteButton = ({
 };
 
 export default ImageDeleteButton;
-

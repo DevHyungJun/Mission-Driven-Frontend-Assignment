@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useState, useEffect, useRef, ReactNode } from "react";
-import { revokeBlobURL } from "@/components";
+import { revokeBlobURL } from "@/utils/revokeBlobURL";
 
 interface ImageContextType {
   mainImage: string | null;
