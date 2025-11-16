@@ -9,10 +9,12 @@ import useImageContext from "@/provider/ImageProvider/hooks/useImageContext";
 import handleImageUpload from "./utils/handleImageUpload/handleImageUpload";
 import { revokeBlobURL } from "@/utils/revokeBlobURL";
 
+// 대표 이미지 업로드
 const MainImageUpload = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { mainImage, setMainImage } = useImageContext();
 
+  // 대표 이미지 삭제 핸들러
   const handleDeleteImage = () => {
     revokeBlobURL(mainImage);
     setMainImage("");
