@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { cn } from "@/app/_utils/cn";
+import { cn } from "@/utils/cn";
 
 interface ModalTitleProps {
   title: ReactNode;

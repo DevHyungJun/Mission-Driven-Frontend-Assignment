@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/app/_utils/cn";
+import { cn } from "@/utils/cn";
 import { Icon, ImageDeleteButton } from "@/components";
 import SectionProvider from "@/provider/SectionProvider/SectionProvider";
 import Image from "next/image";

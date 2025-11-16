@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/app/_utils/cn";
+import { cn } from "@/utils/cn";
 import { TextareaHTMLAttributes, forwardRef } from "react";
 import useTextareaIds from "./hooks/useTextareaIds";
 import useTextareaHandlers from "./hooks/useTextareaHandlers";

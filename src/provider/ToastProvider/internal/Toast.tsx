@@ -1,4 +1,4 @@
-import { cn } from "@/app/_utils/cn";
+import { cn } from "@/utils/cn";
 
 interface ToastProps {
   message: string;

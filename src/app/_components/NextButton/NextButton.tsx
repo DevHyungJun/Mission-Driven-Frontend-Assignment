@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Modal } from "@/components";
-import { cn } from "@/app/_utils/cn";
+import { cn } from "@/utils/cn";
 import { usePathname, useRouter } from "next/navigation";
 import { useCategoryStore } from "@/stores";
 import useCompletedAll from "./hooks/useCompletedAll/useCompletedAll";

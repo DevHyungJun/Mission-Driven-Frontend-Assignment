@@ -4,7 +4,7 @@ import { Button } from "@/components";
 import { CATEGORY_LIST } from "./_constant/CATEGORY_LIST";
 import { useCategoryStore } from "@/stores";
 import handleCategoryClick from "./_utils/handleCategoryClick/handleCategoryClick";
-import { cn } from "@/app/_utils/cn";
+import { cn } from "@/utils/cn";
 import { useEffect } from "react";
 import { CategoryId } from "./_constant/CATEGORY_LIST";
 

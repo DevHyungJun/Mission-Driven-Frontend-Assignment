@@ -8,7 +8,7 @@ import {
   ReactNode,
 } from "react";
 import Toast from "@/provider/ToastProvider/internal/Toast";
-import { cn } from "@/app/_utils/cn";
+import { cn } from "@/utils/cn";
 
 export interface ToastItem {
   id: string;

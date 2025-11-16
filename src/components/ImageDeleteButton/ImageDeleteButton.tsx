@@ -1,7 +1,7 @@
 "use client";
 
 import { Icon } from "@/components";
-import { cn } from "@/app/_utils/cn";
+import { cn } from "@/utils/cn";
 
 /**
  * 이미지 삭제 버튼 컴포넌트

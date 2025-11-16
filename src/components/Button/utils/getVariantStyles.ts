@@ -1,4 +1,4 @@
-import { cn } from "@/app/_utils/cn";
+import { cn } from "@/utils/cn";
 import { COLOR_STYLES, VARIANT_STYLES } from "../constants/STYLE_CONSTANTS";
 import { Color, Variant } from "../types/ButtonTypes";
 

@@ -1,5 +1,5 @@
 import { RefObject, KeyboardEvent, FocusEvent, ChangeEvent } from "react";
-import { cn } from "@/app/_utils/cn";
+import { cn } from "@/utils/cn";
 import { TIME_BUTTON_BASE_STYLE } from "../constants/TIME_BUTTON_BASE_STYLE";
 
 interface TimeInputProps {

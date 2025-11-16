@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react";
 import { createPortal } from "react-dom";
-import { cn } from "@/app/_utils/cn";
+import { cn } from "@/utils/cn";
 import useModalKeyboard from "./hooks/useModalKeyboard";
 import useModalLoadingTimer from "./hooks/useModalLoadingTimer";
 import createModalHandlers from "./utils/createModalHandlers";

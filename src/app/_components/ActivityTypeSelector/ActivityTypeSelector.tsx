@@ -6,7 +6,7 @@ import {
   ACTIVITY_TYPE_SELECTOR_OPTIONS,
   ActivityType,
 } from "./constant/ACTIVITY_TYPE_SELECTOR_OPTIONS";
-import { cn } from "@/app/_utils/cn";
+import { cn } from "@/utils/cn";
 import { useActivityTypeStore } from "@/stores";
 
 const ActivityTypeSelector = () => {

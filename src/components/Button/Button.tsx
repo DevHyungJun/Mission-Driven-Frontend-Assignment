@@ -1,4 +1,4 @@
-import { cn } from "@/app/_utils/cn";
+import { cn } from "@/utils/cn";
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import { SIZE_STYLES, BASE_STYLES } from "./constants/STYLE_CONSTANTS";
 import { Variant, Color, Size } from "./types/ButtonTypes";

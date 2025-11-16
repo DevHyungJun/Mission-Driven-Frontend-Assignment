@@ -6,7 +6,7 @@ import {
   CategorySelector,
   ContentTitle,
 } from "./_components";
-import { cn } from "./_utils/cn";
+import { cn } from "../utils/cn";
 
 export default function Home() {
   return (

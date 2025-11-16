@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/app/_utils/cn";
+import { cn } from "@/utils/cn";
 import { NextButton } from "@/app/_components";
 import { usePathname } from "next/navigation";
 import { Icon, Button } from "@/components";

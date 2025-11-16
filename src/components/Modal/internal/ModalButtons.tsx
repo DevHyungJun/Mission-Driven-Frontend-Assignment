@@ -1,6 +1,6 @@
 import { Button } from "@/components";
 import { MODAL_BUTTON_CONFIG } from "../constants/MODAL_BUTTON_CONFIG";
-import { cn } from "@/app/_utils/cn";
+import { cn } from "@/utils/cn";
 
 interface ModalButtonsProps {
   cancelText: string;

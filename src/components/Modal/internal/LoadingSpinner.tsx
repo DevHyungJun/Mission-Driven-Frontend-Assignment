@@ -1,4 +1,4 @@
-import { cn } from "@/app/_utils/cn";
+import { cn } from "@/utils/cn";
 // 모달 내부 로딩 스피너
 const LoadingSpinner = () => {
   return (

@@ -2,7 +2,7 @@
 
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
-import { cn } from "@/app/_utils/cn";
+import { cn } from "@/utils/cn";
 import { getDateRange } from "./utils/getDateRange";
 import { getCalendarDays } from "./utils/getCalendarDays";
 import { getDateState } from "./utils/getDateState";

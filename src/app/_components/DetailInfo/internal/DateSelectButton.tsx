@@ -5,7 +5,7 @@ import { Button, Calendar } from "@/components";
 import { useSessionStore } from "@/stores";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
-import { cn } from "@/app/_utils/cn";
+import { cn } from "@/utils/cn";
 
 interface DateSelectButtonProps {
   sessionId: string;
