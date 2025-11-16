@@ -76,6 +76,7 @@ describe("NextButton 통합 테스트", () => {
 
     act(() => {
       useCategoryStore.getState().clearSelectedCategories();
+      useCategoryStore.getState().setTempSelectedCategories([]);
       useContentTitleStore.getState().setContentTitle("");
       const activityTypeStore = useActivityTypeStore.getState();
       if (activityTypeStore.activityType !== null) {
@@ -106,7 +107,7 @@ describe("NextButton 통합 테스트", () => {
 
       it("selectedCategories가 있을 때 버튼이 활성화되어야 한다", () => {
         act(() => {
-          useCategoryStore.getState().setSelectedCategories([1]);
+          useCategoryStore.getState().setTempSelectedCategories([1]);
         });
 
         renderWithProviders(<NextButton />);
@@ -126,7 +127,7 @@ describe("NextButton 통합 테스트", () => {
         expect(button.disabled).toBe(true);
 
         act(() => {
-          useCategoryStore.getState().setSelectedCategories([1]);
+          useCategoryStore.getState().setTempSelectedCategories([1]);
         });
 
         rerender(
@@ -171,9 +172,11 @@ describe("NextButton 통합 테스트", () => {
       expect(button.disabled).toBe(true);
 
       act(() => {
-        useCategoryStore.getState().setSelectedCategories([1]);
+        useCategoryStore.getState().setTempSelectedCategories([1]);
       });
 
+      // 다른 페이지(/)에서는 tempSelectedCategories가 아닌 isCompletedAll을 확인하므로
+      // 버튼은 여전히 비활성화되어야 함
       await waitFor(() => {
         expect(button.disabled).toBe(true);
       });
@@ -185,7 +188,7 @@ describe("NextButton 통합 테스트", () => {
       mockPathname.mockReturnValue("/category-select");
 
       act(() => {
-        useCategoryStore.getState().setSelectedCategories([1]);
+        useCategoryStore.getState().setTempSelectedCategories([1]);
       });
 
       renderWithProviders(<NextButton />);
