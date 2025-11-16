@@ -6,7 +6,7 @@ import * as Icons from "./index";
  * @param name - 아이콘 이름(필수)
  * @param className - 추가 스타일 클래스(선택)
  * @param size - 크기(선택)
- * @param aria-hidden - 접근성 라벨(선택)
+ * @param ariaLabel - 접근성 라벨(선택)
  *
  * @example
  * <Icon name="chevron-left" />
@@ -19,23 +19,22 @@ export interface IconProps {
   name: keyof typeof Icons;
   className?: string;
   size?: number;
-  ariaHidden?: boolean;
+  ariaLabel?: string;
 }
 
 const Icon = ({
   name,
   className,
   size = 24,
-  ariaHidden: ariaHidden,
+  ariaLabel = name as string,
 }: IconProps) => {
   return (
     <Image
       src={Icons[name]}
-      alt={ariaHidden ? "" : name}
+      alt={ariaLabel}
       width={size}
       height={size}
       className={className}
-      aria-hidden={ariaHidden}
     />
   );
 };

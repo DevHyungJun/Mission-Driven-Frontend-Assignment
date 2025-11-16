@@ -42,7 +42,7 @@ const ImageDeleteButton = ({
       )}
       aria-label={ariaLabel}
     >
-      <Icon name="X" size={iconSize} />
+      <Icon name="X" size={iconSize} ariaLabel={`${ariaLabel} 삭제`} />
     </button>
   );
 };

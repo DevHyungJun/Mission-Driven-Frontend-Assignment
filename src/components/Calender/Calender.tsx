@@ -57,7 +57,7 @@ const Calendar = ({
 
   // 달력 상태 관리
   const calendarState = useCalendarState({
-    selectedDate,
+    selectedDate: selectedDate ?? minDate ?? new Date(),
     minDate,
     maxDate,
   });
@@ -100,7 +100,7 @@ const Calendar = ({
             className="p-1 bg-white rounded hover:bg-[#F7F7F8]"
             aria-label="이전 달"
           >
-            <Icon name="ChevronLeft" size={20} />
+            <Icon name="ChevronLeft" size={20} ariaLabel="이전 달" />
           </Button>
           <Button
             variant="outline"
@@ -110,7 +110,7 @@ const Calendar = ({
             className="p-1 bg-white rounded hover:bg-[#F7F7F8]"
             aria-label="다음 달"
           >
-            <Icon name="ChevronRight" size={20} />
+            <Icon name="ChevronRight" size={20} ariaLabel="다음 달" />
           </Button>
         </div>
       </div>

@@ -39,7 +39,11 @@ const DetailInfo = () => {
               className="absolute p-2.5 top-1 cursor-pointer right-1 flex items-center justify-center text-[#8F8F8F] hover:text-[#121212] transition-colors focus:outline-none"
               aria-label={`${sessionIndex + 1}회차 삭제`}
             >
-              <Icon name="X" size={28} />
+              <Icon
+                name="X"
+                size={28}
+                ariaLabel={`${sessionIndex + 1}회차 삭제`}
+              />
             </button>
           )}
           <div className="space-y-[12px]">

@@ -53,7 +53,7 @@ const Header = () => {
               className="cursor:pointer md:hidden cursor-pointer hover:opacity-80 active:opacity-60"
               aria-label="닫기 버튼"
             >
-              <Icon name="X" size={28} aria-hidden={true} />
+              <Icon name="X" size={28} ariaLabel="닫기 버튼" />
             </button>
             <Button
               variant="outline"

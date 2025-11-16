@@ -18,7 +18,7 @@ const CategorySelector = () => {
         className="w-full flex justify-between items-center px-[16px] py-[12px] border border-[#E5E5E5] rounded-[8px] text-[#8F8F8F] cursor-pointer leading-[130%] tracking-[-0.02em]"
       >
         <span className="text-[#121212]">{displayText}</span>
-        <Icon name="ChevronRight" />
+        <Icon name="ChevronRight" ariaLabel="카테고리 선택 페이지 이동" />
       </Link>
     </SectionProvider>
   );

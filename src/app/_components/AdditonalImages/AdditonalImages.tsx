@@ -49,7 +49,7 @@ const AdditonalImages = () => {
             <Icon
               name="Plus"
               size={32}
-              ariaHidden={true}
+              ariaLabel="추가 이미지 업로드"
               className="md:size-[60px]"
             />
             <input
