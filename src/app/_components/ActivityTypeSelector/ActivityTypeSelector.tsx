@@ -12,7 +12,9 @@ import { useActivityTypeStore } from "@/stores";
 const ActivityTypeSelector = () => {
   const { activityType, setActivityType } = useActivityTypeStore();
 
+  // 활동 방식 변경 핸들러
   const handleActivityTypeChange = (value: ActivityType) => {
+    // 활동 방식이 이미 선택된 경우 처리하지 않음
     if (activityType === value) return;
     setActivityType(value);
   };
