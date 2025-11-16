@@ -33,6 +33,7 @@ const Header = () => {
   const isCategorySelectPage = pathname === "/category-select";
 
   const handleOut = () => {
+    // 카테고리 선택 상태 복원
     restoreSelectedCategories();
     router.back();
   };
