@@ -7,13 +7,16 @@ import {
   useSessionStore,
 } from "@/stores";
 
+// 모든 필드가 완료된 여부 확인
 const useCompletedAll = () => {
+  // 검사 대상인 스토어 데이터들
   const { mainImage } = useImageContext();
   const { selectedCategories } = useCategoryStore();
   const { contentTitle } = useContentTitleStore();
   const { activityType } = useActivityTypeStore();
   const { sessions } = useSessionStore();
 
+  // 모든 필드가 완료된 여부를 useMemo를 사용하여 리렌더링 방지
   const isCompletedAll = useMemo(() => {
     return (
       mainImage &&
