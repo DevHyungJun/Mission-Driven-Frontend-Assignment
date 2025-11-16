@@ -53,17 +53,21 @@ const Calendar = ({
   currentSessionId,
   onClose,
 }: CalendarProps) => {
+  // 날짜 범위 계산
   const { minDate, maxDate } = getDateRange(sessions, currentSessionId);
 
+  // 달력 상태 관리
   const calendarState = useCalendarState({
     selectedDate,
     minDate,
     maxDate,
   });
 
+  // 현재 달과 선택된 날짜 계산
   const { currentMonth, tempSelectedDate } = calendarState;
   const days = getCalendarDays(currentMonth);
 
+  // 달력 이벤트 핸들러
   const { handleDateClick, handleConfirm, handlePrevMonth, handleNextMonth } =
     useCalendarHandlers({
       calendarState,
