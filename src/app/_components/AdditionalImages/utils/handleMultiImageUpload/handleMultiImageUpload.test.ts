@@ -53,7 +53,7 @@ describe("handleMultiImageUpload", () => {
         },
       } as unknown as React.ChangeEvent<HTMLInputElement>;
 
-      handleMultiImageUpload(mockEvent, mockSetAdditionalImages);
+      handleMultiImageUpload(mockEvent, mockSetAdditionalImages, 4);
 
       expect(mockToastShow).not.toHaveBeenCalled();
       expect(mockCreateObjectURL).toHaveBeenCalledWith(jpgFile);
@@ -68,7 +68,7 @@ describe("handleMultiImageUpload", () => {
         },
       } as unknown as React.ChangeEvent<HTMLInputElement>;
 
-      handleMultiImageUpload(mockEvent, mockSetAdditionalImages);
+      handleMultiImageUpload(mockEvent, mockSetAdditionalImages, 4);
 
       expect(mockToastShow).not.toHaveBeenCalled();
       expect(mockCreateObjectURL).toHaveBeenCalledWith(pngFile);
@@ -83,7 +83,7 @@ describe("handleMultiImageUpload", () => {
         },
       } as unknown as React.ChangeEvent<HTMLInputElement>;
 
-      handleMultiImageUpload(mockEvent, mockSetAdditionalImages);
+      handleMultiImageUpload(mockEvent, mockSetAdditionalImages, 4);
 
       expect(mockToastShow).not.toHaveBeenCalled();
       expect(mockCreateObjectURL).toHaveBeenCalledWith(jpgFile);
@@ -98,7 +98,7 @@ describe("handleMultiImageUpload", () => {
         },
       } as unknown as React.ChangeEvent<HTMLInputElement>;
 
-      handleMultiImageUpload(mockEvent, mockSetAdditionalImages);
+      handleMultiImageUpload(mockEvent, mockSetAdditionalImages, 4);
 
       expect(mockToastShow).toHaveBeenCalledWith(
         "jpg, png 형식의 이미지만 업로드 가능합니다."
@@ -116,7 +116,7 @@ describe("handleMultiImageUpload", () => {
         },
       } as unknown as React.ChangeEvent<HTMLInputElement>;
 
-      handleMultiImageUpload(mockEvent, mockSetAdditionalImages);
+      handleMultiImageUpload(mockEvent, mockSetAdditionalImages, 4);
 
       expect(mockToastShow).toHaveBeenCalledWith(
         "jpg, png 형식의 이미지만 업로드 가능합니다."
@@ -136,7 +136,7 @@ describe("handleMultiImageUpload", () => {
         },
       } as unknown as React.ChangeEvent<HTMLInputElement>;
 
-      handleMultiImageUpload(mockEvent, mockSetAdditionalImages);
+      handleMultiImageUpload(mockEvent, mockSetAdditionalImages, 4);
 
       expect(mockCreateObjectURL).toHaveBeenCalledWith(image1);
       expect(mockCreateObjectURL).toHaveBeenCalledWith(image2);
@@ -153,7 +153,7 @@ describe("handleMultiImageUpload", () => {
         },
       } as unknown as React.ChangeEvent<HTMLInputElement>;
 
-      handleMultiImageUpload(mockEvent, mockSetAdditionalImages);
+      handleMultiImageUpload(mockEvent, mockSetAdditionalImages, 4);
 
       expect(mockCreateObjectURL).toHaveBeenCalledTimes(3);
       expect(mockSetAdditionalImages).toHaveBeenCalled();
@@ -180,7 +180,7 @@ describe("handleMultiImageUpload", () => {
         }
       });
 
-      handleMultiImageUpload(mockEvent, setAdditionalImages);
+      handleMultiImageUpload(mockEvent, setAdditionalImages, 4);
 
       expect(mockCreateObjectURL).toHaveBeenCalledTimes(3);
       expect(currentImages).toHaveLength(3);
@@ -204,7 +204,7 @@ describe("handleMultiImageUpload", () => {
         }
       });
 
-      handleMultiImageUpload(mockEvent, setAdditionalImages);
+      handleMultiImageUpload(mockEvent, setAdditionalImages, 4);
 
       expect(currentImages).toHaveLength(3);
       expect(currentImages).toContain("blob:mock-test.jpg");
@@ -232,7 +232,7 @@ describe("handleMultiImageUpload", () => {
         }
       });
 
-      handleMultiImageUpload(mockEvent, setAdditionalImages);
+      handleMultiImageUpload(mockEvent, setAdditionalImages, 4);
 
       expect(mockCreateObjectURL).toHaveBeenCalledTimes(4);
       expect(currentImages).toHaveLength(4);
@@ -260,7 +260,7 @@ describe("handleMultiImageUpload", () => {
         }
       });
 
-      handleMultiImageUpload(mockEvent, setAdditionalImages);
+      handleMultiImageUpload(mockEvent, setAdditionalImages, 4);
 
       expect(mockCreateObjectURL).toHaveBeenCalledTimes(2);
       expect(currentImages).toHaveLength(4);
@@ -288,7 +288,7 @@ describe("handleMultiImageUpload", () => {
         }
       });
 
-      handleMultiImageUpload(mockEvent, setAdditionalImages);
+      handleMultiImageUpload(mockEvent, setAdditionalImages, 4);
 
       expect(mockToastShow).toHaveBeenCalledWith(
         "최대 4장까지 등록할 수 있습니다."
@@ -322,7 +322,7 @@ describe("handleMultiImageUpload", () => {
         }
       });
 
-      handleMultiImageUpload(mockEvent, setAdditionalImages);
+      handleMultiImageUpload(mockEvent, setAdditionalImages, 4);
 
       expect(mockCreateObjectURL).toHaveBeenCalledTimes(1);
       expect(currentImages).toHaveLength(4);
@@ -350,7 +350,7 @@ describe("handleMultiImageUpload", () => {
         }
       });
 
-      handleMultiImageUpload(mockEvent, setAdditionalImages);
+      handleMultiImageUpload(mockEvent, setAdditionalImages, 4);
 
       expect(mockCreateObjectURL).toHaveBeenCalledTimes(3);
       expect(currentImages).toHaveLength(4);
@@ -377,7 +377,7 @@ describe("handleMultiImageUpload", () => {
         }
       });
 
-      handleMultiImageUpload(mockEvent, setAdditionalImages);
+      handleMultiImageUpload(mockEvent, setAdditionalImages, 4);
 
       expect(mockCreateObjectURL).toHaveBeenCalledWith(newImage);
       expect(currentImages).toHaveLength(2);
@@ -392,7 +392,7 @@ describe("handleMultiImageUpload", () => {
         },
       } as unknown as React.ChangeEvent<HTMLInputElement>;
 
-      handleMultiImageUpload(mockEvent, mockSetAdditionalImages);
+      handleMultiImageUpload(mockEvent, mockSetAdditionalImages, 4);
 
       expect(mockToastShow).not.toHaveBeenCalled();
       expect(mockCreateObjectURL).not.toHaveBeenCalled();
@@ -406,7 +406,7 @@ describe("handleMultiImageUpload", () => {
         },
       } as unknown as React.ChangeEvent<HTMLInputElement>;
 
-      handleMultiImageUpload(mockEvent, mockSetAdditionalImages);
+      handleMultiImageUpload(mockEvent, mockSetAdditionalImages, 4);
 
       expect(mockToastShow).not.toHaveBeenCalled();
       expect(mockCreateObjectURL).not.toHaveBeenCalled();

@@ -1,16 +1,17 @@
 import { toast } from "@/provider/ToastProvider/ToastProvider";
 
+// 허용된 이미지 타입 설정
+const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png"];
+const ALLOWED_IMAGE_EXTENSIONS = [".jpg", ".jpeg", ".png"];
+
 // 여러 이미지 업로드 핸들러
 const handleMultiImageUpload = (
   e: React.ChangeEvent<HTMLInputElement>,
-  setAdditionalImages: (images: React.SetStateAction<string[]>) => void
+  setAdditionalImages: (images: React.SetStateAction<string[]>) => void,
+  maxAdditionalImages: number
 ) => {
   const files = e.target.files;
   if (!files || files.length === 0) return;
-
-  // 허용된 이미지 타입 설정
-  const allowedTypes = ["image/jpeg", "image/png"];
-  const allowedExtensions = [".jpg", ".jpeg", ".png"];
 
   // 유효하지 않은 이미지 필터링
   const invalidFiles = Array.from(files).filter((file) => {
@@ -19,8 +20,8 @@ const handleMultiImageUpload = (
       .substring(file.name.lastIndexOf("."));
 
     return (
-      !allowedTypes.includes(file.type) &&
-      !allowedExtensions.includes(fileExtension)
+      !ALLOWED_IMAGE_TYPES.includes(file.type) &&
+      !ALLOWED_IMAGE_EXTENSIONS.includes(fileExtension)
     );
   });
 
@@ -30,13 +31,11 @@ const handleMultiImageUpload = (
     return;
   }
 
-  // 최대 추가 이미지 개수 설정
-  const MAX_ADDITIONAL_IMAGES = 4;
   // 추가 이미지 업데이트
   setAdditionalImages((prev) => {
-    const remainingSlots = MAX_ADDITIONAL_IMAGES - prev.length;
+    const remainingSlots = maxAdditionalImages - prev.length;
     if (remainingSlots <= 0) {
-      toast.show("최대 4장까지 등록할 수 있습니다.");
+      toast.show(`최대 ${maxAdditionalImages}장까지 등록할 수 있습니다.`);
       return prev;
     }
     // 추가 이미지 파일 설정
@@ -51,4 +50,3 @@ const handleMultiImageUpload = (
 };
 
 export default handleMultiImageUpload;
-

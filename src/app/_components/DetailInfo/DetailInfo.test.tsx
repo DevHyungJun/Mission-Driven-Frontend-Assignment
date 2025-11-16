@@ -86,7 +86,11 @@ describe("DetailInfo 통합 테스트", () => {
       const addButton = screen.getByLabelText("회차 추가하기 버튼");
       fireEvent.click(addButton);
 
-      const deleteButtons = screen.getAllByLabelText(/회차 삭제/);
+      // button과 Icon 모두에 aria-label이 있으므로, button 요소만 필터링
+      const allDeleteElements = screen.getAllByLabelText(/회차 삭제/);
+      const deleteButtons = allDeleteElements.filter(
+        (element) => element.tagName === "BUTTON"
+      );
       expect(deleteButtons.length).toBe(2);
     });
 
@@ -96,7 +100,10 @@ describe("DetailInfo 통합 테스트", () => {
       const addButton = screen.getByLabelText("회차 추가하기 버튼");
       fireEvent.click(addButton);
 
-      const deleteButtons = screen.getAllByLabelText(/회차 삭제/);
+      const allDeleteElements = screen.getAllByLabelText(/회차 삭제/);
+      const deleteButtons = allDeleteElements.filter(
+        (element) => element.tagName === "BUTTON"
+      );
       fireEvent.click(deleteButtons[0]);
 
       await waitFor(() => {
@@ -114,7 +121,10 @@ describe("DetailInfo 통합 테스트", () => {
 
       const initialSessionsCount = useSessionStore.getState().sessions.length;
 
-      const deleteButtons = screen.getAllByLabelText(/회차 삭제/);
+      const allDeleteElements = screen.getAllByLabelText(/회차 삭제/);
+      const deleteButtons = allDeleteElements.filter(
+        (element) => element.tagName === "BUTTON"
+      );
       fireEvent.click(deleteButtons[0]);
 
       await waitFor(() => {
@@ -140,7 +150,10 @@ describe("DetailInfo 통합 테스트", () => {
 
       const initialSessionsCount = useSessionStore.getState().sessions.length;
 
-      const deleteButtons = screen.getAllByLabelText(/회차 삭제/);
+      const allDeleteElements = screen.getAllByLabelText(/회차 삭제/);
+      const deleteButtons = allDeleteElements.filter(
+        (element) => element.tagName === "BUTTON"
+      );
       fireEvent.click(deleteButtons[0]);
 
       await waitFor(() => {
@@ -152,10 +165,9 @@ describe("DetailInfo 통합 테스트", () => {
 
       await waitFor(() => {
         expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+        const finalSessionsCount = useSessionStore.getState().sessions.length;
+        expect(finalSessionsCount).toBe(initialSessionsCount - 1);
       });
-
-      const finalSessionsCount = useSessionStore.getState().sessions.length;
-      expect(finalSessionsCount).toBe(initialSessionsCount - 1);
     });
 
     it("모달에서 삭제하기 버튼 클릭 시 올바른 세션이 삭제되어야 한다", async () => {
@@ -168,7 +180,10 @@ describe("DetailInfo 통합 테스트", () => {
       const store = useSessionStore.getState();
       const secondSessionId = store.sessions[1].id;
 
-      const deleteButtons = screen.getAllByLabelText(/회차 삭제/);
+      const allDeleteElements = screen.getAllByLabelText(/회차 삭제/);
+      const deleteButtons = allDeleteElements.filter(
+        (element) => element.tagName === "BUTTON"
+      );
       fireEvent.click(deleteButtons[1]);
 
       await waitFor(() => {
@@ -193,15 +208,23 @@ describe("DetailInfo 통합 테스트", () => {
       const addButton = screen.getByLabelText("회차 추가하기 버튼");
       fireEvent.click(addButton);
 
-      const deleteButtons = screen.getAllByLabelText(/회차 삭제/);
+      const allDeleteElements = screen.getAllByLabelText(/회차 삭제/);
+      const deleteButtons = allDeleteElements.filter(
+        (element) => element.tagName === "BUTTON"
+      );
       fireEvent.click(deleteButtons[0]);
 
       await waitFor(() => {
         expect(screen.getByRole("dialog")).toBeInTheDocument();
       });
 
-      const closeButton = screen.getByLabelText("닫기");
-      fireEvent.click(closeButton);
+      // button과 Icon 모두에 aria-label이 있으므로, button 요소만 찾음
+      const allCloseElements = screen.getAllByLabelText("닫기");
+      const closeButton = allCloseElements.find(
+        (element) => element.tagName === "BUTTON"
+      );
+      expect(closeButton).toBeInTheDocument();
+      fireEvent.click(closeButton!);
 
       await waitFor(() => {
         expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
@@ -216,7 +239,10 @@ describe("DetailInfo 통합 테스트", () => {
       const addButton = screen.getByLabelText("회차 추가하기 버튼");
       fireEvent.click(addButton);
 
-      const deleteButtons = screen.getAllByLabelText(/회차 삭제/);
+      const allDeleteElements = screen.getAllByLabelText(/회차 삭제/);
+      const deleteButtons = allDeleteElements.filter(
+        (element) => element.tagName === "BUTTON"
+      );
       fireEvent.click(deleteButtons[0]);
 
       await waitFor(() => {
@@ -237,7 +263,10 @@ describe("DetailInfo 통합 테스트", () => {
       const addButton = screen.getByLabelText("회차 추가하기 버튼");
       fireEvent.click(addButton);
 
-      const deleteButtons = screen.getAllByLabelText(/회차 삭제/);
+      const allDeleteElements = screen.getAllByLabelText(/회차 삭제/);
+      const deleteButtons = allDeleteElements.filter(
+        (element) => element.tagName === "BUTTON"
+      );
       fireEvent.click(deleteButtons[0]);
 
       await waitFor(() => {
@@ -261,7 +290,10 @@ describe("DetailInfo 통합 테스트", () => {
 
       const initialSessionsCount = useSessionStore.getState().sessions.length;
 
-      const deleteButtons = screen.getAllByLabelText(/회차 삭제/);
+      const allDeleteElements = screen.getAllByLabelText(/회차 삭제/);
+      const deleteButtons = allDeleteElements.filter(
+        (element) => element.tagName === "BUTTON"
+      );
       fireEvent.click(deleteButtons[0]);
 
       await waitFor(() => {
@@ -307,7 +339,10 @@ describe("DetailInfo 통합 테스트", () => {
       const expectedCount = initialCount + 2;
       expect(useSessionStore.getState().sessions.length).toBe(expectedCount);
 
-      const deleteButtons = screen.getAllByLabelText(/회차 삭제/);
+      const allDeleteElements = screen.getAllByLabelText(/회차 삭제/);
+      const deleteButtons = allDeleteElements.filter(
+        (element) => element.tagName === "BUTTON"
+      );
       fireEvent.click(deleteButtons[1]);
 
       await waitFor(() => {

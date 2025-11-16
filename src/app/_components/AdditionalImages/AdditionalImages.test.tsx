@@ -83,13 +83,15 @@ describe("AdditionalImages 통합 테스트", () => {
 
   describe("UI 상태 표시", () => {
     it("추가 이미지가 없을 때 업로드 UI가 표시되어야 한다", () => {
-      renderWithProviders(<AdditionalImages />);
+      const { container } = renderWithProviders(<AdditionalImages />);
 
       expect(screen.getByText("추가 이미지 (선택)")).toBeInTheDocument();
       expect(
         screen.getByText("최대 4장까지 등록할 수 있어요")
       ).toBeInTheDocument();
-      expect(screen.getByLabelText("추가 이미지 업로드")).toBeInTheDocument();
+      // label과 Icon 모두에 aria-label이 있으므로, label 요소를 직접 찾음
+      const label = container.querySelector('label[aria-label="추가 이미지 업로드"]');
+      expect(label).toBeInTheDocument();
     });
 
     it("추가 이미지가 있을 때 이미지가 표시되어야 한다", async () => {
@@ -249,7 +251,9 @@ describe("AdditionalImages 통합 테스트", () => {
         expect(screen.getAllByAltText("추가 이미지")).toHaveLength(3);
       });
 
-      expect(screen.getByLabelText("추가 이미지 업로드")).toBeInTheDocument();
+      // label과 Icon 모두에 aria-label이 있으므로, label 요소를 직접 찾음
+      const label = container.querySelector('label[aria-label="추가 이미지 업로드"]');
+      expect(label).toBeInTheDocument();
     });
 
     it("4장일 때 업로드 버튼이 표시되지 않아야 한다", async () => {
@@ -393,10 +397,11 @@ describe("AdditionalImages 통합 테스트", () => {
 
   describe("접근성", () => {
     it("파일 입력에 적절한 aria-label이 설정되어 있어야 한다", () => {
-      renderWithProviders(<AdditionalImages />);
+      const { container } = renderWithProviders(<AdditionalImages />);
 
-      const fileInput = screen.getByLabelText("추가 이미지 업로드");
-      expect(fileInput).toBeInTheDocument();
+      // label과 Icon 모두에 aria-label이 있으므로, label 요소를 직접 찾음
+      const label = container.querySelector('label[aria-label="추가 이미지 업로드"]');
+      expect(label).toBeInTheDocument();
     });
   });
 });

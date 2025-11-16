@@ -59,7 +59,9 @@ const AdditionalImages = () => {
               className="hidden"
               accept="image/jpeg,image/png,.jpg,.jpeg,.png"
               multiple
-              onChange={(e) => handleMultiImageUpload(e, setAdditionalImages)}
+              onChange={(e) =>
+                handleMultiImageUpload(e, setAdditionalImages, 4)
+              }
               ref={fileInputRef}
               required
             />
@@ -93,4 +95,3 @@ const AdditionalImages = () => {
 };
 
 export default AdditionalImages;
-
