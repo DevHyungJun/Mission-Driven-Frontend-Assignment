@@ -83,6 +83,7 @@ describe("CategorySelectPage 통합 테스트", () => {
     jest.clearAllMocks();
     mockToastShow.mockClear();
     useCategoryStore.getState().clearSelectedCategories();
+    useCategoryStore.getState().setTempSelectedCategories([]);
   });
 
   describe("카테고리 선택 UI", () => {
@@ -140,7 +141,7 @@ describe("CategorySelectPage 통합 테스트", () => {
       fireEvent.click(categoryButton);
 
       const store = useCategoryStore.getState();
-      expect(store.selectedCategories).toContain(1);
+      expect(store.tempSelectedCategories).toContain(1);
     });
 
     it("선택된 카테고리 버튼의 색상이 변경되어야 한다", async () => {
@@ -152,7 +153,7 @@ describe("CategorySelectPage 통합 테스트", () => {
 
       await waitFor(() => {
         const store = useCategoryStore.getState();
-        expect(store.selectedCategories).toContain(1);
+        expect(store.tempSelectedCategories).toContain(1);
       });
     });
 
@@ -163,11 +164,13 @@ describe("CategorySelectPage 통합 테스트", () => {
 
       fireEvent.click(categoryButton);
 
-      expect(useCategoryStore.getState().selectedCategories).toContain(1);
+      expect(useCategoryStore.getState().tempSelectedCategories).toContain(1);
 
       fireEvent.click(categoryButton);
 
-      expect(useCategoryStore.getState().selectedCategories).not.toContain(1);
+      expect(useCategoryStore.getState().tempSelectedCategories).not.toContain(
+        1
+      );
     });
 
     it("최대 2개까지만 선택할 수 있어야 한다", () => {
@@ -180,14 +183,18 @@ describe("CategorySelectPage 통합 테스트", () => {
       fireEvent.click(button1);
       fireEvent.click(button2);
 
-      expect(useCategoryStore.getState().selectedCategories).toHaveLength(2);
+      expect(useCategoryStore.getState().tempSelectedCategories).toHaveLength(
+        2
+      );
 
       fireEvent.click(button3);
 
       expect(mockToastShow).toHaveBeenCalledWith(
         "최대 2개까지 선택 가능합니다."
       );
-      expect(useCategoryStore.getState().selectedCategories).toHaveLength(2);
+      expect(useCategoryStore.getState().tempSelectedCategories).toHaveLength(
+        2
+      );
     });
 
     it("이미 선택된 카테고리를 다시 선택하면 선택 취소되어야 한다", () => {
@@ -199,12 +206,18 @@ describe("CategorySelectPage 통합 테스트", () => {
       fireEvent.click(button1);
       fireEvent.click(button2);
 
-      expect(useCategoryStore.getState().selectedCategories).toHaveLength(2);
+      expect(useCategoryStore.getState().tempSelectedCategories).toHaveLength(
+        2
+      );
 
       fireEvent.click(button1);
 
-      expect(useCategoryStore.getState().selectedCategories).toHaveLength(1);
-      expect(useCategoryStore.getState().selectedCategories).not.toContain(1);
+      expect(useCategoryStore.getState().tempSelectedCategories).toHaveLength(
+        1
+      );
+      expect(useCategoryStore.getState().tempSelectedCategories).not.toContain(
+        1
+      );
     });
   });
 
@@ -214,6 +227,9 @@ describe("CategorySelectPage 통합 테스트", () => {
 
       const categoryButton = screen.getByLabelText("용돈벌기 카테고리 선택");
       fireEvent.click(categoryButton);
+
+      // tempSelectedCategories를 selectedCategories로 적용
+      useCategoryStore.getState().applyTempSelectedCategories();
 
       await waitFor(() => {
         const link = screen.getByRole("link");
@@ -230,6 +246,9 @@ describe("CategorySelectPage 통합 테스트", () => {
 
       fireEvent.click(button1);
       fireEvent.click(button2);
+
+      // tempSelectedCategories를 selectedCategories로 적용
+      useCategoryStore.getState().applyTempSelectedCategories();
 
       await waitFor(() => {
         const store = useCategoryStore.getState();
@@ -251,12 +270,17 @@ describe("CategorySelectPage 통합 테스트", () => {
       fireEvent.click(button1);
       fireEvent.click(button2);
 
+      // tempSelectedCategories를 selectedCategories로 적용
+      useCategoryStore.getState().applyTempSelectedCategories();
+
       await waitFor(() => {
         const link = screen.getByRole("link");
         expect(link.textContent).toContain("용돈벌기, 디지털");
       });
 
       fireEvent.click(button1);
+      // 다시 적용
+      useCategoryStore.getState().applyTempSelectedCategories();
 
       await waitFor(() => {
         const link = screen.getByRole("link");

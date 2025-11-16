@@ -35,6 +35,7 @@ const Icon = ({
       width={size}
       height={size}
       className={className}
+      aria-label={ariaLabel}
     />
   );
 };
