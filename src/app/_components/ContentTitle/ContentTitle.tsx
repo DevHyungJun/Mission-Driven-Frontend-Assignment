@@ -14,7 +14,9 @@ interface ContentTitleFormValues {
 const ContentTitle = () => {
   const { contentTitle, setContentTitle } = useContentTitleStore();
   const { control, watch } = useForm<ContentTitleFormValues>({
+    // 변경 시 유효성 검사
     mode: "onChange",
+    // 변경 시 유효성 검사 모드
     reValidateMode: "onChange",
     defaultValues: {
       contentTitle: contentTitle || "",
@@ -22,6 +24,7 @@ const ContentTitle = () => {
   });
   const watchContentTitle = watch("contentTitle");
 
+  // 콘텐츠 제목 변경 시 콘텐츠 제목 스토어 업데이트
   useEffect(() => {
     setContentTitle(watchContentTitle);
   }, [watchContentTitle]);
