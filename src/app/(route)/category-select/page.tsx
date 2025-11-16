@@ -5,9 +5,27 @@ import { CATEGORY_LIST } from "./_constant/CATEGORY_LIST";
 import { useCategoryStore } from "@/stores";
 import handleCategoryClick from "./_utils/handleCategoryClick/handleCategoryClick";
 import { cn } from "@/app/_utils/cn";
+import { useEffect } from "react";
+import { CategoryId } from "./_constant/CATEGORY_LIST";
 
 const CategorySelectPage = () => {
-  const { setSelectedCategories, selectedCategories } = useCategoryStore();
+  const {
+    backupSelectedCategories,
+    tempSelectedCategories,
+    setTempSelectedCategories,
+  } = useCategoryStore();
+
+  useEffect(() => {
+    backupSelectedCategories();
+  }, []);
+
+  const handleLocalCategoryClick = (categoryId: CategoryId) => {
+    handleCategoryClick(
+      categoryId,
+      tempSelectedCategories,
+      setTempSelectedCategories
+    );
+  };
 
   return (
     <main
@@ -41,15 +59,11 @@ const CategorySelectPage = () => {
           <Button
             key={category.id}
             variant="outline"
-            color={selectedCategories.includes(category.id) ? "green" : "black"}
-            className="font-semibold h-[47px] flex items-center justify-center"
-            onClick={() =>
-              handleCategoryClick(
-                category.id,
-                selectedCategories,
-                setSelectedCategories
-              )
+            color={
+              tempSelectedCategories.includes(category.id) ? "green" : "black"
             }
+            className="font-semibold h-[47px] flex items-center justify-center"
+            onClick={() => handleLocalCategoryClick(category.id)}
             ariaLabel={`${category.name} 카테고리 선택`}
           >
             {category.name}

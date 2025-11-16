@@ -29,11 +29,11 @@ import { useCategoryStore } from "@/stores";
 const Header = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const { clearSelectedCategories } = useCategoryStore();
+  const { restoreSelectedCategories } = useCategoryStore();
   const isCategorySelectPage = pathname === "/category-select";
 
   const handleOut = () => {
-    clearSelectedCategories();
+    restoreSelectedCategories();
     router.back();
   };
 

@@ -9,17 +9,19 @@ import useCompletedAll from "./hooks/useCompletedAll/useCompletedAll";
 const NextButton = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const { selectedCategories } = useCategoryStore();
+  const { tempSelectedCategories, applyTempSelectedCategories } =
+    useCategoryStore();
   const isCategorySelectPage = pathname === "/category-select";
   const isCompletedAll = useCompletedAll();
 
   const handleClick = () => {
     if (!isCategorySelectPage) return;
+    applyTempSelectedCategories();
     router.push("/");
   };
 
   const isDisabled = isCategorySelectPage
-    ? selectedCategories.length === 0
+    ? tempSelectedCategories.length === 0
     : !isCompletedAll;
 
   return (
