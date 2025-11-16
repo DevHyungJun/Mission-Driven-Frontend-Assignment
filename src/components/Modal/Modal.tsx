@@ -16,9 +16,10 @@ import { MODAL_BUTTON_CONFIG } from "./constants/MODAL_BUTTON_CONFIG";
  * @param subtitle - 모달 서브타이틀(선택)
  * @param cancelText - 취소 버튼 텍스트(선택)
  * @param confirmText - 확인 버튼 텍스트(필수)
+ * @param isLoading - 로딩 상태(선택)
  *
  * @example
- * <Modal open={true} onClose={() => {}} onConfirm={() => {}} title="모달 제목" subtitle="모달 서브타이틀" cancelText="취소" confirmText="확인" />
+ * <Modal open={true} onClose={() => {}} onConfirm={() => {}} title="모달 제목" subtitle="모달 서브타이틀" cancelText="취소" confirmText="확인" isLoading={false} />
  *
  * @description
  * 모달이 열리고 ESC 키를 누르면 모달이 닫힙니다.
@@ -32,6 +33,7 @@ interface ModalProps {
   subtitle?: ReactNode;
   cancelText?: string;
   confirmText: string;
+  isLoading?: boolean;
 }
 
 const Modal = ({
@@ -42,13 +44,17 @@ const Modal = ({
   subtitle,
   cancelText = "취소",
   confirmText,
+  isLoading = false,
 }: ModalProps) => {
+  const handleClose = isLoading ? () => {} : onClose;
+  const handleConfirm = isLoading ? () => {} : onConfirm;
+
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
 
       const handleEscape = (e: KeyboardEvent) => {
-        if (e.key === "Escape") {
+        if (e.key === "Escape" && !isLoading) {
           onClose();
         }
       };
@@ -62,7 +68,7 @@ const Modal = ({
     } else {
       document.body.style.overflow = "";
     }
-  }, [open, onClose]);
+  }, [open, onClose, isLoading]);
 
   if (!open) return null;
 
@@ -70,69 +76,89 @@ const Modal = ({
     <div
       role="dialog"
       aria-modal="true"
-      onClick={onClose}
+      onClick={handleClose}
       className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className={cn("w-[328px] rounded-2xl bg-white", "md:w-[430px]")}
+        className={cn(
+          "w-[328px] rounded-2xl bg-white",
+          "md:w-[430px]",
+          isLoading && "bg-transparent"
+        )}
       >
-        <div className="h-[56px] flex justify-end items-center pr-[16px]">
-          <button
-            aria-label="닫기"
-            onClick={onClose}
-            className="cursor-pointer"
-          >
-            <Icon name="X" size={28} className="md:size-8" />
-          </button>
-        </div>
+        {!isLoading && (
+          <div className="h-[56px] flex justify-end items-center pr-[16px]">
+            <button
+              aria-label="닫기"
+              onClick={handleClose}
+              className="cursor-pointer"
+            >
+              <Icon name="X" size={28} className="md:size-8" />
+            </button>
+          </div>
+        )}
         <div
           className={cn(
             "flex flex-col items-center px-[20px] pb-[20px] gap-8",
             "md:px-[24px] md:pb-[24px]"
           )}
         >
-          <div className="space-y-2">
-            <h2
-              className={cn(
-                "text-center text-[20px] font-bold text-[#121212] leading-[130%] tracking-[-0.02em]",
-                "md:text-[24px]"
-              )}
-            >
-              {title}
-            </h2>
-            {subtitle && (
-              <p
+          {isLoading ? (
+            <div className="flex flex-col items-center gap-4 py-8">
+              <div
                 className={cn(
-                  "text-center text-[16px] leading-[130%] tracking-[-0.02em] text-[#565656]",
-                  "md:text-[18px]"
+                  "w-12 h-12 border-4 border-[#E5E5E5] border-t-[#4CAF50] rounded-full animate-spin",
+                  "md:w-16 md:h-16"
                 )}
-              >
-                {subtitle}
-              </p>
-            )}
-          </div>
-
-          <div className="w-full flex gap-2">
-            {MODAL_BUTTON_CONFIG.map((buttonConfig, index) => {
-              const isCancel = buttonConfig.id === "cancel";
-              return (
-                <Button
-                  key={index}
-                  variant={buttonConfig.variant}
-                  color={buttonConfig.color}
-                  onClick={isCancel ? onClose : onConfirm}
+                aria-label="로딩 중"
+              />
+            </div>
+          ) : (
+            <>
+              <div className="space-y-2">
+                <h2
                   className={cn(
-                    "w-full h-[48px] flex justify-center items-center",
-                    "md:h-[58px]"
+                    "text-center text-[20px] font-bold text-[#121212] leading-[130%] tracking-[-0.02em]",
+                    "md:text-[24px]"
                   )}
-                  ariaLabel={isCancel ? cancelText : confirmText}
                 >
-                  {isCancel ? cancelText : confirmText}
-                </Button>
-              );
-            })}
-          </div>
+                  {title}
+                </h2>
+                {subtitle && (
+                  <p
+                    className={cn(
+                      "text-center text-[16px] leading-[130%] tracking-[-0.02em] text-[#565656]",
+                      "md:text-[18px]"
+                    )}
+                  >
+                    {subtitle}
+                  </p>
+                )}
+              </div>
+
+              <div className="w-full flex gap-2">
+                {MODAL_BUTTON_CONFIG.map((buttonConfig, index) => {
+                  const isCancel = buttonConfig.id === "cancel";
+                  return (
+                    <Button
+                      key={index}
+                      variant={buttonConfig.variant}
+                      color={buttonConfig.color}
+                      onClick={isCancel ? handleClose : handleConfirm}
+                      className={cn(
+                        "w-full h-[48px] flex justify-center items-center",
+                        "md:h-[58px]"
+                      )}
+                      ariaLabel={isCancel ? cancelText : confirmText}
+                    >
+                      {isCancel ? cancelText : confirmText}
+                    </Button>
+                  );
+                })}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>,
