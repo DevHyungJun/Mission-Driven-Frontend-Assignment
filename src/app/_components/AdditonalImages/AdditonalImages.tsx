@@ -9,7 +9,7 @@ import useImageContext from "@/provider/ImageProvider/hooks/useImageContext";
 import handleMultiImageUpload from "./utils/handleMultiImageUpload/handleMultiImageUpload";
 import { revokeBlobURL } from "@/utils/revokeBlobURL";
 
-const AdditonalImages = () => {
+const AdditionalImages = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { additionalImages, setAdditionalImages } = useImageContext();
 
@@ -92,4 +92,4 @@ const AdditonalImages = () => {
   );
 };
 
-export default AdditonalImages;
+export default AdditionalImages;
