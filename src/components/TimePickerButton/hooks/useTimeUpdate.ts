@@ -20,17 +20,21 @@ const createTimeDate = (hour24: number, minute: number): Date => {
 
 const VALIDATION_ERROR_MESSAGE = "시작 시간보다 종료시간은 빠를 수 없습니다.";
 
+// 시간 업데이트 핸들러 생성
 export const useTimeUpdate = ({
   sessionId,
   isStartTime,
 }: UseTimeUpdateParams) => {
+  // 세션 스토어 상태 가져오기
   const { sessions, setSessionStartTime, setSessionEndTime } =
     useSessionStore();
 
+  // 현재 세션 가져오기
   const getCurrentSession = () => {
     return sessions.find((session) => session.id === sessionId);
   };
 
+  // 24시간 형식으로 변환
   const getTimeIn24Hour = (time: Date | null) => {
     const display = getTimeDisplay(time);
     return {
@@ -39,12 +43,14 @@ export const useTimeUpdate = ({
     };
   };
 
+  // 종료 시간 유효성 검사 및 설정
   const validateAndSetEndTime = (
     startHour24: number,
     startMinute: number,
     endHour24: number,
     endMinute: number
   ): boolean => {
+    // 종료 시간이 시작 시간 이후인지 확인
     const isValid = isEndTimeAfterStart(
       startHour24,
       startMinute,
@@ -52,6 +58,7 @@ export const useTimeUpdate = ({
       endMinute
     );
 
+    // 종료 시간이 시작 시간 이후가 아닌 경우
     if (!isValid) {
       toast.show(VALIDATION_ERROR_MESSAGE);
       const calculatedEnd = calculateEndTime(startHour24, startMinute);
@@ -66,15 +73,18 @@ export const useTimeUpdate = ({
     return true;
   };
 
+  // 시작 시간 업데이트 시 종료 시간 업데이트
   const updateEndTimeForStartTime = (
     startHour24: number,
     startMinute: number
   ): void => {
     const currentSession = getCurrentSession();
+    // 종료 시간 가져오기
     const { hour24: endTime24, minute: endMinute } = getTimeIn24Hour(
       currentSession?.endTime ?? null
     );
 
+    // 종료 시간이 시작 시간 이후인지 확인
     const isValid = isEndTimeAfterStart(
       startHour24,
       startMinute,
@@ -90,6 +100,7 @@ export const useTimeUpdate = ({
     setSessionEndTime(sessionId, newEndTime);
   };
 
+  // 종료 시간 업데이트
   const updateEndTime = (endHour24: number, endMinute: number): void => {
     const currentSession = getCurrentSession();
     const { hour24: startTime24, minute: startMinute } = getTimeIn24Hour(
@@ -109,6 +120,7 @@ export const useTimeUpdate = ({
     }
   };
 
+  // 시간 업데이트
   const updateTime = (hour: number, minute: number, isAM: boolean): void => {
     const hour24 = convertTo24Hour(hour, isAM);
     const newTime = createTimeDate(hour24, minute);
@@ -121,6 +133,7 @@ export const useTimeUpdate = ({
     }
   };
 
+  // 오전/오후 토글 핸들러
   const handleAMPMToggle = (
     hour: number,
     minute: number,

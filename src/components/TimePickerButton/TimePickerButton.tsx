@@ -34,8 +34,11 @@ interface TimePickerButtonProps {
 }
 
 const TimePickerButton = ({ label, sessionId }: TimePickerButtonProps) => {
+  // 세션 스토어 상태 가져오기
   const { sessions } = useSessionStore();
+  // 현재 세션 가져오기
   const currentSession = sessions.find((session) => session.id === sessionId);
+  // 시작 시간 여부 확인
   const isStartTime = label === "시작 시간";
 
   const startTime = currentSession?.startTime;
@@ -45,6 +48,7 @@ const TimePickerButton = ({ label, sessionId }: TimePickerButtonProps) => {
   const hourInputRef = useRef<HTMLInputElement | null>(null);
   const minuteInputRef = useRef<HTMLInputElement | null>(null);
 
+  // 시간 표시 상태 관리
   const {
     localHour,
     localMinute,
@@ -54,11 +58,13 @@ const TimePickerButton = ({ label, sessionId }: TimePickerButtonProps) => {
     setLocalIsAM,
   } = useTimeDisplay({ time: currentTime ?? null });
 
+  // 시간 업데이트 핸들러 생성
   const { updateTime, handleAMPMToggle: updateAMPM } = useTimeUpdate({
     sessionId,
     isStartTime,
   });
 
+  // 시간 표시 복원 핸들러
   const restoreTimeDisplay = () => {
     const display = getTimeDisplay(currentTime ?? null);
     const formatted = formatTimeDisplay(display);
@@ -66,6 +72,7 @@ const TimePickerButton = ({ label, sessionId }: TimePickerButtonProps) => {
     setLocalMinute(formatted.minute);
   };
 
+  // 시간 입력 핸들러 생성
   const {
     handleHourChange,
     handleMinuteChange,
@@ -83,6 +90,7 @@ const TimePickerButton = ({ label, sessionId }: TimePickerButtonProps) => {
     onRestore: restoreTimeDisplay,
   });
 
+  // 오전/오후 토글 핸들러
   const handleAMPMToggle = () => {
     const newIsAM = !localIsAM;
     setLocalIsAM(newIsAM);

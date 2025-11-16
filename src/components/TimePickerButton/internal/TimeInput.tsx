@@ -12,6 +12,7 @@ interface TimeInputProps {
   onBlur: (e: FocusEvent<HTMLInputElement>) => void;
 }
 
+// 시간 입력 필드
 export const TimeInput = ({
   inputRef,
   value,
@@ -21,9 +22,13 @@ export const TimeInput = ({
   onKeyDown,
   onBlur,
 }: TimeInputProps) => {
+  // 시간 여부 확인
   const isHour = type === "hour";
+  // 접근성 라벨 생성
   const ariaLabel = `${label} ${isHour ? "시간" : "분"} 선택`;
+  // 최소값 설정
   const min = isHour ? 1 : 0;
+  // 최대값 설정
   const max = isHour ? 12 : 59;
 
   return (

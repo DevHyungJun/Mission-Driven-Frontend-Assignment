@@ -35,11 +35,13 @@ type TimeUnitConfig = {
   setValue: (value: string) => void;
 };
 
+// 화살표 키 핸들러
 const ARROW_KEY_HANDLERS = {
   ArrowUp: "increment",
   ArrowDown: "decrement",
 } as const;
 
+// 시간 입력 핸들러 생성
 export const useTimeInput = ({
   localHour,
   localMinute,
@@ -49,6 +51,7 @@ export const useTimeInput = ({
   onTimeUpdate,
   onRestore,
 }: UseTimeInputParams) => {
+  // 시간 단위 설정
   const getTimeUnitConfig = (unit: TimeUnit): TimeUnitConfig => {
     const configs: Record<TimeUnit, TimeUnitConfig> = {
       hour: {
@@ -71,6 +74,7 @@ export const useTimeInput = ({
     return configs[unit];
   };
 
+  // 시간 입력 핸들러 생성
   const createChangeHandler = (unit: TimeUnit) => {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
       const config = getTimeUnitConfig(unit);
@@ -102,6 +106,7 @@ export const useTimeInput = ({
     };
   };
 
+  // 화살표 키 핸들러 생성
   const createKeyDownHandler = (unit: TimeUnit) => {
     return (e: KeyboardEvent<HTMLInputElement>) => {
       if (shouldPreventDefault(e)) {
@@ -130,6 +135,7 @@ export const useTimeInput = ({
     };
   };
 
+  // 포커스 이탈 핸들러 생성
   const createBlurHandler = (unit: TimeUnit) => {
     return (e: React.FocusEvent<HTMLInputElement>) => {
       const config = getTimeUnitConfig(unit);
@@ -156,6 +162,7 @@ export const useTimeInput = ({
     };
   };
 
+  // 시간 입력 핸들러 반환
   return {
     handleHourChange: createChangeHandler("hour"),
     handleMinuteChange: createChangeHandler("minute"),

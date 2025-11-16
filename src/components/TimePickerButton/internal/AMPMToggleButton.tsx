@@ -4,6 +4,7 @@ interface AMPMToggleButtonProps {
   onClick: () => void;
 }
 
+// 오전/오후 토글 버튼
 export const AMPMToggleButton = ({
   isAM,
   label,

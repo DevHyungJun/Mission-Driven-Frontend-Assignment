@@ -1,3 +1,4 @@
+// 24시간 형식으로 변환
 export const convertTo24Hour = (hour: number, isAM: boolean): number => {
   if (hour === 12) {
     return isAM ? 0 : 12;
@@ -5,6 +6,7 @@ export const convertTo24Hour = (hour: number, isAM: boolean): number => {
   return isAM ? hour : hour + 12;
 };
 
+// 12시간 형식으로 변환
 export const convertTo12Hour = (
   hour24: number
 ): { hour: number; isAM: boolean } => {
@@ -20,6 +22,7 @@ export const convertTo12Hour = (
   return { hour: hour24 - 12, isAM: false };
 };
 
+// 종료 시간이 시작 시간 이후인지 확인
 export const isEndTimeAfterStart = (
   startHour: number,
   startMinute: number,
@@ -31,6 +34,7 @@ export const isEndTimeAfterStart = (
   return endTotalMinutes >= startTotalMinutes;
 };
 
+// 종료 시간 계산
 export const calculateEndTime = (
   startHour: number,
   startMinute: number
