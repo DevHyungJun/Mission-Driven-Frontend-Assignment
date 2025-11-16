@@ -13,9 +13,13 @@ const AdditonalImages = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { additionalImages, setAdditionalImages } = useImageContext();
 
+  // 이미지 삭제 핸들러
   const handleDeleteImage = (imageToDelete: string) => {
+    // 이미지 URL 제거
     revokeBlobURL(imageToDelete);
+    // 이미지 배열에서 삭제
     setAdditionalImages((prev) => prev.filter((img) => img !== imageToDelete));
+    // 파일 입력 필드 초기화
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
