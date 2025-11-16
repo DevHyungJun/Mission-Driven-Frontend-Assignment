@@ -1,11 +1,15 @@
 "use client";
 
-import { useEffect, ReactNode } from "react";
+import { ReactNode } from "react";
 import { createPortal } from "react-dom";
-import Button from "../Button/Button";
-import Icon from "../Icon/Icon";
 import { cn } from "@/app/_utils/cn";
-import { MODAL_BUTTON_CONFIG } from "./constants/MODAL_BUTTON_CONFIG";
+import useModalKeyboard from "./hooks/useModalKeyboard";
+import useModalLoadingTimer from "./hooks/useModalLoadingTimer";
+import createModalHandlers from "./utils/createModalHandlers";
+import LoadingSpinner from "./internal/LoadingSpinner";
+import ModalHeader from "./internal/ModalHeader";
+import ModalTitle from "./internal/ModalTitle";
+import ModalButtons from "./internal/ModalButtons";
 
 /**
  * 모달 컴포넌트(취소, 확인 버튼)
@@ -17,9 +21,10 @@ import { MODAL_BUTTON_CONFIG } from "./constants/MODAL_BUTTON_CONFIG";
  * @param cancelText - 취소 버튼 텍스트(선택)
  * @param confirmText - 확인 버튼 텍스트(필수)
  * @param isLoading - 로딩 상태(선택)
+ * @param onComplete - 로딩 완료 시 콜백(선택)
  *
  * @example
- * <Modal open={true} onClose={() => {}} onConfirm={() => {}} title="모달 제목" subtitle="모달 서브타이틀" cancelText="취소" confirmText="확인" isLoading={false} />
+ * <Modal open={true} onClose={() => {}} onConfirm={() => {}} title="모달 제목" subtitle="모달 서브타이틀" cancelText="취소" confirmText="확인" isLoading={false} onComplete={() => {}} />
  *
  * @description
  * 모달이 열리고 ESC 키를 누르면 모달이 닫힙니다.
@@ -34,6 +39,7 @@ interface ModalProps {
   cancelText?: string;
   confirmText: string;
   isLoading?: boolean;
+  onComplete?: () => void;
 }
 
 const Modal = ({
@@ -45,30 +51,16 @@ const Modal = ({
   cancelText = "취소",
   confirmText,
   isLoading = false,
+  onComplete,
 }: ModalProps) => {
-  const handleClose = isLoading ? () => {} : onClose;
-  const handleConfirm = isLoading ? () => {} : onConfirm;
+  const { handleClose, handleConfirm } = createModalHandlers(
+    isLoading,
+    onClose,
+    onConfirm
+  );
 
-  useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-
-      const handleEscape = (e: KeyboardEvent) => {
-        if (e.key === "Escape" && !isLoading) {
-          onClose();
-        }
-      };
-
-      window.addEventListener("keydown", handleEscape);
-
-      return () => {
-        document.body.style.overflow = "";
-        window.removeEventListener("keydown", handleEscape);
-      };
-    } else {
-      document.body.style.overflow = "";
-    }
-  }, [open, onClose, isLoading]);
+  useModalKeyboard(open, isLoading, onClose);
+  useModalLoadingTimer(isLoading, open, onComplete, onClose);
 
   if (!open) return null;
 
@@ -87,17 +79,7 @@ const Modal = ({
           isLoading && "bg-transparent"
         )}
       >
-        {!isLoading && (
-          <div className="h-[56px] flex justify-end items-center pr-[16px]">
-            <button
-              aria-label="닫기"
-              onClick={handleClose}
-              className="cursor-pointer"
-            >
-              <Icon name="X" size={28} className="md:size-8" />
-            </button>
-          </div>
-        )}
+        {!isLoading && <ModalHeader onClose={handleClose} />}
         <div
           className={cn(
             "flex flex-col items-center px-[20px] pb-[20px] gap-8",
@@ -105,58 +87,16 @@ const Modal = ({
           )}
         >
           {isLoading ? (
-            <div className="flex flex-col items-center gap-4 py-8">
-              <div
-                className={cn(
-                  "w-12 h-12 border-4 border-[#E5E5E5] border-t-[#4CAF50] rounded-full animate-spin",
-                  "md:w-16 md:h-16"
-                )}
-                aria-label="로딩 중"
-              />
-            </div>
+            <LoadingSpinner />
           ) : (
             <>
-              <div className="space-y-2">
-                <h2
-                  className={cn(
-                    "text-center text-[20px] font-bold text-[#121212] leading-[130%] tracking-[-0.02em]",
-                    "md:text-[24px]"
-                  )}
-                >
-                  {title}
-                </h2>
-                {subtitle && (
-                  <p
-                    className={cn(
-                      "text-center text-[16px] leading-[130%] tracking-[-0.02em] text-[#565656]",
-                      "md:text-[18px]"
-                    )}
-                  >
-                    {subtitle}
-                  </p>
-                )}
-              </div>
-
-              <div className="w-full flex gap-2">
-                {MODAL_BUTTON_CONFIG.map((buttonConfig, index) => {
-                  const isCancel = buttonConfig.id === "cancel";
-                  return (
-                    <Button
-                      key={index}
-                      variant={buttonConfig.variant}
-                      color={buttonConfig.color}
-                      onClick={isCancel ? handleClose : handleConfirm}
-                      className={cn(
-                        "w-full h-[48px] flex justify-center items-center",
-                        "md:h-[58px]"
-                      )}
-                      ariaLabel={isCancel ? cancelText : confirmText}
-                    >
-                      {isCancel ? cancelText : confirmText}
-                    </Button>
-                  );
-                })}
-              </div>
+              <ModalTitle title={title} subtitle={subtitle} />
+              <ModalButtons
+                cancelText={cancelText}
+                confirmText={confirmText}
+                onClose={handleClose}
+                onConfirm={handleConfirm}
+              />
             </>
           )}
         </div>

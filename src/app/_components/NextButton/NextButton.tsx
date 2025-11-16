@@ -5,8 +5,7 @@ import { cn } from "@/app/_utils/cn";
 import { usePathname, useRouter } from "next/navigation";
 import { useCategoryStore } from "@/stores";
 import useCompletedAll from "./hooks/useCompletedAll/useCompletedAll";
-import { useState } from "react";
-import { toast } from "@/provider/ToastProvider/ToastProvider";
+import useModal from "./hooks/useModal/useModal";
 
 const NextButton = () => {
   const pathname = usePathname();
@@ -15,8 +14,14 @@ const NextButton = () => {
     useCategoryStore();
   const isCategorySelectPage = pathname === "/category-select";
   const isCompletedAll = useCompletedAll();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const {
+    isModalOpen,
+    isLoading,
+    openModal,
+    handleConfirm,
+    handleComplete,
+    handleClose,
+  } = useModal();
 
   const handleClick = () => {
     if (isCategorySelectPage) {
@@ -26,22 +31,8 @@ const NextButton = () => {
     }
 
     if (isCompletedAll) {
-      setIsModalOpen(true);
+      openModal();
     }
-  };
-
-  const handleConfirm = async () => {
-    setIsLoading(true);
-
-    setTimeout(() => {
-      setIsLoading(false);
-      setIsModalOpen(false);
-      toast.show("등록이 완료되었습니다");
-    }, 2000);
-  };
-
-  const handleClose = () => {
-    setIsModalOpen(false);
   };
 
   const isDisabled = isCategorySelectPage
@@ -79,6 +70,7 @@ const NextButton = () => {
         confirmText="등록"
         cancelText="취소"
         isLoading={isLoading}
+        onComplete={handleComplete}
       />
     </>
   );

@@ -1,0 +1,43 @@
+import Button from "../../Button/Button";
+import { MODAL_BUTTON_CONFIG } from "../constants/MODAL_BUTTON_CONFIG";
+import { cn } from "@/app/_utils/cn";
+
+interface ModalButtonsProps {
+  cancelText: string;
+  confirmText: string;
+  onClose: () => void;
+  onConfirm: () => void;
+}
+
+const ModalButtons = ({
+  cancelText,
+  confirmText,
+  onClose,
+  onConfirm,
+}: ModalButtonsProps) => {
+  return (
+    <div className="w-full flex gap-2">
+      {MODAL_BUTTON_CONFIG.map((buttonConfig, index) => {
+        const isCancel = buttonConfig.id === "cancel";
+        return (
+          <Button
+            key={index}
+            variant={buttonConfig.variant}
+            color={buttonConfig.color}
+            onClick={isCancel ? onClose : onConfirm}
+            className={cn(
+              "w-full h-[48px] flex justify-center items-center",
+              "md:h-[58px]"
+            )}
+            ariaLabel={isCancel ? cancelText : confirmText}
+          >
+            {isCancel ? cancelText : confirmText}
+          </Button>
+        );
+      })}
+    </div>
+  );
+};
+
+export default ModalButtons;
+
