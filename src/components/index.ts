@@ -6,3 +6,4 @@ export { default as Calender } from "./Calender/Calender";
 export { default as Modal } from "./Modal/Modal";
 export { default as TimePickerButton } from "./TimePickerButton/TimePickerButton";
 export { default as ImageDeleteButton } from "./ImageDeleteButton/ImageDeleteButton";
+export { default as Calendar } from "./Calender/Calender";

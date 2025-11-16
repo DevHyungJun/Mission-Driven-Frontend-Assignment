@@ -3,8 +3,7 @@
 import { cn } from "@/app/_utils/cn";
 import { NextButton } from "@/app/_components";
 import { usePathname } from "next/navigation";
-import Icon from "../Icon/Icon";
-import Button from "../Button/Button";
+import { Icon, Button } from "@/components";
 import { useRouter } from "next/navigation";
 import { useCategoryStore } from "@/stores";
 

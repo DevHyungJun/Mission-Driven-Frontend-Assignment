@@ -9,8 +9,7 @@ import { getDateState } from "./utils/getDateState";
 import { useCalendarState } from "./hooks/useCalendarState";
 import { useCalendarHandlers } from "./hooks/useCalendarHandlers";
 import { SessionDate } from "@/stores/sessionStore";
-import Icon from "../Icon/Icon";
-import Button from "../Button/Button";
+import { Icon, Button } from "@/components";
 import { DAYS_OF_WEEK } from "./constants/DAYS_OF_WEEK";
 
 /**
