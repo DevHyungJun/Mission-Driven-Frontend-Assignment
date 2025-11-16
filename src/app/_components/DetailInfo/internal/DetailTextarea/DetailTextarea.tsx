@@ -14,6 +14,7 @@ interface DetailTextareaProps {
   sessionId: string;
 }
 
+// 세션 상세 텍스트 입력 필드
 const DetailTextarea = ({ sessionId }: DetailTextareaProps) => {
   const { sessions, setSessionDetailText } = useSessionStore();
   const currentSession = sessions.find((session) => session.id === sessionId);

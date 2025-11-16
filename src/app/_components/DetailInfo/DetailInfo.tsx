@@ -12,8 +12,10 @@ import { useState } from "react";
 const DetailInfo = () => {
   const { sessions, addSession, removeSession } = useSessionStore();
   const [openModal, setOpenModal] = useState(false);
+  // 삭제할 세션 ID 상태
   const [sessionIdToDelete, setSessionIdToDelete] = useState<string>("");
 
+  // 세션 삭제 핸들러
   const handleRemoveSession = () => {
     if (!sessionIdToDelete) return;
     setOpenModal(false);

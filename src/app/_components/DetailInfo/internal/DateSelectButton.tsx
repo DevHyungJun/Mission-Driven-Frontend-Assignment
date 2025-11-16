@@ -13,6 +13,7 @@ interface DateSelectButtonProps {
   ariaLabel: string;
 }
 
+// 날짜 선택 버튼
 const DateSelectButton = ({ sessionId, ariaLabel }: DateSelectButtonProps) => {
   const { sessions, setSessionDate } = useSessionStore();
   const currentSession = sessions.find((session) => session.id === sessionId);
@@ -20,6 +21,7 @@ const DateSelectButton = ({ sessionId, ariaLabel }: DateSelectButtonProps) => {
   const [isDateCalendarOpen, setIsDateCalendarOpen] = useState(false);
   const dateContainerRef = useRef<HTMLDivElement>(null);
 
+  // 날짜 선택 버튼 클릭 시 달력 열기
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -30,10 +32,12 @@ const DateSelectButton = ({ sessionId, ariaLabel }: DateSelectButtonProps) => {
       }
     };
 
+    // 달력이 열려있는 경우 클릭 이벤트 추가
     if (isDateCalendarOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
 
+    // 달력이 닫히면 클릭 이벤트 제거
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
