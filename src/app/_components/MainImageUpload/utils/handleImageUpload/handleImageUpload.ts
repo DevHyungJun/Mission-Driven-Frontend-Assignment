@@ -1,4 +1,5 @@
 import { toast } from "@/provider/ToastProvider/ToastProvider";
+import { revokeBlobURL } from "@/components";
 
 const handleImageUpload = (
   e: React.ChangeEvent<HTMLInputElement>,
@@ -22,9 +23,7 @@ const handleImageUpload = (
     return;
   }
 
-  if (currentMainImage && currentMainImage.startsWith("blob:")) {
-    URL.revokeObjectURL(currentMainImage);
-  }
+  revokeBlobURL(currentMainImage);
 
   const imageUrl = URL.createObjectURL(file);
   setMainImage(imageUrl);

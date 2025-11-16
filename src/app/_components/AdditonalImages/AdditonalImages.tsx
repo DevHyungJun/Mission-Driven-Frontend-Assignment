@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/app/_utils/cn";
-import { Icon } from "@/components";
+import { Icon, ImageDeleteButton, revokeBlobURL } from "@/components";
 import SectionProvider from "@/provider/SectionProvider/SectionProvider";
 import Image from "next/image";
 import { useRef } from "react";
@@ -11,6 +11,14 @@ import handleMultiImageUpload from "./utils/handleMultiImageUpload/handleMultiIm
 const AdditonalImages = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { additionalImages, setAdditionalImages } = useImageContext();
+
+  const handleDeleteImage = (imageToDelete: string) => {
+    revokeBlobURL(imageToDelete);
+    setAdditionalImages((prev) => prev.filter((img) => img !== imageToDelete));
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
 
   return (
     <SectionProvider
@@ -56,7 +64,7 @@ const AdditonalImages = () => {
           <div
             key={image}
             className={cn(
-              "aspect-square w-[120px] h-[120px] shrink-0 overflow-hidden rounded-[8px]",
+              "relative aspect-square w-[120px] h-[120px] shrink-0 overflow-hidden rounded-[8px]",
               "md:w-full md:h-auto md:aspect-square"
             )}
           >
@@ -66,6 +74,11 @@ const AdditonalImages = () => {
               width={251}
               height={251}
               className="object-cover w-full h-full"
+            />
+            <ImageDeleteButton
+              onDelete={() => handleDeleteImage(image)}
+              ariaLabel="추가 이미지 삭제"
+              iconSize={16}
             />
           </div>
         ))}

@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/app/_utils/cn";
-import { Button } from "@/components";
+import { Button, ImageDeleteButton, revokeBlobURL } from "@/components";
 import SectionProvider from "@/provider/SectionProvider/SectionProvider";
 import Image from "next/image";
 import { useRef } from "react";
@@ -11,6 +11,14 @@ import handleImageUpload from "./utils/handleImageUpload/handleImageUpload";
 const MainImageUpload = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { mainImage, setMainImage } = useImageContext();
+
+  const handleDeleteImage = () => {
+    revokeBlobURL(mainImage);
+    setMainImage("");
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
 
   return (
     <SectionProvider title="대표 이미지" mode="simple">
@@ -68,16 +76,22 @@ const MainImageUpload = () => {
           </div>
         </div>
       ) : (
-        <div
-          onClick={() => fileInputRef.current?.click()}
-          className="cursor-pointer hover:opacity-80 active:opacity-60"
-        >
-          <Image
-            src={mainImage}
-            alt="대표 이미지"
-            width={510}
-            height={510}
-            className="object-cover rounded-[8px] aspect-square w-full h-full"
+        <div className="relative w-full md:max-w-[510px]">
+          <div
+            onClick={() => fileInputRef.current?.click()}
+            className="cursor-pointer hover:opacity-80 active:opacity-60"
+          >
+            <Image
+              src={mainImage}
+              alt="대표 이미지"
+              width={510}
+              height={510}
+              className="object-cover rounded-[8px] aspect-square w-full h-full"
+            />
+          </div>
+          <ImageDeleteButton
+            onDelete={handleDeleteImage}
+            ariaLabel="대표 이미지 삭제"
           />
         </div>
       )}

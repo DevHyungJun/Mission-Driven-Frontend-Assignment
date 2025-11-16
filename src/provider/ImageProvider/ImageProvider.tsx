@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useState, useEffect, useRef, ReactNode } from "react";
+import { revokeBlobURL } from "@/components";
 
 interface ImageContextType {
   mainImage: string | null;
@@ -31,13 +32,9 @@ const ImageProvider = ({ children }: ImageProviderProps) => {
 
   useEffect(() => {
     return () => {
-      if (mainImageRef.current && mainImageRef.current.startsWith("blob:")) {
-        URL.revokeObjectURL(mainImageRef.current);
-      }
+      revokeBlobURL(mainImageRef.current);
       additionalImagesRef.current.forEach((url) => {
-        if (url.startsWith("blob:")) {
-          URL.revokeObjectURL(url);
-        }
+        revokeBlobURL(url);
       });
     };
   }, []);
