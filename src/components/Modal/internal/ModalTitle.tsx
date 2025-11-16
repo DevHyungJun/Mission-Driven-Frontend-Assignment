@@ -6,6 +6,7 @@ interface ModalTitleProps {
   subtitle?: ReactNode;
 }
 
+// 모달 타이틀 컴포넌트
 const ModalTitle = ({ title, subtitle }: ModalTitleProps) => {
   return (
     <div className="space-y-2">
@@ -32,4 +33,3 @@ const ModalTitle = ({ title, subtitle }: ModalTitleProps) => {
 };
 
 export default ModalTitle;
-

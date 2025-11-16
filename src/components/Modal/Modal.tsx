@@ -53,13 +53,16 @@ const Modal = ({
   isLoading = false,
   onComplete,
 }: ModalProps) => {
+  // 모달 핸들러 생성
   const { handleClose, handleConfirm } = createModalHandlers(
     isLoading,
     onClose,
     onConfirm
   );
 
+  // 모니터링 키보드 이벤트 처리
   useModalKeyboard(open, isLoading, onClose);
+  // 모니터링 로딩 타이머 이벤트 처리
   useModalLoadingTimer(isLoading, open, onComplete, onClose);
 
   if (!open) return null;

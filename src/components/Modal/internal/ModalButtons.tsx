@@ -9,6 +9,7 @@ interface ModalButtonsProps {
   onConfirm: () => void;
 }
 
+// 모달 버튼 컴포넌트
 const ModalButtons = ({
   cancelText,
   confirmText,
@@ -40,4 +41,3 @@ const ModalButtons = ({
 };
 
 export default ModalButtons;
-

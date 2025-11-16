@@ -1,5 +1,5 @@
 import { cn } from "@/app/_utils/cn";
-
+// 모달 내부 로딩 스피너
 const LoadingSpinner = () => {
   return (
     <div className="flex flex-col items-center gap-4 py-8">
@@ -15,4 +15,3 @@ const LoadingSpinner = () => {
 };
 
 export default LoadingSpinner;
-
