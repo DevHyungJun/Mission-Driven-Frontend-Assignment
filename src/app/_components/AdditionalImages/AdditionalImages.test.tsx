@@ -93,7 +93,7 @@ describe("AdditionalImages 통합 테스트", () => {
     });
 
     it("추가 이미지가 있을 때 이미지가 표시되어야 한다", async () => {
-      const { container } = renderWithProviders(<AdditonalImages />);
+      const { container } = renderWithProviders(<AdditionalImages />);
 
       const fileInput = container.querySelector(
         "#additional-image"
@@ -119,7 +119,7 @@ describe("AdditionalImages 통합 테스트", () => {
 
   describe("파일 입력 설정", () => {
     it("파일 입력이 올바르게 설정되어 있어야 한다", () => {
-      const { container } = renderWithProviders(<AdditonalImages />);
+      const { container } = renderWithProviders(<AdditionalImages />);
 
       const fileInput = container.querySelector(
         "#additional-image"
@@ -137,7 +137,7 @@ describe("AdditionalImages 통합 테스트", () => {
 
   describe("파일 업로드", () => {
     it("유효한 이미지 파일 업로드 시 ImageProvider 상태가 업데이트되어야 한다", async () => {
-      const { container } = renderWithProviders(<AdditonalImages />);
+      const { container } = renderWithProviders(<AdditionalImages />);
 
       const fileInput = container.querySelector(
         "#additional-image"
@@ -153,7 +153,7 @@ describe("AdditionalImages 통합 테스트", () => {
     });
 
     it("여러 파일을 동시에 업로드할 수 있어야 한다", async () => {
-      const { container } = renderWithProviders(<AdditonalImages />);
+      const { container } = renderWithProviders(<AdditionalImages />);
 
       const fileInput = container.querySelector(
         "#additional-image"
@@ -171,7 +171,7 @@ describe("AdditionalImages 통합 테스트", () => {
     });
 
     it("JPG 파일 업로드 시 정상적으로 처리되어야 한다", async () => {
-      const { container } = renderWithProviders(<AdditonalImages />);
+      const { container } = renderWithProviders(<AdditionalImages />);
 
       const fileInput = container.querySelector(
         "#additional-image"
@@ -187,7 +187,7 @@ describe("AdditionalImages 통합 테스트", () => {
     });
 
     it("PNG 파일 업로드 시 정상적으로 처리되어야 한다", async () => {
-      const { container } = renderWithProviders(<AdditonalImages />);
+      const { container } = renderWithProviders(<AdditionalImages />);
 
       const fileInput = container.querySelector(
         "#additional-image"
@@ -203,7 +203,7 @@ describe("AdditionalImages 통합 테스트", () => {
     });
 
     it("유효하지 않은 파일 형식 업로드 시 토스트가 표시되어야 한다", () => {
-      const { container } = renderWithProviders(<AdditonalImages />);
+      const { container } = renderWithProviders(<AdditionalImages />);
 
       const fileInput = container.querySelector(
         "#additional-image"
@@ -219,7 +219,7 @@ describe("AdditionalImages 통합 테스트", () => {
     });
 
     it("파일이 선택되지 않으면 아무 동작도 하지 않아야 한다", () => {
-      const { container } = renderWithProviders(<AdditonalImages />);
+      const { container } = renderWithProviders(<AdditionalImages />);
 
       const fileInput = container.querySelector(
         "#additional-image"
@@ -234,7 +234,7 @@ describe("AdditionalImages 통합 테스트", () => {
 
   describe("4장 제한", () => {
     it("4장 미만일 때 업로드 버튼이 표시되어야 한다", async () => {
-      const { container } = renderWithProviders(<AdditonalImages />);
+      const { container } = renderWithProviders(<AdditionalImages />);
 
       const fileInput = container.querySelector(
         "#additional-image"
@@ -253,7 +253,7 @@ describe("AdditionalImages 통합 테스트", () => {
     });
 
     it("4장일 때 업로드 버튼이 표시되지 않아야 한다", async () => {
-      const { container } = renderWithProviders(<AdditonalImages />);
+      const { container } = renderWithProviders(<AdditionalImages />);
 
       const fileInput = container.querySelector(
         "#additional-image"
@@ -277,7 +277,7 @@ describe("AdditionalImages 통합 테스트", () => {
     });
 
     it("3장 상태에서 2장을 추가하려 할 때 1장만 추가되어야 한다", async () => {
-      const { container } = renderWithProviders(<AdditonalImages />);
+      const { container } = renderWithProviders(<AdditionalImages />);
 
       const fileInput = container.querySelector(
         "#additional-image"
@@ -325,7 +325,7 @@ describe("AdditionalImages 통합 테스트", () => {
 
   describe("ImageProvider 연동", () => {
     it("파일 업로드 시 ImageProvider의 additionalImages 상태가 업데이트되어야 한다", async () => {
-      const { container } = renderWithProviders(<AdditonalImages />);
+      const { container } = renderWithProviders(<AdditionalImages />);
 
       const fileInput = container.querySelector(
         "#additional-image"
@@ -343,7 +343,7 @@ describe("AdditionalImages 통합 테스트", () => {
     });
 
     it("이미지가 업데이트되면 UI가 재렌더링되어야 한다", async () => {
-      const { container } = renderWithProviders(<AdditonalImages />);
+      const { container } = renderWithProviders(<AdditionalImages />);
 
       const fileInput = container.querySelector(
         "#additional-image"
@@ -365,7 +365,7 @@ describe("AdditionalImages 통합 테스트", () => {
     });
 
     it("여러 이미지가 표시되어야 한다", async () => {
-      const { container } = renderWithProviders(<AdditonalImages />);
+      const { container } = renderWithProviders(<AdditionalImages />);
 
       const fileInput = container.querySelector(
         "#additional-image"
@@ -400,3 +400,4 @@ describe("AdditionalImages 통합 테스트", () => {
     });
   });
 });
+

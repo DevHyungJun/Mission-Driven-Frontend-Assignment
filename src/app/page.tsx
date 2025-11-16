@@ -1,6 +1,6 @@
 import {
   MainImageUpload,
-  AdditonalImages,
+  AdditionalImages,
   ActivityTypeSelector,
   DetailInfo,
   CategorySelector,
@@ -19,7 +19,7 @@ export default function Home() {
       <h1 className="sr-only">과제 작성 메인 페이지</h1>
       <div className="md:w-1/2">
         <MainImageUpload />
-        <AdditonalImages />
+        <AdditionalImages />
       </div>
       <div className="md:w-1/2 md:flex md:flex-col md:gap-[24px]">
         <CategorySelector />

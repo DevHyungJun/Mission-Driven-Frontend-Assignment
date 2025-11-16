@@ -127,7 +127,7 @@ src/
 ├── app/                          # Next.js App Router
 │   ├── _components/              # 페이지별 컴포넌트
 │   │   ├── MainImageUpload/      # 메인 이미지 업로드
-│   │   ├── AdditonalImages/      # 추가 이미지 업로드
+│   │   ├── AdditionalImages/      # 추가 이미지 업로드
 │   │   ├── CategorySelector/     # 카테고리 선택기
 │   │   ├── ContentTitle/         # 제목 입력
 │   │   ├── ActivityTypeSelector/ # 활동 유형 선택기
@@ -206,7 +206,7 @@ npm test
 - ImageProvider 연동 (상태 동기화)
 - 접근성 (ARIA 레이블, 키보드 네비게이션)
 
-#### 2. AdditonalImages (통합 테스트)
+#### 2. AdditionalImages (통합 테스트)
 
 - UI 상태 표시 (기본 상태, 이미지 목록 표시)
 - 파일 입력 설정
